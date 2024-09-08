@@ -17,6 +17,13 @@
     pop_percentile: 'Pop'
   };
 
+  let powerFilter = 0;
+  let spinFilter = 0;
+  let popFilter = 0;
+  let twistFilter = 0;
+  let balanceFilter = 0;
+  let swingFilter = 0;
+
   const filteredData = data.filter((d) => {
     let allValid = true;
     xKey.forEach(key => {
@@ -50,6 +57,15 @@
     window.addEventListener('getTotalValidPaddles', (event) => {
       event.detail.callback(filteredData.length);
     });
+
+    window.addEventListener('setFilters', (event) => {
+      powerFilter = event.detail.powerFilter;
+      spinFilter = event.detail.spinFilter;
+      popFilter = event.detail.popFilter;
+      twistFilter = event.detail.twistFilter;
+      balanceFilter = event.detail.balanceFilter;
+      swingFilter = event.detail.swingFilter;
+    });
   });
 
   // Create a new array of objects with the desired keys
@@ -64,10 +80,30 @@
     }
     return newRecord;
   });
+
+  // Filter processedData based on the filters
+  $: filteredProcessedData = processedData.filter(record => 
+    record.Power * 10 > powerFilter &&
+    record.Spin * 10 > spinFilter &&
+    record.Pop * 10 > popFilter &&
+    record.Twist * 10 > twistFilter &&
+    record.Balance * 10 > balanceFilter &&
+    record.Swing * 10 > swingFilter
+  );
+
+  // Dispatch the filtered paddles count to the layout
+  $: if (typeof window !== 'undefined') {
+    const event = new CustomEvent('updateFilteredPaddlesCount', {
+      detail: {
+        count: filteredProcessedData.length
+      }
+    });
+    window.dispatchEvent(event);
+  }
 </script>
 
-<!-- Loop through processedData and create a Card for each paddle -->
-{#each processedData as record}
+<!-- Loop through filteredProcessedData and create a Card for each paddle -->
+{#each filteredProcessedData as record}
 <Card 
   backContent={{
     company: record.company,
