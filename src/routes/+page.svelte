@@ -37,12 +37,19 @@
 
 <!-- Loop through filteredData and create a Card for each paddle -->
 {#each filteredData as record}
-  <Card 
-    backContent={`Power: ${record.power}`} 
-    radarData={record} 
-    seriesKey={record[seriesKey]} 
-    xKey={xKey} 
-  />
+<Card 
+  backContent={`
+    Power: ${Math.round(record.power * 10)}%\n
+    Spin: ${Math.round(record.spin * 10)}%\n
+    Twist: ${Math.round(record.twist * 10)}%\n
+    Balance: ${Math.round(record.balance * 10)}%\n
+    Swing: ${Math.round(record.swing * 10)}%\n
+    Pop: ${Math.round(record.pop * 10)}%
+  `} 
+  radarData={record} 
+  seriesKey={record[seriesKey]} 
+  xKey={xKey} 
+/>
 {/each}
 
 <!-- Add the SpecialCard for excluded paddles -->

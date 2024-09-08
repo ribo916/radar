@@ -78,6 +78,16 @@
 
   .card-back {
     transform: rotateY(180deg);
+    text-align: left; /* Left-align the text */
+  }
+
+  .card-back pre {
+    font-family: inherit; /* Inherit the font family from the parent */
+    font-size: inherit; /* Inherit the font size from the parent */
+    color: inherit; /* Inherit the text color from the parent */
+    background: none; /* Remove the default background */
+    border: none; /* Remove the default border */
+    white-space: pre-wrap; /* Allow the text to wrap */
   }
 
   .title-banner {
@@ -137,16 +147,16 @@
           width={300} 
           height={300} 
         >
-          <Svg width={300} height={300}>
+          <Svg>
             <AxisRadial />
-            <Radar data={[radarData]} seriesKey={seriesKey} xKey={xKey} />
+            <Radar />
           </Svg>
         </LayerCake>
       </div>
       <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
     </div>
     <div class="card-back">
-      {backContent}
+      <pre>{backContent}</pre>
       <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
     </div>
   </div>
