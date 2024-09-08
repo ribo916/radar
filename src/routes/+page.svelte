@@ -1,6 +1,7 @@
 <script>
   import data from './_data/radarScores.csv';
   import Card from '../shared/Card.svelte';
+  import SpecialCard from '../shared/SpecialCard.svelte';
 
   const seriesKey = 'paddle';
   const xKey = ['power', 'spin', 'twist', 'balance', 'swing', 'pop'];
@@ -26,7 +27,12 @@
     return allValid;
   });
 
+  const excludedPaddles = data
+    .filter(d => !filteredData.includes(d))
+    .map(d => d[seriesKey]);
+
   console.log('Filtered Data:', filteredData);
+  console.log('Excluded Paddles:', excludedPaddles);
 </script>
 
 <!-- Loop through filteredData and create a Card for each paddle -->
@@ -38,3 +44,6 @@
     xKey={xKey} 
   />
 {/each}
+
+<!-- Add the SpecialCard for excluded paddles -->
+<SpecialCard {excludedPaddles} />
