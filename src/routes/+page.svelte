@@ -2,6 +2,7 @@
   import data from './_data/radarScores.csv';
   import Card from '../shared/Card.svelte';
   import SpecialCard from '../shared/SpecialCard.svelte';
+  import { onMount } from 'svelte';
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -27,9 +28,20 @@
     return allValid;
   });
 
+  // Sort filteredData alphabetically by paddle name
+  filteredData.sort((a, b) => a[seriesKey].localeCompare(b[seriesKey]));
+
   const excludedPaddles = data
     .filter(d => !filteredData.includes(d))
-    .map(d => d[seriesKey]);
+    .map(d => d[seriesKey])
+    .sort((a, b) => a.localeCompare(b));
+
+  // Dispatch the total number of valid paddles to the layout
+  onMount(() => {
+    window.addEventListener('getTotalValidPaddles', (event) => {
+      event.detail.callback(filteredData.length);
+    });
+  });
 
   // console.log('Filtered Data:', filteredData);
   // console.log('Excluded Paddles:', excludedPaddles);
@@ -70,4 +82,4 @@
 {/each}
 
 <!-- Add the SpecialCard for excluded paddles -->
-<SpecialCard {excludedPaddles} />
+<SpecialCard {excludedPaddles} excludedCount={excludedPaddles.length} />

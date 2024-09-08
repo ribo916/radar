@@ -143,7 +143,7 @@
   <div class="card-inner">
     <div class="card-front">
       <div class="front-content">
-        <div class="title-banner">Paddles not included</div>
+        <div class="title-banner">{excludedPaddles.length} paddles not included</div>
         <div class="front-text">Some data is missing or invalid to properly render a radar chart for certain paddles so these are all skipped.</div>
       </div>
       <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
