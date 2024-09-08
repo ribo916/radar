@@ -54,3 +54,4 @@
 
 <!-- Add the SpecialCard for excluded paddles -->
 <SpecialCard {excludedPaddles} />
+
