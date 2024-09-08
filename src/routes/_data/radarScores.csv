@@ -1,226 +1,226 @@
-paddle,power,spin,twist,balance,swing,pop
-Hurache Control,0.8,0.59,0.11,0.33,0.10,0.18
-Hurache-X Control,0.59,0.23,0.53,0.61,0.70,0.50
-Hurache-X Control+,0.66,0.77,0.37,0.48,0.50,0.86
-Hurache-X Control+,0.64,0.35,0.46,0.67,0.64,0.69
-Monarch All Court,0.86,0.66,0.98,0.29,0.30,0.42
-Monarch Control,0.59,0.50,0.98,0.21,0.28,0.54
-Monarch Jelly Bean,0.24,0.79,0.88,0.33,0.17,0.13
-Heart,0.66,0.85,0.24,0.74,0.52,0.36
-Ball Hawk Classic,0.02,0.57,0.87,0.24,0.10,0.04
-Falcon Elite Ergo,0.13,0.19,,0.00,,0.01
-Drip Contender,,0.00,,,,
-Drip Verge,,0.00,,,,
-Fat Boy,0.34,0.52,0.90,0.24,0.18,0.87
-Filth,0.57,0.27,0.42,0.67,0.78,0.74
-Loco,0.39,0.56,0.34,0.61,0.40,0.59
-Shogun,0.51,0.43,0.36,0.81,0.83,0.84
-Spear Breakout,,0.03,,,,
-Spear Juno,,0.01,,,,
-Predion E16 Edgeless,0.13,0.09,0.08,0.17,0.10,0.29
-Predion E16-with lead tape,0.28,0.09,0.93,0.24,0.46,0.29
-Shapeshifter,0.73,0.66,0.67,0.61,0.59,0.64
-Shapeshifter with 5 grams tungsten tape,0.79,0.66,0.86,0.33,0.66,0.59
-Shapeshifter with 5 grams tungsten tape & 28-gram Slyce cap,0.81,0.66,0.90,0.02,0.82,0.76
-Reaction Pro Elongated,0.34,0.26,0.32,0.93,0.94,0.18
-Reaction Pro Standard,0.22,0.30,0.94,0.42,0.34,0.20
-CRBN 1X,0.42,0.83,0.23,0.67,0.53,0.31
-CRBN 2X,0.22,0.38,0.99,0.24,0.25,0.31
-CRBN1 Control,,0.71,,,,
-CRBN1 Control (USAP-Banned 2021),,0.35,,,,
-Edge 18K,0.17,0.92,0.45,0.61,0.84,0.22
-Hush,1.00,1.00,0.03,0.81,0.90,0.99
-Icon V2 XL,0.30,0.13,0.15,0.81,0.92,0.50
-Vice,0.98,0.18,0.19,,0.41,0.16
-Warrior,0.09,0.16,0.94,0.91,1.00,0.01
-Mayhem,0.84,0.97,0.47,0.42,0.29,0.76
-Model E,,0.10,0.77,,0.84,
-Model E Elite,0.73,0.46,0.91,0.91,0.91,0.76
-Model E Stealth,0.66,0.19,0.01,0.17,0.15,0.74
-Model E Stealth-with 0.5 oz. lead tape,0.51,0.19,0.34,0.14,0.22,0.50
-Pro II,0.01,0.56,0.75,0.33,0.10,0.29
-Pro II Stealth,0.17,0.77,0.01,0.12,0.00,0.90
-Pro II Stealth-with 0.5 oz. lead tape,0.51,0.77,0.49,0.09,0.02,0.84
-Pro Stealth,0.09,0.34,0.13,0.03,0.00,0.86
-Pro Stealth-with 0.5 oz. lead tape,0.51,0.34,0.82,0.03,0.00,0.76
-Evolution Extreme V2.14,0.18,0.32,0.51,0.77,0.65,0.40
-Evolution Extreme V2.16,0.39,0.55,0.71,0.81,0.83,0.31
-Pursuit EX 6.0 Maxx,0.30,0.12,0.99,0.81,0.51,0.64
-Pursuit EX 6.0 Pro,0.51,0.85,0.96,0.24,0.45,0.87
-Pursuit EX Pro,0.48,0.97,0.95,0.33,0.54,0.93
-Pursuit MX 6.0 Maxx,0.84,0.13,0.24,0.67,0.54,0.59
-Pursuit MX 6.0 Pro,0.87,0.85,0.69,0.98,0.98,0.69
-Pursuit MX Pro,0.86,0.87,0.26,0.61,0.73,0.87
-Pursuit Pro 1 6.0-Light,0.88,0.79,0.20,0.33,0.49,0.69
-Pursuit Pro 1-Light,0.81,0.74,0.11,0.17,0.24,0.72
-Ben Johns Signature,,0.05,,,0.76,
-Carbon STK,0.04,0.05,0.22,0.88,0.66,0.00
-Airbender,0.73,0.41,0.02,0.24,0.30,0.80
-Airbender,0.76,0.59,0.05,0.29,0.40,0.59
-Airbender,0.61,0.31,0.11,0.17,0.50,0.22
-Obsidian 10,0.42,0.42,0.22,0.77,0.67,0.72
-Obsidian 13,0.55,0.25,0.31,0.42,0.36,0.59
-Obsidian 16,0.76,0.28,0.57,0.81,0.75,0.31
-CX11E Power,0.00,0.08,0.00,,0.03,0.02
-CX14E,,0.08,0.00,,0.05,
-CX14H Ultimate Power,0.01,0.37,0.23,0.02,0.15,0.06
-G2 Elongated,0.34,0.46,0.07,0.99,0.90,0.05
-G2 Integra,0.30,0.62,0.14,0.81,0.38,0.05
-G2 Quad,0.20,0.66,0.45,0.33,0.20,0.08
-Pro Control Elongated,0.81,0.65,0.02,0.96,0.84,0.54
-Pro Control Fusion,0.76,0.56,0.03,0.81,0.46,0.69
-Pro Power Elongated,0.96,0.51,0.04,0.95,0.76,0.93
-Pro Power Elongated with 10 grams tungsten,0.99,0.21,0.15,0.74,0.84,0.97
-Pro Power Fusion,0.97,0.62,0.03,0.67,0.34,0.94
-Pro Ultimate Elongated,0.94,0.40,0.08,0.99,0.89,0.64
-GBS-001,0.05,0.08,0.69,0.12,0.46,0.02
-LAZR-16S,0.33,0.80,0.88,0.12,0.13,0.59
-MÜVN-13S,0.46,0.22,0.49,0.03,0.05,0.90
-MÜVN-13X,0.61,0.38,0.28,0.48,0.41,0.45
-MÜVN-16E,0.51,0.26,0.49,0.42,0.66,0.45
-MÜVN-16H,0.66,0.21,0.37,0.67,0.84,0.76
-MÜVN-16S,0.33,0.42,0.77,0.06,0.07,0.50
-MÜVN-16X,0.33,0.44,0.46,0.33,0.58,0.26
-Raw-13R,0.07,0.71,0.60,0.06,0.01,0.36
-Raw-13S,0.21,0.84,0.77,0.24,0.14,0.45
-Raw-13V,0.08,0.37,0.77,0.09,0.03,0.42
-Raw-16H,0.09,0.71,0.20,0.96,0.78,0.16
-Raw-16R,0.09,0.11,0.73,0.05,0.02,0.08
-Raw-16RX,0.13,0.28,0.16,0.81,0.70,0.26
-Raw-16S,0.28,0.76,0.81,0.17,0.09,0.13
-Raw-16V,0.16,0.68,0.96,0.10,0.04,0.08
-Raw-16X,0.25,0.68,0.33,0.81,0.84,0.16
-Balance 1 - 10g cap,0.39,0.59,0.37,0.06,0.38,0.40
-Balance 1 - 30g cap,0.73,0.48,0.31,0.01,0.41,0.76
-J2K,0.64,0.58,0.86,0.33,0.50,0.80
-J2K Pro,0.66,0.49,0.81,0.21,0.24,0.82
-J2K with 10 grams tungsten tape,0.48,0.58,0.97,0.17,0.39,0.59
-J2K with 6 grams tungsten tape & 28-gram Slyce cap,0.66,0.58,1.00,0.01,0.69,0.84
-J3K,0.51,0.36,0.93,0.48,0.52,0.87
-J3K Pro,0.46,0.38,0.87,0.24,0.33,0.82
-J7K Pro,0.81,0.91,0.37,0.48,0.60,0.50
-Sword & Shield-J1,0.48,0.29,0.82,0.61,0.97,0.29
-Sword & Shield-J1H,0.91,0.47,0.77,0.57,0.99,0.36
-Sword & Shield-J2,0.57,0.13,0.62,0.57,0.65,0.31
-Sword & Shield-J3,0.55,0.17,0.86,0.29,0.32,0.34
-Sword & Shield-J5,0.73,0.52,0.37,0.74,1.00,0.26
-Mage Pro,0.28,0.43,0.53,0.67,0.70,0.22
-Mage Pro Gen 2,0.55,0.50,0.67,0.42,0.22,0.42
-Viva Pro Gen1,0.06,0.53,0.39,0.77,0.84,0.18
-Viva Pro Gen2,0.64,0.50,0.59,0.98,0.97,0.42
-Hyperion CAS,,0.04,0.51,0.81,0.92,
-Hyperion CFS,0.03,0.14,0.64,0.93,0.96,
-Hyperion CFS,0.03,0.06,0.64,0.93,0.96,
-Hyperion CFS Swift,,0.07,,,,
-Magnus 3 Tyson McGuffin,0.95,0.99,0.33,0.61,0.45,0.95
-Perseus 3 Ben Johns,0.91,0.75,0.26,0.67,0.59,0.99
-Perseus 3 Ben Johns,0.96,1.00,0.34,0.67,0.72,0.96
-Perseus MOD TA-15,0.95,0.83,0.36,0.88,0.72,0.95
-Scorpeus 3 Anna Bright,0.91,0.93,0.68,0.57,0.23,1.00
-Scorpeus 3 Collin Johns,0.94,0.63,0.84,0.33,0.33,0.98
-Scorpeus Collin Johns,0.06,0.29,0.85,0.48,0.41,0.22
-Solaire,,0.33,,,,
-Solaire,,0.17,,,,
-Katana,0.26,0.47,0.20,0.42,0.14,0.08
-Tonto 18K,0.37,0.25,0.07,0.17,0.04,0.64
-Tonto Unidirectional,0.46,0.17,0.14,0.29,0.68,0.64
-Legacy Pro,,0.32,0.55,,0.78,
-Clash-15 All Court,0.55,0.70,0.62,0.48,0.63,0.50
-Clash-15 Pro,0.61,0.41,0.55,0.48,0.55,0.54
-Havik-15 All Court,0.51,0.46,0.50,0.48,0.63,0.54
-Havik-15 Pro,0.66,0.42,0.65,0.61,0.69,0.45
-Mercenary Graphite 2,,0.02,,,0.20,
-Flow,0.48,0.93,0.61,0.48,0.56,0.36
-Aero,0.91,0.11,0.58,0.24,0.15,0.87
-Owl CXE,0.42,0.98,0.09,0.99,0.68,0.34
-Bantam TKO-C,0.84,0.94,0.62,0.77,0.37,0.95
-Bantam TKO-CX,0.89,0.91,0.51,0.96,0.83,0.90
-Tempest TKO-C,0.90,0.77,0.66,0.88,0.91,0.90
-Tempest Wave Pro-C,0.64,0.92,0.92,0.33,0.37,0.92
-Pro 13,0.02,0.22,0.27,0.14,0.76,0.04
-Pro 16,0.13,0.24,0.64,0.42,0.78,0.03
-Pro Line Energy,0.59,0.55,0.16,0.91,0.84,0.45
-Pro Line Energy S,0.79,0.75,0.48,0.67,0.66,0.74
-Hurricane Pro,0.73,0.90,0.67,0.29,0.18,0.69
-Hurricane Pro,0.79,0.99,0.77,0.48,0.21,0.59
-Vantage Pro,0.76,0.98,0.41,0.42,0.32,0.50
-Vantage Pro,0.81,0.85,0.68,0.48,0.81,0.42
-Drive Carbon,0.66,0.28,0.94,0.81,0.99,0.08
-Encounter,0.90,0.45,0.09,0.61,0.73,0.34
-Ghost,0.66,0.20,0.74,0.48,0.60,0.54
-Black Ace Pro,0.37,0.23,0.40,0.05,0.08,0.97
-Black Ace Pro,0.37,0.09,0.40,0.05,0.08,0.97
-Pro Spin,,0.07,,,,
-K2 Power,0.27,0.12,0.53,0.06,0.05,0.13
-Series Four,0.88,0.63,0.13,0.61,0.57,0.72
-Series One-Type A,0.59,0.61,0.75,0.61,0.45,0.93
-Series One-Type A,0.46,0.89,0.92,0.48,0.71,0.08
-Series One-Type B,0.84,0.96,0.62,0.74,0.98,0.26
-Series Three,0.84,0.16,0.73,0.81,0.89,0.15
-Series Two,0.17,0.21,0.31,0.67,0.78,0.31
-Connor Garnett,0.28,0.70,0.10,0.03,0.25,0.22
-Signature,0.76,0.87,0.22,0.14,0.57,0.59
-Sweet Spot,0.30,0.71,0.85,0.24,0.51,0.64
-"Zane Navratil ""The Standard""",0.39,0.85,0.84,0.06,0.15,0.40
-RLD 1-16,0.46,0.61,0.61,0.88,0.94,0.45
-Revo Pro Pure Hybrid,0.88,0.75,0.56,0.06,0.07,0.22
-Revo Pro Reach Hybrid,0.91,0.48,0.10,0.11,0.18,0.16
-Revo Reach Control,,0.01,,,,
-Republic 2.16 Standard,0.12,0.04,0.59,0.88,0.95,0.06
-EV1.16,0.97,0.02,0.30,0.42,0.60,0.36
-NOVA R1,0.57,0.14,0.18,0.81,0.46,0.42
-NOVA R2,0.34,0.64,0.65,0.29,0.21,0.69
-NOVA R3,0.61,0.15,0.34,0.77,0.78,0.42
-Pulsar FX.R1,0.81,0.87,0.43,0.77,0.81,0.69
-Pulsar FX.R2,0.39,0.73,0.88,0.21,0.44,0.87
-Pulsar FX.R3,0.66,0.82,0.43,0.88,0.83,0.82
-Pulsar R1,0.42,0.32,0.43,0.48,0.53,0.54
-Pulsar R3,0.27,0.38,0.58,0.42,0.92,0.06
-R1.16,,0.92,0.42,,0.60,
-XPRO EV1.T700.R2,0.99,0.90,0.16,0.24,0.34,
-XPRO EV1.T700.R3,0.98,0.80,0.16,0.33,0.34,
-AMPED Control Invikta,0.30,0.25,0.28,0.57,0.74,0.22
-Amped Pro Air Epic,0.66,0.84,0.72,0.57,0.31,0.64
-Amped Pro Air Invikta,0.66,0.54,0.28,0.93,0.81,0.74
-Epic Vanguard,,0.06,,,,
-Invikta Amped,,0.04,,,0.22,
-Luxx Control Air Invikta,0.03,0.82,0.30,0.77,0.76,0.06
-Project 003,,0.31,,,,
-SLK Halo Power XL,0.05,0.24,0.05,0.67,0.46,0.02
-Vanguard Power Air Invikta,0.09,0.73,0.06,0.12,0.10,0.80
-Vanguard Power Air Invikta,0.09,0.03,0.06,0.12,0.10,0.80
-Vanguard Power Air S2,,0.53,,,,
-Black Diamond Power,0.91,0.59,0.51,0.48,0.33,0.76
-Double Black Diamond,0.24,0.53,0.48,0.29,0.34,0.54
-Double Black Diamond,0.42,0.51,0.71,0.48,0.41,0.13
-Double Black Diamond (Early Batch),,0.74,,,,
-Infinity Black Diamond,0.37,0.89,0.16,0.11,0.13,0.59
-Infinity Double Black Diamond,0.23,0.53,0.24,0.14,0.25,0.36
-Quartz,0.22,0.33,0.55,0.29,0.19,0.54
-Ruby,0.61,0.64,0.59,0.33,0.44,0.82
-Ruby,0.66,0.88,0.80,0.33,0.60,0.34
-Triple Black Diamond (Willinator),0.42,0.36,0.57,0.93,0.95,0.45
-Black Diamond Power,0.59,0.81,0.76,0.33,0.53,0.36
-Black Diamond Power (Early Batch),,0.94,,,,
-Apollo,0.34,0.65,1.00,0.21,0.27,0.26
-Fire 14,0.42,0.45,0.26,0.74,0.60,0.54
-Ice 16,0.48,0.26,0.33,0.95,0.84,0.08
-KC1,0.66,0.48,0.12,0.81,0.74,0.45
-Azul (medium-light),0.66,0.69,0.68,0.41,0.58,0.90
-Azul (medium),0.79,0.68,0.69,0.48,0.64,0.64
-Surge,0.51,0.81,0.74,0.74,0.56,0.72
-Flash,,0.72,,,,
-Prism Flash,0.13,0.76,0.45,0.57,0.29,0.08
-V7,0.18,0.39,0.72,0.14,0.91,0.08
-Alto,0.21,0.18,0.20,0.57,0.28,0.36
-Alto,0.25,0.15,0.42,0.77,0.75,0.22
-Corto,0.18,0.30,0.82,0.21,0.06,0.45
-Corto,0.25,0.40,0.90,0.42,0.27,0.13
-Mach 1,0.13,0.42,0.18,0.57,0.25,0.16
-Mach 1,0.20,0.63,0.28,0.67,0.41,0.22
-Mach 1 Forza,0.13,0.96,0.39,0.48,0.29,0.50
-Mach 1 Forza,0.39,0.79,0.53,0.61,0.46,0.50
-Mach 2,0.07,0.96,0.75,0.17,0.09,0.20
-Mach 2,0.08,0.94,0.82,0.21,0.17,0.08
-Mach 2 Forza,0.27,0.83,0.77,0.33,0.17,0.64
-Mach 2 Forza,0.42,0.95,0.96,0.42,0.39,0.20
+company,paddle,thinkness,power_percentile,spin_percentile,twist_percentile,balance_percentile,swing_percentile,pop_percentile,shape,face_material,handle_length,spin_rpm,swing_weight,twist_weight,core_material,surface_texture,length,width,static_weight,balance_point_cm,serve_speed_mph,punch_volley_speed
+11Six24,Hurache Control,16,0.08,0.59,0.11,0.33,0.10,0.18,Elongated,Toray Carbon Fiber,5.5,"2,107",106,5.55,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.4,23.7,52.5,33.9
+11Six24,Hurache-X Control,16,0.59,0.23,0.53,0.61,0.70,0.50,Elongated,Toray Carbon Fiber and Kevlar,6,"1,847",119,6.4,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.2,24.1,55.3,35
+11Six24,Hurache-X Control+,14,0.66,0.77,0.37,0.48,0.50,0.86,Elongated,Toray Carbon Fiber,6,"2,203",115.4,6.15,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.2,23.9,55.6,36.1
+11Six24,Hurache-X Control+,16,0.64,0.35,0.46,0.67,0.64,0.69,Elongated,Toray Carbon Fiber and Fiberglass,6,"1,956",117.4,6.3,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8,24.2,55.5,35.4
+11Six24,Monarch All Court,16,0.86,0.66,0.98,0.29,0.30,0.42,Wide Body,Toray Carbon Fiber,5.75,"2,131",111.2,7.36,Polypropylene Honeycomb,Peel Ply-Coarse,15.8,8.2,8.2,23.6,56.2,34.8
+11Six24,Monarch Control,16,0.59,0.50,0.98,0.21,0.28,0.54,Wide Body,Kevlar 3K Cloth,5.75,"2,051",110.2,7.37,Polypropylene Honeycomb,Peel Ply-Coarse,15.8,8.2,8.2,23.4,55.3,35.1
+11Six24,Monarch Jelly Bean,16,0.24,0.79,0.88,0.33,0.17,0.13,Wide Body,Toray Carbon Fiber,5.75,"2,209",107.2,7.09,Polypropylene Honeycomb,Peel Ply-Coarse,15.8,8.2,7.9,23.7,53.7,33.6
+Ace,Heart,14,0.66,0.85,0.24,0.74,0.52,0.36,Elongated,T700 Carbon Fiber,7.5,"2,260",115.7,5.8,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,16.5,7.8,24.3,55.6,34.6
+Bird,Ball Hawk Classic,14,0.02,0.57,0.87,0.24,0.10,0.04,Standard,T700 Carbon Fiber,4.75,"2,099",106,7.05,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,7.9,23.5,51.3,32.4
+Bird,Falcon Elite Ergo,14,0.13,0.19,,0.00,,0.01,Ergo,T700 Carbon Fiber,,"1,806",,,Polypropylene Honeycomb,Peel Ply-Coarse,14.5,8,8.7,18.9,52.8,31
+Bread & Butter,Drip Contender,16,,0.00,,,,,Elongated,T700 Carbon Fiber,5,"1,017",,,Polypropylene Honeycomb,Grit,16.4,7.5,8.3,,,
+Bread & Butter,Drip Verge,16,,0.00,,,,,Elongated,T700 Carbon Fiber,5,"1,046",,,Polypropylene Honeycomb,Grit,16.4,7.5,8.3,,,
+Bread & Butter,Fat Boy,16,0.34,0.52,0.90,0.24,0.18,0.87,Wide Body,3K Kevlar-Carbon Fiber Weave,5.3,"2,069",107.8,7.11,Polypropylene Honeycomb,Peel Ply-Coarse,15.9,8.1,8,23.5,54.4,36.3
+Bread & Butter,Filth,16,0.57,0.27,0.42,0.67,0.78,0.74,Elongated,T700 Carbon Fiber,5.5,"1,865",121,6.2,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,7.9,24.2,55.2,35.6
+Bread & Butter,Loco,16,0.39,0.56,0.34,0.61,0.40,0.59,Hybrid,T700 Carbon Fiber,5.3,"2,091",113.7,6.1,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,7.7,24.1,54.6,35.2
+Bread & Butter,Shogun,16,0.51,0.43,0.36,0.81,0.83,0.84,Elongated,T700 Carbon Fiber & Titanium,5.5,"2,004",121.6,6.13,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.2,24.5,55,36
+Bread & Butter,Spear Breakout,13,,0.03,,,,,Standard,T700 Carbon Fiber,5,"1,156",,,Polypropylene Honeycomb,Grit,15.9,7.9,7.6,,,
+Bread & Butter,Spear Juno,16,,0.01,,,,,Standard,T700 Carbon Fiber,5,"1,081",,,Polypropylene Honeycomb,Grit,15.9,7.9,7.6,,,
+Cheetah,Predion E16 Edgeless,16,0.13,0.09,0.08,0.17,0.10,0.29,Elongated,3K Woven Carbon Fiber,5.5,"1,556",106,5.37,Aramid Fiber Honeycomb,Grit,16.5,7.5,7.7,23.3,52.8,34.3
+Cheetah,Predion E16-with lead tape,16,0.28,0.09,0.93,0.24,0.46,0.29,Elongated,3K Woven Carbon Fiber,5.5,"1,556",115,7.23,Aramid Fiber Honeycomb,Grit,16.5,7.5,8.4,23.5,54.1,34.3
+Chorus,Shapeshifter,16,0.73,0.66,0.67,0.61,0.59,0.64,Hybrid,18K Toray Carbon Fiber,5.3,"2,139",116.7,6.61,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.8,8.1,24.1,55.7,35.3
+Chorus,Shapeshifter with 5 grams tungsten tape,16,0.79,0.66,0.86,0.33,0.66,0.59,Hybrid,18K Toray Carbon Fiber,5.3,"2,139",117.8,7,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.8,8.4,23.7,55.9,35.2
+Chorus,Shapeshifter with 5 grams tungsten tape & 28-gram Slyce cap,16,0.81,0.66,0.90,0.02,0.82,0.76,Hybrid,18K Toray Carbon Fiber,5.3,"2,139",121.3,7.11,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.8,9.3,21.8,56,35.7
+Core,Reaction Pro Elongated,16,0.34,0.26,0.32,0.93,0.94,0.18,Elongated,T700 Carbon Fiber,5.8,"1,863",125.4,6.03,Polypropylene Honeycomb,Peel Ply-Fine,16.5,7.4,8.2,24.8,54.4,33.9
+Core,Reaction Pro Standard,16,0.22,0.30,0.94,0.42,0.34,0.20,Standard,T700 Carbon Fiber,5.13,"1,892",111.7,7.25,Polypropylene Honeycomb,Peel Ply-Fine,15.8,8,8.2,23.8,53.5,34
+CRBN,CRBN 1X,14,0.42,0.83,0.23,0.67,0.53,0.31,Elongated,Toray Carbon Fiber,5.5,"2,244",116,5.78,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.3,8,24.2,54.7,34.4
+CRBN,CRBN 2X,16,0.22,0.38,0.99,0.24,0.25,0.31,Standard,Toray Carbon Fiber,4.75,"1,975",110,7.5,Polypropylene Honeycomb,Peel Ply-Coarse,15.8,8,8,23.5,53.5,34.4
+CRBN 1,CRBN1 Control,14,,0.71,,,,,Elongated,T700 Carbon Fiber,5.5,"2,171",,,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.3,7.9,,,
+CRBN 1,CRBN1 Control (USAP-Banned 2021),14,,0.35,,,,,Elongated,T700 Carbon Fiber,5.5,"1,943",,,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.3,7.9,,,
+Diadem,Edge 18K,16,0.17,0.92,0.45,0.61,0.84,0.22,Elongated,18k Carbon Fiber,5.3,"2,304",122,6.25,Polypropylene Honeycomb,Peel Ply-Coarse,16.4,7.5,7.9,24.1,53,34.1
+Diadem,Hush,18,1.00,1.00,0.03,0.81,0.90,0.99,Elongated,Thermoplastic Polyurethane,5.6,"2,776",122.7,5.13,Carbon fiber frame with BASF materials,Textured polyurethane,16.5,7.2,8.3,24.5,62,38.3
+Diadem,Icon V2 XL,13.7,0.30,0.13,0.15,0.81,0.92,0.50,Standard,Carbon Fiber (Japanese-Sourced),5.25,"1,718",125,5.69,Polypropylene Honeycomb (2 sheets),Grit,16,7.6,8.2,24.5,54.2,35
+Diadem,Vice,16,0.98,0.18,0.19,,0.41,0.16,Elongated,Carbon Fiber,5.3,"1,789",114,5.73,EVA Foam,Grit,16.4,7.4,7.9,,59,33.8
+Diadem,Warrior,19,0.09,0.16,0.94,0.91,1.00,0.01,Elongated,Carbon Fiber,5.3,"1,744",133,7.25,Polypropylene + Aramid,Grit,16.4,7.4,8.6,24.7,52.6,31
+Dymon,Mayhem,16,0.84,0.97,0.47,0.42,0.29,0.76,Elongated,Toray Carbon Fiber,4.25,"2,366",110.6,6.31,Kevlar honeycomb,Peel Ply-Coarse,16.5,7.5,7.8,23.8,56.1,35.7
+Electrum,Model E,16,,0.10,0.77,,0.84,,Elongated,Toray Carbon Fiber,5.25,"1,575",122,6.8,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.2,,,
+Electrum,Model E Elite,16,0.73,0.46,0.91,0.91,0.91,0.76,Elongated,Toray Carbon Fiber,5.25,"2,028",124,7.14,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.4,24.7,55.7,35.7
+Electrum,Model E Stealth,16,0.66,0.19,0.01,0.17,0.15,0.74,Elongated,Toray Carbon Fiber,5.38,"1,810",107,5,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.3,7.7,23.3,55.6,35.6
+Electrum,Model E Stealth-with 0.5 oz. lead tape,16,0.51,0.19,0.34,0.14,0.22,0.50,Elongated,Toray Carbon Fiber,5.38,"1,810",109,6.1,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.3,8.2,23.2,55,35
+Electrum,Pro II,11,0.01,0.56,0.75,0.33,0.10,0.29,Standard,Toray Carbon Fiber,5.25,"2,089",106,6.75,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,7.6,23.7,51,34.3
+Electrum,Pro II Stealth,12,0.17,0.77,0.01,0.12,0.00,0.90,Standard,Toray Carbon Fiber,5.25,"2,204",93,4.83,Polypropylene Honeycomb,Peel Ply-Coarse,16,7.8,7,23.1,53.1,36.4
+Electrum,Pro II Stealth-with 0.5 oz. lead tape,12,0.51,0.77,0.49,0.09,0.02,0.84,Standard,Toray Carbon Fiber,5.25,"2,204",97,6.35,Polypropylene Honeycomb,Peel Ply-Coarse,16,7.8,7.5,22.8,55,36
+Electrum,Pro Stealth,12,0.09,0.34,0.13,0.03,0.00,0.86,Wide Body,Toray Carbon Fiber,5,"1,927",92,5.63,Polypropylene Honeycomb,Peel Ply-Coarse,15.6,8.3,7.3,22.5,52.6,36.1
+Electrum,Pro Stealth-with 0.5 oz. lead tape,12,0.51,0.34,0.82,0.03,0.00,0.76,Wide Body,Toray Carbon Fiber,5,"1,927",93,6.9,Polypropylene Honeycomb,Peel Ply-Coarse,15.6,8.3,7.3,22.3,55,35.7
+Engage,Evolution Extreme V2.14,14,0.18,0.32,0.51,0.77,0.65,0.40,Elongated,Toray Carbon Fiber,5.25,"1,915",117.7,6.38,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8,24.4,53.2,34.7
+Engage,Evolution Extreme V2.16,16,0.39,0.55,0.71,0.81,0.83,0.31,Elongated,Toray Carbon Fiber,5.25,"2,082",121.8,6.66,Polypropylene Honeycomb,Peel Ply-Coarse,16.4,7.5,8.2,24.5,54.6,34.4
+Engage,Pursuit EX 6.0 Maxx,16,0.30,0.12,0.99,0.81,0.51,0.64,Elongated,Toray Carbon Fiber,5,"1,666",115.6,7.43,Polypropylene Honeycomb,Frosted RCF,16,8,8,24.5,54.2,35.3
+Engage,Pursuit EX 6.0 Pro,16,0.51,0.85,0.96,0.24,0.45,0.87,Elongated,Toray Carbon Fiber,5,"2,260",114.7,7.32,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.1,23.5,55,36.3
+Engage,Pursuit EX Pro,13,0.48,0.97,0.95,0.33,0.54,0.93,Elongated,Toray Carbon Fiber,5,"2,366",116.2,7.29,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.2,23.7,54.9,36.6
+Engage,Pursuit MX 6.0 Maxx,16,0.84,0.13,0.24,0.67,0.54,0.59,Elongated,Toray Carbon Fiber,5.75,"1,716",116.2,5.8,Polypropylene Honeycomb,Frosted RCF,16.5,7.5,7.8,24.2,56.1,35.2
+Engage,Pursuit MX 6.0 Pro,16,0.87,0.85,0.69,0.98,0.98,0.69,Elongated,Toray Carbon Fiber,5.75,"2,258",129.1,6.65,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.1,25.3,56.3,35.4
+Engage,Pursuit MX Pro,13,0.86,0.87,0.26,0.61,0.73,0.87,Elongated,Toray Carbon Fiber,5.75,"2,264",119.3,5.85,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8,24.1,56.2,36.3
+Engage,Pursuit Pro 1 6.0-Light,16,0.88,0.79,0.20,0.33,0.49,0.69,Elongated,Toray Carbon Fiber,5.88,"2,207",115.2,5.75,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.7,23.7,56.4,35.4
+Engage,Pursuit Pro 1-Light,13,0.81,0.74,0.11,0.17,0.24,0.72,Elongated,Toray Carbon Fiber,5.88,"2,178",109.5,5.57,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.7,23.3,56,35.5
+Franklin,Ben Johns Signature,13,,0.05,,,0.76,,Elongated,Fiberglass,5.5,"1,267",120,,Polypropylene Honeycomb,Grit,16.5,7.3,8.1,,,
+Franklin,Carbon STK,14.5,0.04,0.05,0.22,0.88,0.66,0.00,Elongated,Carbon Fiber,4.25,"1,251",118,5.76,Polypropylene Honeycomb,Unknown,16.5,7.5,7.6,24.6,51.7,30.9
+Gamma,Airbender,10,0.73,0.41,0.02,0.24,0.30,0.80,Elongated,Toray Carbon Fiber,5.5,"1,988",111.2,5.08,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.1,23.5,55.7,35.8
+Gamma,Airbender,13,0.76,0.59,0.05,0.29,0.40,0.59,Elongated,Toray Carbon Fiber,5.5,"2,107",113.8,5.24,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.1,23.6,55.8,35.2
+Gamma,Airbender,16,0.61,0.31,0.11,0.17,0.50,0.22,Elongated,Toray Carbon Fiber,5.38,"1,903",115.3,5.57,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.5,23.3,55.4,34.1
+Gamma,Obsidian 10,10,0.42,0.42,0.22,0.77,0.67,0.72,Elongated,Toray Carbon Fiber,5.75,"1,992",118.3,5.77,Polypropylene Honeycomb,Peel Ply-Coarse,16.4,7.6,8,24.4,54.7,35.5
+Gamma,Obsidian 13,13,0.55,0.25,0.31,0.42,0.36,0.59,Elongated,Toray Carbon Fiber,5.75,"1,854",112.2,6,Polypropylene Honeycomb,Peel Ply-Coarse,16.4,7.6,7.9,23.8,55.1,35.2
+Gamma,Obsidian 16,16,0.76,0.28,0.57,0.81,0.75,0.31,Elongated,Toray Carbon Fiber,5.75,"1,877",119.6,6.46,Polypropylene Honeycomb,Peel Ply-Coarse,16.4,7.6,8.1,24.5,55.8,34.4
+Gearbox,CX11E Power,14,0.00,0.08,0.00,,0.03,0.02,Elongated,3K Woven Carbon Fiber,5.38,"1,480",98,4.69,Toray T700 Carbon Fiber,Grit,16.6,8,7.8,,47.8,31.5
+Gearbox,CX14E,14,,0.08,0.00,,0.05,,Elongated,3K Woven Carbon Fiber,5.38,"1,523",101,4.32,Toray T700 Carbon Fiber,Grit,16.6,7.4,8,,,
+Gearbox,CX14H Ultimate Power,14,0.01,0.37,0.23,0.02,0.15,0.06,Standard,3K Woven Carbon Fiber,5.38,"1,962",107,5.78,Toray T700 Carbon Fiber,Grit,15.6,8,8.5,22,51.1,33.1
+Gearbox,G2 Elongated,14,0.34,0.46,0.07,0.99,0.90,0.05,Elongated,Carbon Fiber; Fiberglass,5.5,"2,030",122.9,5.35,Polypropylene Honeycomb,Grit,16.5,7.4,7.9,25.4,54.4,32.7
+Gearbox,G2 Integra,14,0.30,0.62,0.14,0.81,0.38,0.05,Hybrid,Carbon Fiber; Fiberglass,5.5,"2,113",113.3,5.64,Polypropylene Honeycomb,Grit,16,7.4,7.9,24.5,54.2,32.6
+Gearbox,G2 Quad,14,0.20,0.66,0.45,0.33,0.20,0.08,Standard,Carbon Fiber; Fiberglass,4.75,"2,139",108,6.23,Polypropylene Honeycomb,Grit,15.9,8,7.9,23.7,53.3,33.4
+Gearbox,Pro Control Elongated,14,0.81,0.65,0.02,0.96,0.84,0.54,Elongated,Toray Carbon Fiber,5.5,"2,130",122,5.07,Toray Carbon Fiber,Peel Ply-Coarse,16.5,7.4,8.1,25,56,35.1
+Gearbox,Pro Control Fusion,14,0.76,0.56,0.03,0.81,0.46,0.69,Hybrid,Toray Carbon Fiber,5.5,"2,091",115,5.14,Toray Carbon Fiber,Peel Ply-Coarse,16,7.4,8,24.5,55.8,35.4
+Gearbox,Pro Power Elongated,14,0.96,0.51,0.04,0.95,0.76,0.93,Elongated,Toray Carbon Fiber,5.5,"2,062",120,5.22,Toray Carbon Fiber,Peel Ply-Coarse,16.5,7.4,8,24.9,57.7,36.6
+Gearbox,Pro Power Elongated with 10 grams tungsten,14,0.99,0.21,0.15,0.74,0.84,0.97,Elongated,Toray Carbon Fiber,5.5,"1,827",122,5.67,Toray Carbon Fiber,Peel Ply-Coarse,16.5,7.4,8.5,24.3,61.3,37.4
+Gearbox,Pro Power Fusion,14,0.97,0.62,0.03,0.67,0.34,0.94,Hybrid,Toray Carbon Fiber,5.5,"2,113",112,5.14,Toray Carbon Fiber,Peel Ply-Coarse,16,7.4,8,24.2,57.9,36.8
+Gearbox,Pro Ultimate Elongated,16,0.94,0.40,0.08,0.99,0.89,0.64,Elongated,Toray Carbon Fiber,5.5,"1,983",122.3,5.43,Toray Carbon Fiber,Peel Ply-Coarse,16.5,7.4,7.9,25.6,57.2,35.3
+Gentle Booms Sports,GBS-001,11,0.05,0.08,0.69,0.12,0.46,0.02,Standard,Aluminum,5,"1,493",115,6.65,Aluminum Honeycomb,Grit,15.7,7.8,8.5,23.1,51.9,31.7
+GRÜVN,LAZR-16S,16,0.33,0.80,0.88,0.12,0.13,0.59,Standard,3K Kevlar-Carbon Fiber Weave,5.35,"2,213",106.2,7.09,Polypropylene Honeycomb,Peel Ply-Coarse,15.9,8,8.1,23.1,54.3,35.2
+GRÜVN,MÜVN-13S,13,0.46,0.22,0.49,0.03,0.05,0.90,Wide Body,T700 Carbon Fiber,5.3,"1,846",101,6.35,Polypropylene Honeycomb,Peel Ply-Coarse,15.7,8.1,7.9,22.5,54.8,36.4
+GRÜVN,MÜVN-13X,13,0.61,0.38,0.28,0.48,0.41,0.45,Elongated,T700 Carbon Fiber,5.5,"1,975",114,5.93,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,7.8,23.9,55.4,34.9
+GRÜVN,MÜVN-16E,16,0.51,0.26,0.49,0.42,0.66,0.45,Elongated,T700 Carbon Fiber,4.75,"1,862",118,6.35,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.3,23.8,55,34.9
+GRÜVN,MÜVN-16H,16,0.66,0.21,0.37,0.67,0.84,0.76,Elongated,T700 Carbon Fiber,5.88,"1,821",122,6.15,Polypropylene Honeycomb,Peel Ply-Fine,16.5,7.4,8.2,24.2,55.6,35.7
+GRÜVN,MÜVN-16S,16,0.33,0.42,0.77,0.06,0.07,0.50,Wide Body,T700 Carbon Fiber,5.3,"2,002",103.9,6.8,Polypropylene Honeycomb,Peel Ply-Coarse,15.7,8.1,8,22.7,54.3,35
+GRÜVN,MÜVN-16X,16,0.33,0.44,0.46,0.33,0.58,0.26,Elongated,T700 Carbon Fiber,5.5,"2,013",116.7,6.3,Polypropylene Honeycomb,Peel Ply-Fine,16.5,7.4,8.2,23.7,54.3,34.2
+GRÜVN,Raw-13R,13,0.07,0.71,0.60,0.06,0.01,0.36,Wide Body,T700 Carbon Fiber,5.25,"2,171",96.8,6.51,Polypropylene Honeycomb,Peel Ply-Coarse,15.6,8.2,7.6,22.7,52.3,34.6
+GRÜVN,Raw-13S,13,0.21,0.84,0.77,0.24,0.14,0.45,Wide Body,T700 Carbon Fiber,5.3,"2,255",106.4,6.8,Polypropylene Honeycomb,Peel Ply-Coarse,15.7,8.1,7.8,23.5,53.4,34.9
+GRÜVN,Raw-13V,13,0.08,0.37,0.77,0.09,0.03,0.42,Wide Body,T700 Carbon Fiber,4.75,"1,965",99,6.8,Polypropylene Honeycomb,Peel Ply-Coarse,15.5,8.1,7.7,22.8,52.5,34.8
+GRÜVN,Raw-16H,16,0.09,0.71,0.20,0.96,0.78,0.16,Elongated,T700 Carbon Fiber,5.88,"2,166",121,5.74,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,7.7,25,52.6,33.8
+GRÜVN,Raw-16R,16,0.09,0.11,0.73,0.05,0.02,0.08,Wide Body,T700 Carbon Fiber,5.25,"1,597",97.3,6.72,Polypropylene Honeycomb,Peel Ply-Coarse,15.6,8.2,7.7,22.6,52.6,33.4
+GRÜVN,Raw-16RX,16,0.13,0.28,0.16,0.81,0.70,0.26,Elongated,T700 Carbon Fiber,6,"1,877",119,5.7,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,7.8,24.5,52.8,34.2
+GRÜVN,Raw-16S,16,0.28,0.76,0.81,0.17,0.09,0.13,Wide Body,T700 Carbon Fiber,5.3,"2,202",105.3,6.83,Polypropylene Honeycomb,Peel Ply-Coarse,15.7,8.1,7.8,23.3,54.1,33.6
+GRÜVN,Raw-16V,16,0.16,0.68,0.96,0.10,0.04,0.08,Wide Body,T700 Carbon Fiber,4.75,"2,152",100.2,7.32,Polypropylene Honeycomb,Peel Ply-Coarse,15.5,8.1,7.8,22.9,52.9,33.4
+GRÜVN,Raw-16X,16,0.25,0.68,0.33,0.81,0.84,0.16,Elongated,T700 Carbon Fiber,5.5,"2,152",122,6.07,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8,24.5,53.8,33.8
+GRYP,Balance 1 - 10g cap,15,0.39,0.59,0.37,0.06,0.38,0.40,Elongated,T700 Carbon Fiber,5.5,"2,107",113,6.15,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.3,22.7,54.6,34.7
+GRYP,Balance 1 - 30g cap,15,0.73,0.48,0.31,0.01,0.41,0.76,Elongated,T700 Carbon Fiber,5.5,"2,042",114,6,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.9,21,55.7,35.7
+Honolulu Pickleball Co.,J2K,16,0.64,0.58,0.86,0.33,0.50,0.80,Hybrid,Dupont Kevlar,5.5,"2,101",115.4,7,Polypropylene Honeycomb,Peel Ply-Coarse,16.2,7.8,8.2,23.7,55.5,35.8
+Honolulu Pickleball Co.,J2K Pro,16,0.66,0.49,0.81,0.21,0.24,0.82,Hybrid,Dupont Kevlar,5.5,"2,044",110,6.84,Polypropylene Honeycomb,Peel Ply-Coarse,16.2,7.8,7.9,23.4,55.6,35.9
+Honolulu Pickleball Co.,J2K with 10 grams tungsten tape,16,0.48,0.58,0.97,0.17,0.39,0.59,Hybrid,Dupont Kevlar,5.5,"2,101",113.4,7.35,Polypropylene Honeycomb,Peel Ply-Coarse,16.2,7.8,8.4,23.3,54.9,35.2
+Honolulu Pickleball Co.,J2K with 6 grams tungsten tape & 28-gram Slyce cap,16,0.66,0.58,1.00,0.01,0.69,0.84,Hybrid,Dupont Kevlar,5.5,"2,101",118.8,7.67,Polypropylene Honeycomb,Peel Ply-Coarse,16.2,7.8,9.4,21.7,55.6,36
+Honolulu Pickleball Co.,J3K,16,0.51,0.36,0.93,0.48,0.52,0.87,Standard,Dupont Kevlar,6,"1,959",115.9,7.23,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.2,23.9,55,36.2
+Honolulu Pickleball Co.,J3K Pro,16,0.46,0.38,0.87,0.24,0.33,0.82,Standard,Dupont Kevlar,6,"1,973",111.6,7.05,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.1,23.5,54.8,35.9
+Honolulu Pickleball Co.,J7K Pro,16,0.81,0.91,0.37,0.48,0.60,0.50,Standard,Dupont Kevlar,5.5,"2,285",116.9,6.14,Polypropylene Honeycomb,Peel Ply-Coarse,16.6,7.3,8,23.9,56,35
+Honolulu Pickleball Co.,Sword & Shield-J1,16,0.48,0.29,0.82,0.61,0.97,0.29,Elongated,Toray Carbon Fiber,5.75,"1,880",127.8,6.9,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.8,24.1,54.9,34.3
+Honolulu Pickleball Co.,Sword & Shield-J1H,16,0.91,0.47,0.77,0.57,0.99,0.36,Elongated,Toray Carbon Fiber,5.75,"2,032",129.9,6.8,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.7,24,56.9,34.6
+Honolulu Pickleball Co.,Sword & Shield-J2,16,0.57,0.13,0.62,0.57,0.65,0.31,Hybrid,Toray Carbon Fiber,5.5,"1,714",117.7,6.55,Polypropylene Honeycomb,Peel Ply-Coarse,16.2,7.8,8,24,55.2,34.4
+Honolulu Pickleball Co.,Sword & Shield-J3,16,0.55,0.17,0.86,0.29,0.32,0.34,Standard,Toray Carbon Fiber,6,"1,778",111.4,7,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8,23.6,55.1,34.5
+Honolulu Pickleball Co.,Sword & Shield-J5,16,0.73,0.52,0.37,0.74,1.00,0.26,Elongated,Toray Carbon Fiber,5.75,"2,067",130.1,6.15,Polypropylene Honeycomb,Peel Ply-Coarse,17,7,8.6,24.3,55.7,34.2
+Hudef,Mage Pro,16,0.28,0.43,0.53,0.67,0.70,0.22,Elongated,T700 Carbon Fiber,5.35,"2,004",119,6.4,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.1,24.2,54.1,34.1
+Hudef,Mage Pro Gen 2,14,0.55,0.50,0.67,0.42,0.22,0.42,Hybrid,Kevlar & Carbon Fiber,5.3,"2,056",108.6,6.6,Polypropylene Honeycomb,Peel Ply-Coarse,16.1,7.8,7.9,23.8,55.1,34.8
+Hudef,Viva Pro Gen1,16,0.06,0.53,0.39,0.77,0.84,0.18,Elongated,T700 Carbon Fiber,5.5,"2,077",122,6.16,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.1,24.4,52.1,33.9
+Hudef,Viva Pro Gen2,16,0.64,0.50,0.59,0.98,0.97,0.42,Elongated,T700 Carbon Fiber,5.5,"2,060",128,6.5,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.1,25.3,55.5,34.8
+Joola,Hyperion CAS,16,,0.04,0.51,0.81,0.92,,Elongated,Fiberglass,5.5,"1,234",125,6.37,Polypropylene Honeycomb,Grit,16.5,7.5,8.3,24.5,,
+Joola,Hyperion CFS,16,0.03,0.14,0.64,0.93,0.96,,Elongated,Carbon Fiber,5.5,"1,725",127,6.57,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.4,24.8,51.6,
+Joola,Hyperion CFS,16,0.03,0.06,0.64,0.93,0.96,,Elongated,Carbon Fiber,5.5,"1,333",127,6.57,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.4,24.8,51.6,
+Joola,Hyperion CFS Swift,16,,0.07,,,,,Elongated,Carbon Fiber,5.5,"1,420",,,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.9,,,
+Joola,Magnus 3 Tyson McGuffin,14,0.95,0.99,0.33,0.61,0.45,0.95,Elongated,Carbon Fiber,5,"2,425",114.7,6.05,Polypropylene + Foam,Peel Ply-Coarse,16.5,7.5,8,24.1,57.3,37.2
+Joola,Perseus 3 Ben Johns,14,0.91,0.75,0.26,0.67,0.59,0.99,Elongated,Carbon Fiber,5.5,"2,193",116.9,5.83,Polypropylene + Foam,Peel Ply-Coarse,16.5,7.5,8,24.2,56.9,38.3
+Joola,Perseus 3 Ben Johns,16,0.96,1.00,0.34,0.67,0.72,0.96,Elongated,Carbon Fiber,5.5,"2,487",119.2,6.08,Polypropylene + Foam,Peel Ply-Coarse,16.5,7.5,8,24.2,57.6,37.3
+Joola,Perseus MOD TA-15,16,0.95,0.83,0.36,0.88,0.72,0.95,Elongated,Carbon Fiber,5.5,"2,243",119.2,6.12,Polypropylene + Foam,Peel Ply-Coarse,16.5,7.5,8,24.6,57.5,36.9
+Joola,Scorpeus 3 Anna Bright,14,0.91,0.93,0.68,0.57,0.23,1.00,Standard,Carbon Fiber,5.25,"2,310",109.3,6.64,Polypropylene + Foam,Peel Ply-Coarse,16,8,7.8,24,56.9,38.6
+Joola,Scorpeus 3 Collin Johns,16,0.94,0.63,0.84,0.33,0.33,0.98,Standard,Carbon Fiber,5.25,"2,115",111.7,6.94,Polypropylene + Foam,Peel Ply-Coarse,16,8,8,23.7,57,38
+Joola,Scorpeus Collin Johns,16,0.06,0.29,0.85,0.48,0.41,0.22,Standard,Carbon Fiber,5.25,"1,889",114,6.95,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.1,23.9,52.2,34.1
+Joola,Solaire,14,,0.33,,,,,Standard,Carbon Fiber,5.5,"1,917",,,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.4,,,
+Joola,Solaire,14,,0.17,,,,,Standard,Carbon Fiber,5.5,"1,774",,,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.4,,,
+Komodo,Katana,16,0.26,0.47,0.20,0.42,0.14,0.08,Elongated,Kevlar 3K Cloth,5.25,"2,032",106.5,5.75,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.5,23.8,53.9,33.4
+Komodo,Tonto 18K,14,0.37,0.25,0.07,0.17,0.04,0.64,Elongated,18K Carbon Fiber,5.8,"1,854",100,5.32,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,7.1,23.3,54.5,35.3
+Komodo,Tonto Unidirectional,14,0.46,0.17,0.14,0.29,0.68,0.64,Elongated,T700 Carbon Fiber,5.8,"1,765",118.5,5.64,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.4,8.1,23.6,54.8,35.3
+Legacy,Legacy Pro,16,,0.32,0.55,,0.78,,Elongated,Toray Carbon Fiber,5.3,"1,913",121,6.43,Polypropylene Honeycomb,Peel Ply-Fine,16.5,7.5,8,,,
+Maverix,Clash-15 All Court,15,0.55,0.70,0.62,0.48,0.63,0.50,Hybrid,T700 Carbon Fiber,5.4,"2,161",117.2,6.55,Polypropylene Honeycomb,Peel Ply-Coarse,16.2,7.7,8.1,23.9,55.1,35
+Maverix,Clash-15 Pro,15,0.61,0.41,0.55,0.48,0.55,0.54,Hybrid,Kevlar & Carbon Fiber,5.4,"1,986",116.2,6.42,Polypropylene Honeycomb,Peel Ply-Coarse,16.2,7.7,8.2,23.9,55.4,35.1
+Maverix,Havik-15 All Court,15,0.51,0.46,0.50,0.48,0.63,0.54,Elongated,T700 Carbon Fiber,5.5,"2,028",117.2,6.36,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.2,23.9,55,35.1
+Maverix,Havik-15 Pro,15,0.66,0.42,0.65,0.61,0.69,0.45,Elongated,Kevlar & Carbon Fiber,5.5,"2,002",118.7,6.58,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.3,24.1,55.6,34.9
+Monarch,Mercenary Graphite 2,10.3,,0.02,,,0.20,,Standard,Graphite,4.5,"1,099",108,,Polypropylene Honeycomb,Grit,15.5,8.2,7.8,,,
+Neonic,Flow,16,0.48,0.93,0.61,0.48,0.56,0.36,Hybrid,Toray Carbon Fiber,5.5,"2,310",116.3,6.53,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.6,8.1,23.9,54.9,34.6
+OM,Aero,14,0.91,0.11,0.58,0.24,0.15,0.87,Wide Body,T700 Carbon Fiber,5,"1,584",106.7,6.48,Polypropylene Honeycomb,Grit,15.8,8.2,7.9,23.5,56.9,36.3
+Owl,Owl CXE,16,0.42,0.98,0.09,0.99,0.68,0.34,Elongated,Acoustene™ Composite,5.3,"2,380",118.5,5.51,Polypropylene Honeycomb,Acoustene™ Composite,16.5,7.5,7.9,25.6,54.7,34.5
+PaddleTek,Bantam TKO-C,12.7,0.84,0.94,0.62,0.77,0.37,0.95,Elongated,Toray Carbon Fiber & Fiberglass,5.25,"2,314",113,6.55,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.7,24.4,56.1,37.2
+PaddleTek,Bantam TKO-CX,14.3,0.89,0.91,0.51,0.96,0.83,0.90,Elongated,Toray Carbon Fiber & Fiberglass,5.75,"2,293",121.7,6.38,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.9,25,56.5,36.4
+PaddleTek,Tempest TKO-C,14.3,0.90,0.77,0.66,0.88,0.91,0.90,Standard,Toray Carbon Fiber & Fiberglass,5.25,"2,204",124,6.59,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.3,24.6,56.6,36.4
+PaddleTek,Tempest Wave Pro-C,14.3,0.64,0.92,0.92,0.33,0.37,0.92,Standard,Toray Carbon Fiber & Fiberglass,5.25,"2,302",112.4,7.19,Polypropylene Honeycomb,Peel Ply-Coarse,15.9,8,8.2,23.7,55.5,36.5
+PCKL,Pro 13,13,0.02,0.22,0.27,0.14,0.76,0.04,Hybrid,Toray Carbon Fiber,5.5,"1,834",120,5.91,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.5,8.1,23.2,51.3,32.3
+PCKL,Pro 16,16,0.13,0.24,0.64,0.42,0.78,0.03,Hybrid,Toray Carbon Fiber,5.5,"1,853",121,6.56,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.5,7.8,23.8,52.8,32.1
+Pickleball Apes,Pro Line Energy,16.5,0.59,0.55,0.16,0.91,0.84,0.45,Elongated,Kevlar & Carbon Fiber,6.25,"2,081",122,5.7,Polypropylene Narrow-Cell Honeycomb,Peel Ply-Coarse,17,7,8.3,24.7,55.3,34.9
+Pickleball Apes,Pro Line Energy S,16.5,0.79,0.75,0.48,0.67,0.66,0.74,Elongated,Kevlar & Carbon Fiber,5.5,"2,192",118,6.34,Polypropylene Narrow-Cell Honeycomb,Peel Ply-Coarse,16.4,7.6,8.1,24.2,55.9,35.6
+PIKKL,Hurricane Pro,14,0.73,0.90,0.67,0.29,0.18,0.69,Standard,T700 Carbon Fiber,5.5,"2,280",107.7,6.6,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,7.8,23.6,55.7,35.4
+PIKKL,Hurricane Pro,16,0.79,0.99,0.77,0.48,0.21,0.59,Standard,T700 Carbon Fiber,5.5,"2,404",108.6,6.79,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,7.8,23.9,55.9,35.2
+PIKKL,Vantage Pro,14,0.76,0.98,0.41,0.42,0.32,0.50,Elongated,Carbon Fiber,5.35,"2,367",111.5,6.19,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.5,7.9,23.8,55.8,35
+PIKKL,Vantage Pro,16,0.81,0.85,0.68,0.48,0.81,0.42,Elongated,Carbon Fiber,5.35,"2,260",121.2,6.64,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.5,8.4,23.9,56,34.8
+ProDrive,Drive Carbon,19,0.66,0.28,0.94,0.81,0.99,0.08,Elongated,Toray Carbon Fiber,5.3,"1,870",130,7.24,Polypropylene + Kevlar,Peel Ply-Coarse,16.4,7.6,8.6,24.5,55.6,33.4
+ProDrive,Encounter,16,0.90,0.45,0.09,0.61,0.73,0.34,Elongated,T700 Carbon Fiber,5.5,"2,020",119.2,5.49,Polypropylene + Kevlar,Peel Ply-Coarse,16.5,7.3,8.2,24.1,56.7,34.5
+ProDrive,Ghost,16,0.66,0.20,0.74,0.48,0.60,0.54,Elongated,Toray Carbon Fiber,5.3,"1,817",117,6.73,Kevlar,Peel Ply-Coarse,16.4,7.6,8,23.9,55.6,35.1
+ProKennex,Black Ace Pro,10,0.37,0.23,0.40,0.05,0.08,0.97,Standard,Toray Carbon Fiber,5.3,"1,848",105,6.17,Polypropylene Honeycomb,Peel Ply,15.8,7.6,8.1,22.6,54.5,37.4
+ProKennex,Black Ace Pro,10,0.37,0.09,0.40,0.05,0.08,0.97,Standard,Toray Carbon Fiber,5.3,"1,525",105,6.17,Polypropylene Honeycomb,Peel Ply,15.8,7.6,8.1,22.6,54.5,37.4
+Prokennex,Pro Spin,11,,0.07,,,,,Standard,Composit with Submerged Strings,5.12,"1,477",,,Polypropylene Honeycomb,Grit,15.7,7.6,7.6,,,
+PROLITE,K2 Power,14,0.27,0.12,0.53,0.06,0.05,0.13,Standard,Toray Carbon Fiber,4.75,"1,628",101,6.4,Polypropylene Honeycomb,Grit,15.7,8.1,7.8,22.7,54,33.6
+Proton,Series Four,16,0.88,0.63,0.13,0.61,0.57,0.72,Elongated,3K Kevlar-Carbon Fiber Weave,5.5,"2,114",116.4,5.61,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8,24.1,56.4,35.5
+Proton,Series One-Type A,11,0.59,0.61,0.75,0.61,0.45,0.93,Standard,Carbon Fiber,5.25,"2,112",114.5,6.75,Polypropylene Honeycomb,NanoTac,15.8,8.3,8.1,24.1,55.3,36.6
+Proton,Series One-Type A,15,0.46,0.89,0.92,0.48,0.71,0.08,Standard,Carbon Fiber,5.25,"2,276",119.1,7.2,Polypropylene Honeycomb,NanoTac,15.8,8.3,8.4,23.9,54.8,33.4
+Proton,Series One-Type B,15,0.84,0.96,0.62,0.74,0.98,0.26,Elongated,Carbon Fiber,5.25,"2,336",129.6,6.55,Nomex Honeycomb,NanoTac,16.8,7.3,8.8,24.3,56.1,34.2
+Proton,Series Three,15.6,0.84,0.16,0.73,0.81,0.89,0.15,$192.00,Carbon Fiber,5.38,"1,755",122.5,6.72,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.2,24.5,56.1,33.7
+Proton,Series Two,16.2,0.17,0.21,0.31,0.67,0.78,0.31,$176.00,Carbon Fiber,5.38,"1,818",120.6,5.98,Polypropylene Honeycomb,Grit,16.5,7.5,8.3,24.2,53.1,34.4
+ProXR,Connor Garnett,14,0.28,0.70,0.10,0.03,0.25,0.22,Elongated,T700 Carbon Fiber,6,"2,163",110,5.52,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.2,22.5,54.1,34.1
+ProXR,Signature,16,0.76,0.87,0.22,0.14,0.57,0.59,Elongated,T700 Carbon Fiber,6,"2,264",116.3,5.77,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.4,23.2,55.8,35.2
+ProXR,Sweet Spot,16,0.30,0.71,0.85,0.24,0.51,0.64,Standard,T700 Carbon Fiber,5.25,"2,169",115.6,6.98,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.4,23.5,54.2,35.3
+ProXR,"Zane Navratil ""The Standard""",14,0.39,0.85,0.84,0.06,0.15,0.40,Standard,T700 Carbon Fiber,5.25,"2,260",107,6.92,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.2,22.7,54.6,34.7
+Reload,RLD 1-16,16,0.46,0.61,0.61,0.88,0.94,0.45,Elongated,T700 Carbon Fiber,5.5,"2,108",125.7,6.54,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.3,24.6,54.8,34.9
+Revolin,Revo Pro Pure Hybrid,16,0.88,0.75,0.56,0.06,0.07,0.22,Hybrid,Basalt epoxy,5.25,"2,189",104.5,6.44,Polypropylene Honeycomb,Peel Ply-Coarse,15.9,7.8,8.1,22.7,56.4,34.1
+Revolin,Revo Pro Reach Hybrid,16,0.91,0.48,0.10,0.11,0.18,0.16,Elongated,Basalt epoxy,6,"2,034",107.8,5.54,Polypropylene Honeycomb,Peel Ply-Coarse,16.4,7.3,8,23,56.9,33.8
+Revolin,Revo Reach Control,16,,0.01,,,,,Elongated,Flax & Hemp,5.5,"1,056",,,Polypropylene Honeycomb,Grit,16.5,7.5,7.9,,,
+Rokne,Republic 2.16 Standard,16,0.12,0.04,0.59,0.88,0.95,0.06,Hybrid,Mitsubishi T700 Carbon Fiber,5.5,"1,176",126.2,6.5,Polypropylene Honeycomb,Grit,16.3,7.5,8.4,24.6,52.7,32.8
+Ronbus,EV1.16,16,0.97,0.02,0.30,0.42,0.60,0.36,Elongated,Unknown,5.25,"1,148",117,5.94,EVA Foam,Grit,16.4,7.4,8.1,23.8,58.8,34.6
+Ronbus,NOVA R1,16,0.57,0.14,0.18,0.81,0.46,0.42,Elongated,Toray Carbon Fiber,5.5,"1,729",115,5.72,Polypropylene Honeycomb,Peel Ply-Fine,16.5,7.5,7.7,24.5,55.2,34.8
+Ronbus,NOVA R2,16,0.34,0.64,0.65,0.29,0.21,0.69,Standard,Toray Carbon Fiber,5.5,"2,127",108.4,6.58,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,7.9,23.6,54.4,35.4
+Ronbus,NOVA R3,16,0.61,0.15,0.34,0.77,0.78,0.42,Elongated,Toray Carbon Fiber,5.5,"1,732",121,6.1,Polypropylene Honeycomb,Peel Ply-Fine,16.5,7.5,8.1,24.4,55.4,34.8
+Ronbus,Pulsar FX.R1,16,0.81,0.87,0.43,0.77,0.81,0.69,Elongated,Toray Carbon Fiber,5.5,"2,264",121.2,6.21,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.2,24.4,56,35.4
+Ronbus,Pulsar FX.R2,16,0.39,0.73,0.88,0.21,0.44,0.87,Standard,Toray Carbon Fiber,5.5,"2,177",114.1,7.09,Polypropylene Honeycomb,Peel Ply-Coarse,16,8,8.2,23.4,54.6,36.3
+Ronbus,Pulsar FX.R3,16,0.66,0.82,0.43,0.88,0.83,0.82,Elongated,Toray Carbon Fiber,5.5,"2,230",121.8,6.21,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.1,24.6,55.6,35.9
+Ronbus,Pulsar R1,16,0.42,0.32,0.43,0.48,0.53,0.54,Elongated,Toray Carbon Fiber,5.5,"1,915",116,6.21,Polypropylene Honeycomb,Peel Ply-Fine,16.5,7.5,7.9,23.9,54.7,35.1
+Ronbus,Pulsar R3,16,0.27,0.38,0.58,0.42,0.92,0.06,Elongated,Toray Carbon Fiber,5.5,"1,970",125,6.47,Polypropylene Honeycomb,Peel Ply-Fine,16.5,7.5,8.3,23.8,54,33.1
+Ronbus,R1.16,16,,0.92,0.42,,0.60,,Elongated,Toray Carbon Fiber,5.5,"2,307",117,6.2,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.1,,,
+Ronbus,XPRO EV1.T700.R2,16,0.99,0.90,0.16,0.24,0.34,,Elongated,Toray Carbon Fiber,5.5,"2,280",112,5.7,EVA Foam,Peel Ply-Fine,16.5,7.5,7.9,23.5,59.7,
+Ronbus,XPRO EV1.T700.R3,16,0.98,0.80,0.16,0.33,0.34,,Elongated,Toray Carbon Fiber,5.5,"2,210",112,5.7,EVA Foam,Peel Ply-Fine,16.5,7.5,7.9,23.7,59.6,
+Selkirk,AMPED Control Invikta,16,0.30,0.25,0.28,0.57,0.74,0.22,Elongated,Fiberglass,5.25,"1,855",119.4,5.93,Polypropylene Honeycomb,Grit,16.5,7.4,8.2,24,54.2,34.1
+Selkirk,Amped Pro Air Epic,16,0.66,0.84,0.72,0.57,0.31,0.64,Standard,Fiberglass,5.25,"2,252",111.3,6.67,Polypropylene Honeycomb,Grit,15.8,8,8,24,55.6,35.3
+Selkirk,Amped Pro Air Invikta,16,0.66,0.54,0.28,0.93,0.81,0.74,Elongated,Fiberglass,5.25,"2,080",121.2,5.93,Polypropylene Honeycomb,Grit,16.5,7.5,8,24.8,55.6,35.6
+Selkirk,Epic Vanguard,16,,0.06,,,,,Standard,Carbon Fiber,5.25,"1,285",,,Polypropylene Honeycomb,Grit,15.8,8,7.9,,,
+Selkirk,Invikta Amped,16,,0.04,,,0.22,,Elongated,Fiberglass,5.25,"1,220",109,,Polypropylene Honeycomb,Grit,16.5,7.4,7.3,,,
+Selkirk,Luxx Control Air Invikta,20,0.03,0.82,0.30,0.77,0.76,0.06,Elongated,Fiberglass & Carbon Fiber,5.35,"2,229",120,5.96,Polypropylene Honeycomb,Grit,16.5,7.5,8.1,24.4,51.6,33.1
+Selkirk,Project 003,20,,0.31,,,,,Standard,3K Woven Carbon Fiber,5.25,"1,903",,,Polypropylene Honeycomb,Grit,15.9,7.9,7.7,,,
+Selkirk,SLK Halo Power XL,13,0.05,0.24,0.05,0.67,0.46,0.02,Elongated,T700 Carbon Fiber,5.75,"1,849",115,5.27,Polypropylene Honeycomb,Peel Ply-Coarse,16.4,7.4,7.5,24.2,51.9,31.7
+Selkirk,Vanguard Power Air Invikta,12.7,0.09,0.73,0.06,0.12,0.10,0.80,Elongated,Fiberglass & Carbon Fiber,5.25,"2,176",106,5.31,Polypropylene Honeycomb,Grit,16.5,7.4,7.8,23.1,52.6,35.8
+Selkirk,Vanguard Power Air Invikta,12.7,0.09,0.03,0.06,0.12,0.10,0.80,Elongated,Fiberglass & Carbon Fiber,5.25,"1,172",106,5.31,Polypropylene Honeycomb,Grit,16.5,7.4,7.8,23.1,52.6,35.8
+Selkirk,Vanguard Power Air S2,12.7,,0.53,,,,,Standard,Fiberglass & Carbon Fiber,5.38,"2,077",,,Polypropylene Honeycomb,Grit,15.8,8,7.8,,,
+Six Zero,Black Diamond Power,14,0.91,0.59,0.51,0.48,0.33,0.76,Hybrid,Fiberglass,5.5,"2,104",111.7,6.38,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,7.9,23.9,56.8,35.7
+Six Zero,Double Black Diamond,14,0.24,0.53,0.48,0.29,0.34,0.54,Hybrid,Toray Carbon Fiber,5.5,"2,077",112,6.33,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8.1,23.6,53.7,35.1
+Six Zero,Double Black Diamond,16,0.42,0.51,0.71,0.48,0.41,0.13,Hybrid,Toray Carbon Fiber,5.5,"2,062",114,6.66,Polypropylene Honeycomb,Peel Ply-Fine,16.3,7.7,8.1,23.9,54.7,33.6
+Six Zero,Double Black Diamond (Early Batch),16,,0.74,,,,,Hybrid,Toray Carbon Fiber,5.5,"2,186",,,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8.1,,,
+Six Zero,Infinity Black Diamond,16,0.37,0.89,0.16,0.11,0.13,0.59,Hybrid,Toray Fiberglass,5.5,"2,273",106.2,5.7,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8,23,54.5,35.2
+Six Zero,Infinity Double Black Diamond,16,0.23,0.53,0.24,0.14,0.25,0.36,Hybrid,Toray Carbon Fiber,5.5,"2,077",110,5.8,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8.1,23.2,53.6,34.6
+Six Zero,Quartz,15,0.22,0.33,0.55,0.29,0.19,0.54,Standard,Carbon Fiber,5,"1,925",107.8,6.43,Polypropylene Honeycomb,Peel Ply-Coarse,16,7.9,7.9,23.6,53.5,35.1
+Six Zero,Ruby,14,0.61,0.64,0.59,0.33,0.44,0.82,Hybrid,Dupont Kevlar,5.5,"2,124",114.1,6.5,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8.2,23.7,55.4,35.9
+Six Zero,Ruby,16,0.66,0.88,0.80,0.33,0.60,0.34,Hybrid,Dupont Kevlar,5.5,"2,271",117,6.81,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8.3,23.7,55.6,34.5
+Six Zero,Triple Black Diamond (Willinator),15,0.42,0.36,0.57,0.93,0.95,0.45,Elongated,18K Toray Carbon Fiber,6,"1,959",126,6.45,Polypropylene Honeycomb,Peel Ply-Coarse,16.6,7.6,8.2,24.8,54.7,34.9
+Six Zero,Black Diamond Power,16,0.59,0.81,0.76,0.33,0.53,0.36,Hybrid,Toray Fiberglass,5.5,"2,217",116,6.76,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8,23.7,55.3,34.6
+Six Zero,Black Diamond Power (Early Batch),16,,0.94,,,,,Hybrid,Toray Fiberglass,5.5,"2,329",,,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8.1,,,
+Spartus,Apollo,16,0.34,0.65,1.00,0.21,0.27,0.26,Wide Body,Dupont Kevlar,5.5,"2,130",110.1,7.56,Polypropylene Honeycomb,Peel Ply-Coarse,15.9,8.2,8.1,23.4,54.4,34.2
+Speedup,Fire 14,14,0.42,0.45,0.26,0.74,0.60,0.54,Elongated,Toray Carbon Fiber,6,"2,016",117,5.85,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.8,24.3,54.7,35.1
+Speedup,Ice 16,16,0.48,0.26,0.33,0.95,0.84,0.08,Elongated,Toray Carbon Fiber,6,"1,863",122,6.05,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.8,24.9,54.9,33.4
+Standout,KC1,16,0.66,0.48,0.12,0.81,0.74,0.45,Elongated,Kevlar & Carbon Fiber,5.5,"2,042",119.4,5.59,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8,24.5,55.6,34.9
+Thrive,Azul (medium-light),16,0.66,0.69,0.68,0.41,0.58,0.90,Hybrid,Kevlar & Carbon Fiber,5.5,"2,155",116.5,6.62,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8.2,23.8,55.6,36.4
+Thrive,Azul (medium),16,0.79,0.68,0.69,0.48,0.64,0.64,Hybrid,Kevlar & Carbon Fiber,5.5,"2,144",117.3,6.65,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8.2,23.9,55.9,35.3
+Thrive,Surge,16,0.51,0.81,0.74,0.74,0.56,0.72,Hybrid,Toray Carbon Fiber,5.3,"2,215",116.3,6.73,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,8,24.3,55,35.5
+Vatic Pro,Flash,14,,0.72,,,,,Hybrid,Toray Carbon Fiber,5.3,"2,174",,,Polypropylene Honeycomb,Peel Ply-Fine,16.3,7.7,8.1,,,
+Vatic Pro,Prism Flash,16,0.13,0.76,0.45,0.57,0.29,0.08,Hybrid,Toray Carbon Fiber,5.3,"2,200",111,6.25,Polypropylene Honeycomb,Peel Ply-Coarse,16.3,7.7,7.8,24,52.8,33.4
+Vatic Pro,V7,16,0.18,0.39,0.72,0.14,0.91,0.08,Elongated,Toray Carbon Fiber,5.3,"1,981",124,6.68,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.2,23.2,53.2,33.4
+Volair,Alto,14,0.21,0.18,0.20,0.57,0.28,0.36,Elongated,Fiberglass,5.5,"1,798",110.3,5.75,Polypropylene Honeycomb,Grit,16.5,7.5,7.7,24,53.4,34.6
+Volair,Alto,16,0.25,0.15,0.42,0.77,0.75,0.22,Elongated,Fiberglass,5.5,"1,737",119.8,6.2,Polypropylene Honeycomb,Grit,16.5,7.5,8.2,24.4,53.8,34.1
+Volair,Corto,14,0.18,0.30,0.82,0.21,0.06,0.45,Wide Body,Fiberglass,5.5,"1,892",103.5,6.85,Polypropylene Honeycomb,Grit,15.9,8.1,7.8,23.4,53.2,34.9
+Volair,Corto,16,0.25,0.40,0.90,0.42,0.27,0.13,Wide Body,Fiberglass,5.5,"1,984",110.1,7.1,Polypropylene Honeycomb,Grit,15.9,8.1,8.1,23.8,53.8,33.6
+Volair,Mach 1,16,0.13,0.42,0.18,0.57,0.25,0.16,Elongated,T700 Carbon Fiber,5.5,"2,002",110,5.72,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.7,24,52.8,33.8
+Volair,Mach 1,14,0.20,0.63,0.28,0.67,0.41,0.22,Elongated,T700 Carbon Fiber,5.5,"2,123",114,5.92,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8,24.2,53.3,34.1
+Volair,Mach 1 Forza,14,0.13,0.96,0.39,0.48,0.29,0.50,Elongated,T700 Carbon Fiber,5.5,"2,332",111,6.16,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.8,23.9,52.8,35
+Volair,Mach 1 Forza,16,0.39,0.79,0.53,0.61,0.46,0.50,Elongated,T700 Carbon Fiber,5.5,"2,205",115,6.4,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8,24.1,54.6,35
+Volair,Mach 2,14,0.07,0.96,0.75,0.17,0.09,0.20,Wide Body,T700 Carbon Fiber,5.5,"2,345",105.3,6.75,Polypropylene Honeycomb,Peel Ply-Coarse,15.9,8.1,7.8,23.3,52.3,34
+Volair,Mach 2,16,0.08,0.94,0.82,0.21,0.17,0.08,Wide Body,T700 Carbon Fiber,5.5,"2,329",107.2,6.9,Polypropylene Honeycomb,Peel Ply-Coarse,15.9,8.1,8,23.4,52.5,33.2
+Volair,Mach 2 Forza,14,0.27,0.83,0.77,0.33,0.17,0.64,Wide Body,T700 Carbon Fiber,5.5,"2,236",107.7,6.8,Polypropylene Honeycomb,Peel Ply-Coarse,15.9,8.1,7.8,23.7,54,35.3
+Volair,Mach 2 Forza,16,0.42,0.95,0.96,0.42,0.39,0.20,Wide Body,T700 Carbon Fiber,5.5,"2,330",113.4,7.3,Polypropylene Honeycomb,Peel Ply-Coarse,15.9,8.1,8.1,23.8,54.7,34

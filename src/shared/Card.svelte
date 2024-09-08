@@ -7,6 +7,7 @@
   export let radarData; // Accept radar data as a prop
   export let seriesKey; // Accept seriesKey as a prop (actual paddle name)
   export let xKey; // Accept xKey as a prop
+  export let thickness; // Accept thickness as a prop
 
   let flipped = false;
 
@@ -65,8 +66,8 @@
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start; /* Align items to the start of the flex container */
+    justify-content: flex-start; /* Align items to the start of the flex container */
     font-size: 1.2em; /* Adjust font size as needed */
     border-radius: 10px; /* Rounded corners */
     padding: 20px;
@@ -79,15 +80,16 @@
   .card-back {
     transform: rotateY(180deg);
     text-align: left; /* Left-align the text */
+    overflow-y: auto; /* Add vertical scrollbar */
   }
 
-  .card-back pre {
-    font-family: inherit; /* Inherit the font family from the parent */
-    font-size: inherit; /* Inherit the font size from the parent */
-    color: inherit; /* Inherit the text color from the parent */
-    background: none; /* Remove the default background */
-    border: none; /* Remove the default border */
-    white-space: pre-wrap; /* Allow the text to wrap */
+  .card-back .back-content-item {
+    margin-bottom: 5px; /* Add some space between each label-value pair */
+    text-align: left; /* Ensure text is left-aligned */
+  }
+
+  .card-back i {
+    color: rgb(234, 99, 207); 
   }
 
   .title-banner {
@@ -99,6 +101,7 @@
     font-weight: bold;
     text-align: center;
     border-bottom: 1px solid #444; /* Darker border */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
   }
 
   .chart-container {
@@ -136,7 +139,7 @@
 >
   <div class="card-inner">
     <div class="card-front">
-      <div class="title-banner">{seriesKey}</div> <!-- Title banner for the seriesKey -->
+      <div class="title-banner">{seriesKey} - {thickness}</div> <!-- Title banner for the seriesKey and thickness -->
       <div class="chart-container">
         <LayerCake
           padding={{ top: 30, right: 30, bottom: 30, left: 30 }} 
@@ -156,8 +159,10 @@
       <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
     </div>
     <div class="card-back">
-      <pre>{backContent}</pre>
-      <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
+      <div class="title-banner">{seriesKey} - {thickness}</div> <!-- Title banner for the seriesKey and thickness -->
+      {#each Object.entries(backContent) as [label, value]}
+        <div class="back-content-item">{label} : <i>{value}</i></div>
+      {/each}
     </div>
   </div>
 </div>
