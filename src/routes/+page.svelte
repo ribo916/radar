@@ -1,10 +1,6 @@
 <script>
-  import { LayerCake, Svg } from 'layercake';
-  import Radar from './_components/Radar.svelte';
-  import AxisRadial from './_components/AxisRadial.svelte';
   import data from './_data/radarScores.csv';
   import Card from '../shared/Card.svelte';
-  import Card2 from '../shared/Card2.svelte'; // Import the new Card2 component
 
   const seriesKey = 'paddle';
   const xKey = ['power', 'spin', 'twist', 'balance', 'swing', 'pop'];
@@ -33,24 +29,12 @@
   console.log('Filtered Data:', filteredData);
 </script>
 
-<!-- Loop through filteredData and create a Card2 for each paddle -->
+<!-- Loop through filteredData and create a Card for each paddle -->
 {#each filteredData as record}
-  <Card2 
-    frontContent={record[seriesKey]} 
+  <Card 
     backContent={`Power: ${record.power}`} 
     radarData={record} 
-    seriesKey={seriesKey} 
+    seriesKey={record[seriesKey]} 
     xKey={xKey} 
   />
 {/each}
-
-<style>
-  .chart-container {
-    width: 100%;
-    height: 250px;
-  }
-
-  .chart-block {
-    margin-bottom: 50px;
-  }
-</style>

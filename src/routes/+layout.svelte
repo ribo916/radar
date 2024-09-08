@@ -3,7 +3,9 @@
 </script>
 
 <main>
-    <h3>Paddle Charts</h3>
+    <div class="banner">
+        <h3>Paddle Comparisons</h3>
+    </div>
     <div class="chart-grid">
         <slot />
     </div>
@@ -13,6 +15,18 @@
     main {
         width: 100%;
         height: 100%;
+    }
+
+    .banner {
+        width: 100%;
+        background: linear-gradient(90deg, #03c8ff, #0077ff);
+        color: white;
+        padding: 1px;
+        text-align: center;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 10px;
+        border-radius: 4px;
+        font-size: 1.2em;
     }
 
     .chart-grid {
