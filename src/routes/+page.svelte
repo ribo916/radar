@@ -8,6 +8,15 @@
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
   const seriespaddles = Object.keys(data[0]).filter(d => !xKey.includes(d) && d !== seriesKey);
 
+  const labelMapping = {
+    power_percentile: 'Power',
+    spin_percentile: 'Spin',
+    twist_percentile: 'Twist',
+    balance_percentile: 'Balance',
+    swing_percentile: 'Swing',
+    pop_percentile: 'Pop'
+  };
+
   const filteredData = data.filter((d) => {
     let allValid = true;
     xKey.forEach(key => {
@@ -43,12 +52,22 @@
     });
   });
 
-  // console.log('Filtered Data:', filteredData);
-  // console.log('Excluded Paddles:', excludedPaddles);
+  // Create a new array of objects with the desired keys
+  const processedData = filteredData.map(record => {
+    const newRecord = {};
+    for (const key in record) {
+      if (labelMapping[key]) {
+        newRecord[labelMapping[key]] = record[key];
+      } else {
+        newRecord[key] = record[key];
+      }
+    }
+    return newRecord;
+  });
 </script>
 
-<!-- Loop through filteredData and create a Card for each paddle -->
-{#each filteredData as record}
+<!-- Loop through processedData and create a Card for each paddle -->
+{#each processedData as record}
 <Card 
   backContent={{
     company: record.company,
@@ -67,16 +86,16 @@
     balancePointCM: record.balance_point_cm,
     serveSpeedMPH: record.serve_speed_mph,
     punchVolleySpeed: record.punch_volley_speed,
-    power: `${Math.round(record.power_percentile * 10)}%`,
-    spin: `${Math.round(record.spin_percentile * 10)}%`,
-    twist: `${Math.round(record.twist_percentile * 10)}%`,
-    balance: `${Math.round(record.balance_percentile * 10)}%`,
-    swing: `${Math.round(record.swing_percentile * 10)}%`,
-    pop: `${Math.round(record.pop_percentile * 10)}%`
+    power: `${Math.round(record.Power * 10)}%`,
+    spin: `${Math.round(record.Spin * 10)}%`,
+    twist: `${Math.round(record.Twist * 10)}%`,
+    balance: `${Math.round(record.Balance * 10)}%`,
+    swing: `${Math.round(record.Swing * 10)}%`,
+    pop: `${Math.round(record.Pop * 10)}%`
   }} 
   radarData={record} 
   seriesKey={record[seriesKey]} 
-  xKey={xKey}
+  xKey={Object.values(labelMapping)}
   thickness={`${record.thinkness} mm`} 
 />
 {/each}
