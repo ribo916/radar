@@ -99,6 +99,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden; /* Ensure content does not overflow the container */
+    transform: rotate(-30deg); /* Rotate the radar chart by 30 degrees counter-clockwise */
   }
 
   .flip-icon {

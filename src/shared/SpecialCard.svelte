@@ -72,7 +72,7 @@
   .card-back {
     transform: rotateY(180deg);
     overflow-y: auto; /* Enable vertical scrolling */
-    padding-top: 0px; /* Add padding to ensure the first bullet is not cut off */
+    padding: 20px; /* Add padding to ensure the first bullet is not cut off */
   }
 
   .title-banner {
@@ -101,9 +101,16 @@
   }
 
   .excluded-list {
-    list-style-type: disc;
     padding-left: 20px;
     text-align: left;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Ensure the list is scrollable */
+  }
+
+  .excluded-list li {
+    font-size: 1em; /* Adjust font size as needed */
+    color: white; /* Ensure text color is white */
   }
 
   .front-text {
@@ -121,7 +128,7 @@
     justify-content: flex-start; /* Align items to the top */
     height: 100%;
     width: 100%;
-    padding-top: 0px; /* Add padding to the top */
+    padding-top: 20px; /* Add padding to the top */
   }
 </style>
 
@@ -142,7 +149,6 @@
       <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
     </div>
     <div class="card-back">
-
       <ul class="excluded-list">
         {#each excludedPaddles as paddle}
           <li>{paddle}</li>
