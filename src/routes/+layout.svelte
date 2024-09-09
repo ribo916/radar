@@ -51,7 +51,7 @@
     swingFilter = event.target.value;
   }
 
-  function calculateTotalValidPaddles() {
+  function calculateTotalValidPaddles(data) {
     // Assuming `data` is an array of paddle objects
     const validPaddles = data.filter((d) => {
       return Object.values(d).every(value => value !== undefined && value !== '' && !isNaN(+value) && +value > 0);
@@ -61,7 +61,12 @@
 
   // Fetch the total number of valid paddles from the parent component
   onMount(() => {
-    totalValidPaddles = calculateTotalValidPaddles();
+    if (data && data.length > 0) {
+      totalValidPaddles = calculateTotalValidPaddles(data);
+      console.log('onMount hit... Total Valid Paddles:', totalValidPaddles);
+    } else {
+      console.error('Data is not loaded or empty');
+    }
 
     window.addEventListener('getTotalValidPaddles', (event) => {
       event.detail.callback(totalValidPaddles);
@@ -91,10 +96,12 @@
 <main>
   <div class="banner">
     <h3>Paddle Comparisons</h3>
-    <button class="info-button" on:click={openModal} aria-label="More information">
+  </div>
+  <div class="icon-bar">
+    <button class="icon-button" on:click={openModal} aria-label="More information">
       <i class="fas fa-info-circle"></i>
     </button>
-    <button class="filter-button" on:click={toggleFilters} aria-label="Toggle filters">
+    <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters">
       <i class="fas fa-filter"></i>
     </button>
   </div>
@@ -138,7 +145,7 @@
     padding: 1px;
     text-align: center;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     border-radius: 4px;
     font-size: 1.2em;
     display: flex;
@@ -147,24 +154,24 @@
     position: relative;
   }
 
-  .info-button, .filter-button {
+  .icon-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 5px 0;
+    border-color: #333;
+  }
+
+  .icon-button {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.2em;
-    color: #ccc;
-    position: absolute;
-    right: 20px; /* Increased spacing from the right */
-  }
-
-  .filter-button {
-    right: 50px; /* Adjust spacing to position next to info button */
-  }
-
-  .filter-toggle {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: white;
+    margin: 0 10px;
   }
 
   .filter-text {
