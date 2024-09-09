@@ -12,6 +12,30 @@
   export let setTwistFilter;
   export let setBalanceFilter;
   export let setSwingFilter;
+
+  import { onMount } from 'svelte';
+  import data from '../routes/_data/radarScores.csv'; // Import the data
+
+  let totalValidPaddles = "All"; // Default value
+
+  function calculateTotalValidPaddles(data) {
+    // Assuming `data` is an array of paddle objects
+    const validPaddles = data.filter((d) => {
+      return Object.values(d).every(value => value !== undefined && value !== '' && !isNaN(+value) && +value > 0);
+    });
+    return validPaddles.length;
+  }
+
+  // Fetch the total number of valid paddles from the parent component
+  onMount(() => {
+    window.addEventListener('getTotalValidPaddles', (event) => {
+      event.detail.callback(totalValidPaddles);
+    });
+
+    window.addEventListener('updateFilteredPaddlesCount', (event) => {
+      totalValidPaddles = event.detail.count;
+    });
+  });
 </script>
 
 <div class="filter-area">
@@ -45,6 +69,8 @@
     <input id="swingFilter" type="range" min="0" max="100" bind:value={swingFilter} class="slider" on:input={setSwingFilter} />
     <div class="filter-value">{swingFilter}</div>
   </div>
+  <!-- Total Valid Paddles Count -->
+  <div class="total-valid-paddles">Total Valid Paddles: {totalValidPaddles}</div>
 </div>
 
 <style>
@@ -83,5 +109,12 @@
     flex: 1;
     text-align: left;
     margin-left: 10px;
+  }
+
+  .total-valid-paddles {
+    font-size: 1em; /* Adjusted font size to match the filters */
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
   }
 </style>

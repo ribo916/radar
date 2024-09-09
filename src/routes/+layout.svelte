@@ -7,7 +7,6 @@
 
   let showModal = false;
   let showFilters = false;
-  let totalValidPaddles = 0;
   let powerFilter = 0;
   let spinFilter = 0;
   let popFilter = 0;
@@ -51,32 +50,6 @@
     swingFilter = event.target.value;
   }
 
-  function calculateTotalValidPaddles(data) {
-    // Assuming `data` is an array of paddle objects
-    const validPaddles = data.filter((d) => {
-      return Object.values(d).every(value => value !== undefined && value !== '' && !isNaN(+value) && +value > 0);
-    });
-    return validPaddles.length;
-  }
-
-  // Fetch the total number of valid paddles from the parent component
-  onMount(() => {
-    if (data && data.length > 0) {
-      totalValidPaddles = calculateTotalValidPaddles(data);
-      console.log('onMount hit... Total Valid Paddles:', totalValidPaddles);
-    } else {
-      console.error('Data is not loaded or empty');
-    }
-
-    window.addEventListener('getTotalValidPaddles', (event) => {
-      event.detail.callback(totalValidPaddles);
-    });
-
-    window.addEventListener('updateFilteredPaddlesCount', (event) => {
-      totalValidPaddles = event.detail.count;
-    });
-  });
-
   // Dispatch the filter values to the child components
   $: if (typeof window !== 'undefined') {
     const event = new CustomEvent('setFilters', {
@@ -116,7 +89,6 @@
       setSwingFilter={setSwingFilter}
     />
   {/if}
-  <div class="filter-text">Total Valid Paddles: {totalValidPaddles}</div>
   <div class="chart-grid">
     <slot />
   </div>
@@ -172,13 +144,6 @@
     font-size: 1.5em;
     color: white;
     margin: 0 10px;
-  }
-
-  .filter-text {
-    font-size: 1em;
-    color: #fff;
-    text-align: center;
-    margin-bottom: 10px;
   }
 
   .chart-grid {
