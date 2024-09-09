@@ -8,6 +8,7 @@
   export let seriesKey; // Accept seriesKey as a prop (actual paddle name)
   export let xKey; // Accept xKey as a prop
   export let thickness; // Accept thickness as a prop
+  export let company; // Accept company as a prop
 
   let flipped = false;
 
@@ -139,7 +140,7 @@
 >
   <div class="card-inner">
     <div class="card-front">
-      <div class="title-banner">{seriesKey} - {thickness}</div> <!-- Title banner for the seriesKey and thickness -->
+      <div class="title-banner">{company} {seriesKey} - {thickness}</div> <!-- Title banner for the company, seriesKey, and thickness -->
       <div class="chart-container">
         <LayerCake
           padding={{ top: 30, right: 30, bottom: 30, left: 30 }} 
@@ -159,7 +160,8 @@
       <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
     </div>
     <div class="card-back">
-      <div class="title-banner">{seriesKey} - {thickness}</div> <!-- Title banner for the seriesKey and thickness -->
+      <div class="title-banner">{company} {seriesKey} - {thickness}</div> <!-- Title banner for the company, seriesKey, and thickness -->
+      <br>
       {#each Object.entries(backContent) as [label, value]}
         <div class="back-content-item">{label} : <i>{value}</i></div>
       {/each}

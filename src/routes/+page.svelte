@@ -106,12 +106,18 @@
 {#each filteredProcessedData as record}
 <Card 
   backContent={{
-    company: record.company,
-    thickness: `${record.thinkness} mm`,
+    power: `${Math.round(record.Power * 10)}%`,
+    spin: `${Math.round(record.Spin * 10)}%`,
+    twist: `${Math.round(record.Twist * 10)}%`,
+    balance: `${Math.round(record.Balance * 10)}%`,
+    swing: `${Math.round(record.Swing * 10)}%`,
+    pop: `${Math.round(record.Pop * 10)}%`,
     shape: record.shape,
     faceMaterial: record.face_material,
     handleLength: record.handle_length,
     spinRPM: record.spin_rpm,
+    serveSpeedMPH: record.serve_speed_mph,
+    punchVolleySpeed: record.punch_volley_speed,
     swingWeight: record.swing_weight,
     twistWeight: record.twist_weight,
     coreMaterial: record.core_material,
@@ -119,20 +125,13 @@
     length: record.length,
     width: record.width,
     staticWeight: record.static_weight,
-    balancePointCM: record.balance_point_cm,
-    serveSpeedMPH: record.serve_speed_mph,
-    punchVolleySpeed: record.punch_volley_speed,
-    power: `${Math.round(record.Power * 10)}%`,
-    spin: `${Math.round(record.Spin * 10)}%`,
-    twist: `${Math.round(record.Twist * 10)}%`,
-    balance: `${Math.round(record.Balance * 10)}%`,
-    swing: `${Math.round(record.Swing * 10)}%`,
-    pop: `${Math.round(record.Pop * 10)}%`
+    balancePointCM: record.balance_point_cm
   }} 
   radarData={record} 
   seriesKey={record[seriesKey]} 
   xKey={Object.values(labelMapping)}
   thickness={`${record.thinkness} mm`} 
+  company={record.company}
 />
 {/each}
 

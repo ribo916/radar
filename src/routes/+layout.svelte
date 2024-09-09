@@ -2,11 +2,13 @@
   import '../app.css';
   import Modal from '../shared/Modal.svelte'; // Import the Modal component
   import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
+  import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
   import data from './_data/radarScores.csv'; // Import the data
 
   let showModal = false;
   let showFilters = false;
+  let showCompare = false;
   let powerFilter = 0;
   let spinFilter = 0;
   let popFilter = 0;
@@ -24,6 +26,16 @@
 
   function toggleFilters() {
     showFilters = !showFilters;
+    if (showFilters) {
+      showCompare = false;
+    }
+  }
+
+  function toggleCompare() {
+    showCompare = !showCompare;
+    if (showCompare) {
+      showFilters = false;
+    }
   }
 
   function setPowerFilter(event) {
@@ -69,13 +81,16 @@
 <main>
   <div class="banner">
     <h3>Paddle Comparisons</h3>
-  </div>
-  <div class="icon-bar">
-    <button class="icon-button" on:click={openModal} aria-label="More information">
+    <button class="info-button" on:click={openModal} aria-label="More information">
       <i class="fas fa-info-circle"></i>
     </button>
+  </div>
+  <div class="icon-bar">
     <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters">
       <i class="fas fa-filter"></i>
+    </button>
+    <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare">
+      <i class="fas fa-exchange-alt"></i> <!-- New icon for comparing paddles -->
     </button>
   </div>
   {#if showFilters}
@@ -88,6 +103,9 @@
       setBalanceFilter={setBalanceFilter}
       setSwingFilter={setSwingFilter}
     />
+  {/if}
+  {#if showCompare}
+    <CompareSection />
   {/if}
   <div class="chart-grid">
     <slot />
@@ -111,10 +129,9 @@
   }
 
   .banner {
-    width: 100%;
     background: linear-gradient(90deg, #03c8ff, #0077ff);
     color: white;
-    padding: 1px;
+    padding: 15px 20px; /* Increase padding for better height */
     text-align: center;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 0px;
@@ -124,6 +141,24 @@
     justify-content: center;
     align-items: center;
     position: relative;
+  }
+
+  .banner h3 {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+  }
+
+  .info-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: white;
+    position: absolute;
+    right: 20px; /* Adjust spacing from the right */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
   }
 
   .icon-bar {

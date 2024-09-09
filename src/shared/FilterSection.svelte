@@ -71,6 +71,7 @@
   </div>
   <!-- Total Valid Paddles Count -->
   <div class="total-valid-paddles">Total Valid Paddles: {totalValidPaddles}</div>
+  <br>
 </div>
 
 <style>
@@ -85,6 +86,7 @@
     border-bottom: 1px solid #ccc;
     box-sizing: border-box;
     margin-bottom: 10px;
+    border-color: #333;
   }
 
   .slider-container {
