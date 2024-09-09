@@ -1,4 +1,4 @@
-company,paddle,thinkness,power_percentile,spin_percentile,twist_percentile,balance_percentile,swing_percentile,pop_percentile,shape,face_material,handle_length,spin_rpm,swing_weight,twist_weight,core_material,surface_texture,length,width,static_weight,balance_point_cm,serve_speed_mph,punch_volley_speed
+company,paddle,thickness,power_percentile,spin_percentile,twist_percentile,balance_percentile,swing_percentile,pop_percentile,shape,face_material,handle_length,spin_rpm,swing_weight,twist_weight,core_material,surface_texture,length,width,static_weight,balance_point_cm,serve_speed_mph,punch_volley_speed
 11Six24,Hurache Control,16,0.08,0.59,0.11,0.33,0.10,0.18,Elongated,Toray Carbon Fiber,5.5,"2,107",106,5.55,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,7.4,23.7,52.5,33.9
 11Six24,Hurache-X Control,16,0.59,0.23,0.53,0.61,0.70,0.50,Elongated,Toray Carbon Fiber and Kevlar,6,"1,847",119,6.4,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.2,24.1,55.3,35
 11Six24,Hurache-X Control+,14,0.66,0.77,0.37,0.48,0.50,0.86,Elongated,Toray Carbon Fiber,6,"2,203",115.4,6.15,Polypropylene Honeycomb,Peel Ply-Coarse,16.5,7.5,8.2,23.9,55.6,36.1

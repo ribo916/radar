@@ -3,6 +3,7 @@
   import Card from '../shared/Card.svelte';
   import SpecialCard from '../shared/SpecialCard.svelte';
   import { onMount } from 'svelte';
+  import { paddlesStore } from '../stores.js'; // Import the store
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -100,6 +101,9 @@
     });
     window.dispatchEvent(event);
   }
+
+  // Update the store with the filtered processed data
+  $: paddlesStore.set(filteredProcessedData);
 </script>
 
 <!-- Loop through filteredProcessedData and create a Card for each paddle -->
@@ -130,7 +134,7 @@
   radarData={record} 
   seriesKey={record[seriesKey]} 
   xKey={Object.values(labelMapping)}
-  thickness={`${record.thinkness} mm`} 
+  thickness={`${record.thickness} mm`} 
   company={record.company}
 />
 {/each}

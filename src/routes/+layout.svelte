@@ -5,6 +5,7 @@
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
   import data from './_data/radarScores.csv'; // Import the data
+  import { paddlesStore } from '../stores.js'; // Import the store
 
   let showModal = false;
   let showFilters = false;
@@ -15,6 +16,7 @@
   let twistFilter = 0;
   let balanceFilter = 0;
   let swingFilter = 0;
+  let paddles = [];
 
   function openModal() {
     showModal = true;
@@ -62,6 +64,11 @@
     swingFilter = event.target.value;
   }
 
+  // Subscribe to the paddles store
+  paddlesStore.subscribe(value => {
+    paddles = value;
+  });
+
   // Dispatch the filter values to the child components
   $: if (typeof window !== 'undefined') {
     const event = new CustomEvent('setFilters', {
@@ -105,7 +112,7 @@
     />
   {/if}
   {#if showCompare}
-    <CompareSection />
+    <CompareSection {paddles} />
   {/if}
   <div class="chart-grid">
     <slot />
