@@ -1,9 +1,12 @@
 <script>
   import '../app.css';
   import Modal from '../shared/Modal.svelte'; // Import the Modal component
+  import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
   import { onMount } from 'svelte';
+  import data from './_data/radarScores.csv'; // Import the data
 
   let showModal = false;
+  let showFilters = false;
   let totalValidPaddles = 0;
   let powerFilter = 0;
   let spinFilter = 0;
@@ -20,8 +23,46 @@
     showModal = false;
   }
 
+  function toggleFilters() {
+    showFilters = !showFilters;
+  }
+
+  function setPowerFilter(event) {
+    powerFilter = event.target.value;
+  }
+
+  function setSpinFilter(event) {
+    spinFilter = event.target.value;
+  }
+
+  function setPopFilter(event) {
+    popFilter = event.target.value;
+  }
+
+  function setTwistFilter(event) {
+    twistFilter = event.target.value;
+  }
+
+  function setBalanceFilter(event) {
+    balanceFilter = event.target.value;
+  }
+
+  function setSwingFilter(event) {
+    swingFilter = event.target.value;
+  }
+
+  function calculateTotalValidPaddles() {
+    // Assuming `data` is an array of paddle objects
+    const validPaddles = data.filter((d) => {
+      return Object.values(d).every(value => value !== undefined && value !== '' && !isNaN(+value) && +value > 0);
+    });
+    return validPaddles.length;
+  }
+
   // Fetch the total number of valid paddles from the parent component
   onMount(() => {
+    totalValidPaddles = calculateTotalValidPaddles();
+
     window.addEventListener('getTotalValidPaddles', (event) => {
       event.detail.callback(totalValidPaddles);
     });
@@ -53,40 +94,22 @@
     <button class="info-button" on:click={openModal} aria-label="More information">
       <i class="fas fa-info-circle"></i>
     </button>
+    <button class="filter-button" on:click={toggleFilters} aria-label="Toggle filters">
+      <i class="fas fa-filter"></i>
+    </button>
   </div>
-  <div class="filter-area">
-    <div class="filter-text">Total Valid Paddles: {totalValidPaddles}</div>
-    <div class="slider-container">
-      <label class="filter-label" for="powerFilter">Power:</label>
-      <input id="powerFilter" type="range" min="0" max="100" bind:value={powerFilter} class="slider" />
-      <div class="filter-value">{powerFilter}</div>
-    </div>
-    <div class="slider-container">
-      <label class="filter-label" for="spinFilter">Spin:</label>
-      <input id="spinFilter" type="range" min="0" max="100" bind:value={spinFilter} class="slider" />
-      <div class="filter-value">{spinFilter}</div>
-    </div>
-    <div class="slider-container">
-      <label class="filter-label" for="popFilter">Pop:</label>
-      <input id="popFilter" type="range" min="0" max="100" bind:value={popFilter} class="slider" />
-      <div class="filter-value">{popFilter}</div>
-    </div>
-    <div class="slider-container">
-      <label class="filter-label" for="twistFilter">Twist:</label>
-      <input id="twistFilter" type="range" min="0" max="100" bind:value={twistFilter} class="slider" />
-      <div class="filter-value">{twistFilter}</div>
-    </div>
-    <div class="slider-container">
-      <label class="filter-label" for="balanceFilter">Balance:</label>
-      <input id="balanceFilter" type="range" min="0" max="100" bind:value={balanceFilter} class="slider" />
-      <div class="filter-value">{balanceFilter}</div>
-    </div>
-    <div class="slider-container">
-      <label class="filter-label" for="swingFilter">Swing:</label>
-      <input id="swingFilter" type="range" min="0" max="100" bind:value={swingFilter} class="slider" />
-      <div class="filter-value">{swingFilter}</div>
-    </div>
-  </div>
+  {#if showFilters}
+    <FilterSection 
+      {powerFilter} {spinFilter} {popFilter} {twistFilter} {balanceFilter} {swingFilter}
+      setPowerFilter={setPowerFilter}
+      setSpinFilter={setSpinFilter}
+      setPopFilter={setPopFilter}
+      setTwistFilter={setTwistFilter}
+      setBalanceFilter={setBalanceFilter}
+      setSwingFilter={setSwingFilter}
+    />
+  {/if}
+  <div class="filter-text">Total Valid Paddles: {totalValidPaddles}</div>
   <div class="chart-grid">
     <slot />
   </div>
@@ -124,7 +147,7 @@
     position: relative;
   }
 
-  .info-button {
+  .info-button, .filter-button {
     background: none;
     border: none;
     cursor: pointer;
@@ -134,48 +157,21 @@
     right: 20px; /* Increased spacing from the right */
   }
 
-  .filter-area {
+  .filter-button {
+    right: 50px; /* Adjust spacing to position next to info button */
+  }
+
+  .filter-toggle {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding: 10px;
-    background-color: #f0f0f0;
-    color: #333;
-    font-size: 1em;
-    border-bottom: 1px solid #ccc;
-    box-sizing: border-box;
     margin-bottom: 10px;
   }
 
   .filter-text {
     font-size: 1em;
-    color: #333;
+    color: #fff;
+    text-align: center;
     margin-bottom: 10px;
-  }
-
-  .slider-container {
-    display: flex;
-    align-items: center;
-    margin: 5px 0;
-    width: 100%;
-    max-width: 600px;
-  }
-
-  .filter-label {
-    flex: 1;
-    text-align: right;
-    margin-right: 10px;
-  }
-
-  .slider {
-    flex: 3;
-  }
-
-  .filter-value {
-    flex: 1;
-    text-align: left;
-    margin-left: 10px;
   }
 
   .chart-grid {
