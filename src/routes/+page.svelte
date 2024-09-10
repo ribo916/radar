@@ -3,7 +3,7 @@
   import Card from '../shared/Card.svelte';
   import SpecialCard from '../shared/SpecialCard.svelte';
   import { onMount } from 'svelte';
-  import { paddlesStore } from '../stores.js'; // Import the store
+  import { paddlesStore, selectedPaddlesStore } from '../stores.js'; // Import the stores
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -53,6 +53,12 @@
     .map(d => d[seriesKey])
     .sort((a, b) => a.localeCompare(b));
 
+  // Subscribe to the selected paddles store
+  let selectedPaddles = [];
+  selectedPaddlesStore.subscribe(value => {
+    selectedPaddles = value;
+  });
+
   // Dispatch the total number of valid paddles to the layout
   onMount(() => {
     window.addEventListener('getTotalValidPaddles', (event) => {
@@ -82,14 +88,15 @@
     return newRecord;
   });
 
-  // Filter processedData based on the filters
+  // Filter processedData based on the filters and selected paddles
   $: filteredProcessedData = processedData.filter(record => 
     record.Power * 10 > powerFilter &&
     record.Spin * 10 > spinFilter &&
     record.Pop * 10 > popFilter &&
     record.Twist * 10 > twistFilter &&
     record.Balance * 10 > balanceFilter &&
-    record.Swing * 10 > swingFilter
+    record.Swing * 10 > swingFilter &&
+    (selectedPaddles.length === 0 || selectedPaddles.some(p => p.paddle === record[seriesKey] && p.company === record.company && p.thickness === record.thickness))
   );
 
   // Dispatch the filtered paddles count to the layout
