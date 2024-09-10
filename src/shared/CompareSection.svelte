@@ -4,7 +4,6 @@
   import { onMount, afterUpdate } from 'svelte';
 
   export let paddles = []; // Use the paddles prop passed from +layout.svelte
-console.log('********** exporting paddles array...');
 
   let filterText = ''; // Declare filterText
   let filteredPaddles = paddles;

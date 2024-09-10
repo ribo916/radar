@@ -14,17 +14,14 @@
   export let setSwingFilter;
 
   import { onMount } from 'svelte';
-  import data from '../routes/_data/radarScores.csv'; // Import the data
+  import { paddlesStore } from '../stores.js'; // Import the store
 
   let totalValidPaddles = "All"; // Default value
 
-  function calculateTotalValidPaddles(data) {
-    // Assuming `data` is an array of paddle objects
-    const validPaddles = data.filter((d) => {
-      return Object.values(d).every(value => value !== undefined && value !== '' && !isNaN(+value) && +value > 0);
-    });
-    return validPaddles.length;
-  }
+  // Subscribe to the paddles store to get the total number of valid paddles
+  paddlesStore.subscribe(value => {
+    totalValidPaddles = value.length;
+  });
 
   // Fetch the total number of valid paddles from the parent component
   onMount(() => {

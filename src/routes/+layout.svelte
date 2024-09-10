@@ -4,7 +4,6 @@
   import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
-  import data from './_data/radarScores.csv'; // Import the data
   import { paddlesStore } from '../stores.js'; // Import the store
 
   let showModal = false;
