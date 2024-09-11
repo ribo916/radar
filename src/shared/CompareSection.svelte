@@ -5,8 +5,11 @@
 
   export let paddles = []; // Use the paddles prop passed from +layout.svelte
 
+  // Create an immutable constant for the full list of paddles
+  const FULL_PADDLES_LIST = [...paddles];
+
   let filterText = ''; // Declare filterText
-  const filteredPaddlesStore = writable(paddles);
+  const filteredPaddlesStore = writable([]);
 
   // Subscribe to the store to keep track of selected paddles
   let selectedPaddles = [];
@@ -21,6 +24,7 @@
       selectedPaddles = selectedPaddles.filter(p => p.company !== paddle.company || p.paddle !== paddle.paddle || p.thickness !== paddle.thickness);
     }
     selectedPaddlesStore.set(selectedPaddles); // Update the store
+    filterPaddles(); // Reapply filter to include selected paddles
   }
 
   function isPaddleSelected(paddle) {
@@ -28,36 +32,59 @@
   }
 
   function filterPaddles() {
-    filteredPaddlesStore.set(
-      paddles.filter(paddle => 
+    //console.log('filter paddles hit...');
+    //console.log('filterText:', filterText);
+    //console.log('selectedPaddles:', selectedPaddles);
+    //console.log('FULL_PADDLES_LIST:', FULL_PADDLES_LIST);
+    //console.log('filteredPaddlesStore:', $filteredPaddlesStore);
+
+    // Start with the full list of paddles
+    let filteredPaddles = FULL_PADDLES_LIST;
+
+    // If there is filter text, filter the paddles
+    if (filterText.trim() !== '') {
+      //console.log('filter text applied...');
+      filteredPaddles = FULL_PADDLES_LIST.filter(paddle => 
         paddle.paddle.toLowerCase().includes(filterText.toLowerCase()) ||
         paddle.company.toLowerCase().includes(filterText.toLowerCase())
-      )
-    );
+      );
+    }
+
+    //console.log('filteredPaddles:', filteredPaddles);
+    //console.log('selectedPaddlesStore', $selectedPaddlesStore);
+
+    // Ensure selected paddles are always included
+    const mergedPaddles = [...filteredPaddles, ...selectedPaddles.filter(paddle => 
+      !filteredPaddles.some(fp => fp.company === paddle.company && fp.paddle === paddle.paddle && fp.thickness === paddle.thickness)
+    )];
+
+    //console.log('mergedPaddles:', mergedPaddles);
+    filteredPaddlesStore.set(mergedPaddles); // Update the store with the merged paddles
+    //console.log('filteredPaddlesStore after set:', $filteredPaddlesStore);
   }
 
   function clearSelection() {
-  selectedPaddlesStore.set([]);
-  filterText = '';
-  filteredPaddlesStore.set(paddles);
-  // Manually uncheck all checkboxes
-  document.querySelectorAll('.paddle-item input[type="checkbox"]').forEach(checkbox => {
-    checkbox.checked = false;
-  });
-  // Simulate pressing the "Clear" button a second time
-  setTimeout(() => {
     selectedPaddlesStore.set([]);
     filterText = '';
-    filteredPaddlesStore.set(paddles);
+    filteredPaddlesStore.set(FULL_PADDLES_LIST);
+    // Manually uncheck all checkboxes
     document.querySelectorAll('.paddle-item input[type="checkbox"]').forEach(checkbox => {
       checkbox.checked = false;
     });
-  }, 0);
-}
+    // Simulate pressing the "Clear" button a second time
+    setTimeout(() => {
+      selectedPaddlesStore.set([]);
+      filterText = '';
+      filteredPaddlesStore.set(FULL_PADDLES_LIST);
+      document.querySelectorAll('.paddle-item input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = false;
+      });
+    }, 0);
+  }
 
   // Initialize filtered paddles on mount
   onMount(() => {
-    filteredPaddlesStore.set(paddles);
+    filteredPaddlesStore.set(FULL_PADDLES_LIST); // Initialize the filtered paddles store
   });
 </script>
 
