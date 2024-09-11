@@ -79,14 +79,14 @@
       twistFilter = event.detail.twistFilter;
       balanceFilter = event.detail.balanceFilter;
       swingFilter = event.detail.swingFilter;
-      console.log('Filters Set:', {
+      /*console.log('Filters Set:', {
         powerFilter,
         spinFilter,
         popFilter,
         twistFilter,
         balanceFilter,
         swingFilter
-      });
+      });*/
     });
   });
 
@@ -116,7 +116,7 @@
     (selectedPaddles.length === 0 || selectedPaddles.some(p => p.paddle === record[seriesKey] && p.company === record.company && p.thickness === record.thickness))
   );
 
-  $: console.log('Filtered Processed Data:', filteredProcessedData);
+  /*$: console.log('Filtered Processed Data:', filteredProcessedData);*/
 
   // Dispatch the filtered paddles count to the layout
   $: if (typeof window !== 'undefined') {
