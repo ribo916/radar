@@ -1,64 +1,63 @@
 <script>
   import { selectedPaddlesStore } from '../stores.js'; // Import the store
-  import { get } from 'svelte/store';
-  import { onMount, afterUpdate } from 'svelte';
+  import { writable } from 'svelte/store';
+  import { onMount } from 'svelte';
 
   export let paddles = []; // Use the paddles prop passed from +layout.svelte
 
   let filterText = ''; // Declare filterText
-  let filteredPaddles = paddles;
+  const filteredPaddlesStore = writable(paddles);
 
   // Subscribe to the store to keep track of selected paddles
-  let selectedPaddles = get(selectedPaddlesStore);
-
-  console.log('Initial Paddles:', paddles);
-  console.log('Initial Selected Paddles:', selectedPaddles);
+  let selectedPaddles = [];
+  selectedPaddlesStore.subscribe(value => {
+    selectedPaddles = value;
+  });
 
   function handleCheckboxChange(event, paddle) {
-    console.log('Checkbox Change Event:', event);
-    console.log('Paddle:', paddle);
-    console.log('Paddles array in handle checkbox A:', paddles);
-    console.log('Selected Paddles before change:', selectedPaddles);
     if (event.target.checked) {
       selectedPaddles = [...selectedPaddles, paddle];
     } else {
       selectedPaddles = selectedPaddles.filter(p => p.company !== paddle.company || p.paddle !== paddle.paddle || p.thickness !== paddle.thickness);
     }
-    console.log('Paddles array in handle checkbox B:', paddles);
     selectedPaddlesStore.set(selectedPaddles); // Update the store
-    console.log('Paddles array in handle checkbox C:', paddles);
-    console.log('Selected Paddles after change:', selectedPaddles);
   }
 
   function isPaddleSelected(paddle) {
-    console.log('Checking if paddle is selected:', paddle);
-    const isSelected = selectedPaddles.some(p => p.company === paddle.company && p.paddle === paddle.paddle && p.thickness === paddle.thickness);
-    console.log('Is Paddle Selected:', isSelected);
-    return isSelected;
+    return selectedPaddles.some(p => p.company === paddle.company && p.paddle === paddle.paddle && p.thickness === paddle.thickness);
   }
 
   function filterPaddles() {
-    console.log('Paddles array in filterPaddles A:', paddles);
-    filteredPaddles = paddles.filter(paddle => 
-      paddle.paddle.toLowerCase().includes(filterText.toLowerCase()) ||
-      paddle.company.toLowerCase().includes(filterText.toLowerCase())
+    filteredPaddlesStore.set(
+      paddles.filter(paddle => 
+        paddle.paddle.toLowerCase().includes(filterText.toLowerCase()) ||
+        paddle.company.toLowerCase().includes(filterText.toLowerCase())
+      )
     );
-    console.log('Filtered Paddles:', filteredPaddles);
-    console.log('Paddles array in filterPaddles B:', paddles);
   }
+
+  function clearSelection() {
+  selectedPaddlesStore.set([]);
+  filterText = '';
+  filteredPaddlesStore.set(paddles);
+  // Manually uncheck all checkboxes
+  document.querySelectorAll('.paddle-item input[type="checkbox"]').forEach(checkbox => {
+    checkbox.checked = false;
+  });
+  // Simulate pressing the "Clear" button a second time
+  setTimeout(() => {
+    selectedPaddlesStore.set([]);
+    filterText = '';
+    filteredPaddlesStore.set(paddles);
+    document.querySelectorAll('.paddle-item input[type="checkbox"]').forEach(checkbox => {
+      checkbox.checked = false;
+    });
+  }, 0);
+}
 
   // Initialize filtered paddles on mount
   onMount(() => {
-    filteredPaddles = paddles;
-    console.log('Component Mounted');
-    console.log('Initial Paddles:', paddles);
-  });
-
-  // Log paddles array after each update
-  afterUpdate(() => {
-    console.log('Component Updated');
-    console.log('Current Paddles:', paddles);
-    console.log('Current Selected Paddles:', selectedPaddles);
+    filteredPaddlesStore.set(paddles);
   });
 </script>
 
@@ -67,7 +66,7 @@
     <button class="dropdown-button">Compare Paddles</button>
     <div class="dropdown-content">
       <input type="text" placeholder="Filter paddles..." bind:value={filterText} on:input={filterPaddles} />
-      {#each filteredPaddles as { company, paddle, thickness }, index}
+      {#each $filteredPaddlesStore as { company, paddle, thickness }, index}
         <div class="paddle-item">
           <label for={`paddle-${index}`}>
             <input id={`paddle-${index}`} type="checkbox" checked={isPaddleSelected({ company, paddle, thickness })} on:change={(event) => handleCheckboxChange(event, { company, paddle, thickness })} />
@@ -77,12 +76,12 @@
       {/each}
     </div>
   </div>
+  <button class="clear-button" on:click={clearSelection}>Clear</button>
 </div>
 
 <style>
   .compare-area {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 10px;
@@ -153,5 +152,16 @@
     border-radius: 4px;
     border: 1px solid #ccc;
     box-sizing: border-box;
+  }
+
+  .clear-button {
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    text-align: center;
   }
 </style>

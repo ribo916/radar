@@ -25,7 +25,7 @@
   let balanceFilter = 0;
   let swingFilter = 0;
 
-  console.log('Initial Data:', data);
+  //console.log('Initial Data:', data);
 
   const filteredData = data.filter((d) => {
     let allValid = true;
@@ -41,13 +41,13 @@
         d[key] = +d[key] * 10;
       });
     } else {
-      console.log('Skipping entry due to invalid or missing data:', d);
+      //console.log('Skipping entry due to invalid or missing data:', d);
     }
 
     return allValid;
   });
 
-  console.log('Filtered Data:', filteredData);
+  //console.log('Filtered Data:', filteredData);
 
   // Sort filteredData alphabetically by paddle name
   filteredData.sort((a, b) => a[seriesKey].localeCompare(b[seriesKey]));
@@ -57,13 +57,13 @@
     .map(d => d[seriesKey])
     .sort((a, b) => a.localeCompare(b));
 
-  console.log('Excluded Paddles:', excludedPaddles);
+  //console.log('Excluded Paddles:', excludedPaddles);
 
   // Subscribe to the selected paddles store
   let selectedPaddles = [];
   selectedPaddlesStore.subscribe(value => {
     selectedPaddles = value;
-    console.log('Selected Paddles Store Updated:', selectedPaddles);
+    //console.log('Selected Paddles Store Updated:', selectedPaddles);
   });
 
   // Dispatch the total number of valid paddles to the layout
@@ -103,7 +103,7 @@
     return newRecord;
   });
 
-  console.log('Processed Data:', processedData);
+  //console.log('Processed Data:', processedData);
 
   // Filter processedData based on the filters and selected paddles
   $: filteredProcessedData = processedData.filter(record => 
@@ -131,7 +131,7 @@
   // Update the store with the filtered processed data
   $: {
     paddlesStore.set(filteredProcessedData);
-    console.log('Paddles Store Updated:', filteredProcessedData);
+    //console.log('Paddles Store Updated:', filteredProcessedData);
   }
 </script>
 
