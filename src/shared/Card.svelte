@@ -29,21 +29,22 @@
     'POP': 'punchVolleySpeed',
     'TWIST WEIGHT': 'twistWeight',
     'SWING WEIGHT': 'swingWeight',
-    'BALANCE POINT': 'balancePointCM'
+    'BALANCE POINT': 'balancePointCM',
+    'power': 'power',
+    'spin': 'spin',
+    'twist': 'twist',
+    'balance': 'balance',
+    'swing': 'swing',
+    'pop': 'pop',
+    'shape': 'shape',
+    'faceMaterial': 'faceMaterial',
+    'handleLength': 'handleLength',
+    'coreMaterial': 'coreMaterial',
+    'surfaceTexture': 'surfaceTexture',
+    'length': 'length',
+    'width': 'width',
+    'staticWeight': 'staticWeight'
   };
-
-  // Separate special and regular properties
-  let specialContent = [];
-  let regularContent = [];
-
-  for (const [key, value] of Object.entries(backContent)) {
-    //console.log(`Key: ${key}, Value: ${value}`); // Log each key and value
-    if (Object.values(specialProperties).includes(key)) {
-      specialContent.push({ key, value });
-    } else {
-      regularContent.push({ key, value });
-    }
-  }
 </script>
 
 <div
@@ -81,7 +82,7 @@
       <!-- Special properties section -->
       <div class="special-properties-grid">
         {#each Object.entries(specialProperties) as [label, key]}
-          {#if backContent[key] !== undefined}
+          {#if ['serveSpeedMPH', 'spinRPM', 'punchVolleySpeed', 'twistWeight', 'swingWeight', 'balancePointCM'].includes(key) && backContent[key] !== undefined}
             <div class="special-property">
               <div class="special-label">{label}</div>
               <div class="special-value">
@@ -101,10 +102,11 @@
         {/each}
       </div>
       <br>
-      <p>Other Properties:</p>
       <!-- Regular properties section -->
-      {#each regularContent as { key, value }}
-        <div class="back-content-item">{key} : <i>{value}</i></div>
+      {#each Object.entries(specialProperties) as [label, key]}
+        {#if !['serveSpeedMPH', 'spinRPM', 'punchVolleySpeed', 'twistWeight', 'swingWeight', 'balancePointCM'].includes(key) && backContent[key] !== undefined}
+          <div class="back-content-item">{label} : <i>{backContent[key]}</i></div>
+        {/if}
       {/each}
     </div>
   </div>
