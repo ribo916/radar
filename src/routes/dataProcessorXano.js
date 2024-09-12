@@ -25,12 +25,12 @@ const columnMapping = {
 };
 
 export async function loadAndProcessDataFromXano() {
-  const apiUrl = 'https://x8ki-letl-twmt.n7.xano.io/api:MZ3FZyTL/paddles';
+  const apiUrl = 'https://x8ki-letl-twmt.n7.xano.io/api:l0-i5bo6/2024_09_12_paddles';
   console.log(`Requesting data from API: ${apiUrl}`);
 
   const response = await fetch(apiUrl, {
     headers: {
-      'Authorization': 'Bearer patjACwgjxO1E1Pdg.d01120f3140b22921d9f4e3cb0d1e70f0e6fd21e551718677aeb01885a0a0906'
+      'Authorization': 'none'
     }
   });
 
@@ -66,15 +66,6 @@ export async function loadAndProcessDataFromXano() {
         allValid = false;
       }
     });
-
-    if (d.paddle.startsWith('Carbon')) {
-      if (allValid) {
-        console.log(`Paddle ${d.paddle} approved`);
-        console.log(d);
-        console.log(`${d.pop_percentile}`);
-      }
-    }
-
     return allValid;
   });
 

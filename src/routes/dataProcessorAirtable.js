@@ -25,7 +25,7 @@ const columnMapping = {
 };
 
 export async function loadAndProcessDataFromAirtable() {
-  const apiUrl = 'https://api.airtable.com/v0/app3MN0hMBADkRqSj/tblzA9TRV5BscXDHH';
+  const apiUrl = 'https://api.airtable.com/v0/app3MN0hMBADkRqSj/tblUXHyTXk9AF5r3F';
   let allRecords = [];
   let offset = null;
 
@@ -81,15 +81,6 @@ export async function loadAndProcessDataFromAirtable() {
         allValid = false;
       }
     });
-
-    if (d.paddle.startsWith('Carbon')) {
-      if (allValid) {
-        console.log(`Paddle ${d.paddle} approved`);
-        console.log(d);
-        console.log(`${d.pop_percentile}`);
-      }
-    }
-
     return allValid;
   });
 

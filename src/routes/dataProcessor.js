@@ -67,15 +67,6 @@ export async function loadAndProcessData() {
         allValid = false;
       }
     });
-
-    if (d.paddle.startsWith('Carbon')) {
-      if (allValid) {
-        console.log(`Paddle ${d.paddle} approved`);
-        console.log(d);
-        console.log(`${d.pop_percentile}`);
-      }
-    }
-
     return allValid;
   });
 
