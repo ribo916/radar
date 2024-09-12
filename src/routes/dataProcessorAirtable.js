@@ -1,7 +1,3 @@
-import { csv } from 'd3-fetch'; // Import the csv function from d3-fetch
-import { loadAndProcessDataFromAirtable } from './dataProcessorAirtable'; // Import the API data processor
-import { loadAndProcessDataFromXano } from './dataProcessorXano'; // Import the API data processor
-
 const columnMapping = {
   'Company': 'company',
   'Paddle': 'paddle',
@@ -28,28 +24,46 @@ const columnMapping = {
   'Punch Volley Speed-MPH (Pop)': 'punch_volley_speed'
 };
 
-export async function loadAndProcessData() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const useAirtable = urlParams.get('useAirtable');
-  const useXano = urlParams.get('useXano');
+export async function loadAndProcessDataFromAirtable() {
+  const apiUrl = 'https://api.airtable.com/v0/app3MN0hMBADkRqSj/tblzA9TRV5BscXDHH';
+  let allRecords = [];
+  let offset = null;
 
-  if (useAirtable) {
-    return await loadAndProcessDataFromAirtable();
-  } else if (useXano) {
-    return await loadAndProcessDataFromXano();
-  }
+  do {
+    let url = apiUrl;
+    if (offset) {
+      url += `?offset=${offset}`;
+    }
+    console.log(`Requesting data from API: ${url}`);
 
-  const data = await csv('/radarScores.csv'); // Load the CSV file from the static directory
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': 'Bearer patjACwgjxO1E1Pdg.d01120f3140b22921d9f4e3cb0d1e70f0e6fd21e551718677aeb01885a0a0906'
+      }
+    });
 
-  const mappedData = data.map((row, index) => {
+    console.log(`Response status: ${response.status}`);
+
+    const data = await response.json();
+    console.log('Response data:', data);
+
+    allRecords = allRecords.concat(data.records);
+    offset = data.offset;
+
+  } while (offset);
+
+  console.log('All records:', allRecords);
+
+  const mappedData = allRecords.map((record, index) => {
     const mappedRow = {};
     for (const [originalColumn, newColumn] of Object.entries(columnMapping)) {
-      mappedRow[newColumn] = row[originalColumn];
+      mappedRow[newColumn] = record.fields[originalColumn];
     }
     return mappedRow;
   });
 
   console.log('Mapped data:', mappedData);
+
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
 
   const filteredData = mappedData.filter((d, index) => {
@@ -79,6 +93,8 @@ export async function loadAndProcessData() {
     return allValid;
   });
 
+  console.log('Filtered data:', filteredData);
+
   // Sort by company and then by paddle
   filteredData.sort((a, b) => {
     if (a.company < b.company) return -1;
@@ -87,12 +103,12 @@ export async function loadAndProcessData() {
     if (a.paddle > b.paddle) return 1;
     return 0;
   });
-  console.log('Filtered data:', filteredData);
 
   const excludedPaddles = mappedData
     .filter(d => !filteredData.includes(d))
     .map(d => d.paddle)
     .sort((a, b) => a.localeCompare(b));
+
   console.log('Excluded paddles:', excludedPaddles);
 
   return { filteredData, excludedPaddles };

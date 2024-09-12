@@ -1,55 +1,54 @@
-import { csv } from 'd3-fetch'; // Import the csv function from d3-fetch
-import { loadAndProcessDataFromAirtable } from './dataProcessorAirtable'; // Import the API data processor
-import { loadAndProcessDataFromXano } from './dataProcessorXano'; // Import the API data processor
-
 const columnMapping = {
   'Company': 'company',
   'Paddle': 'paddle',
-  'Core Thickness (mm)': 'thickness',
-  'Power Percentile': 'power_percentile',
-  'Spin Percentile': 'spin_percentile',
-  'Twist Weight Percentile': 'twist_percentile',
-  'Balance Point Percentile': 'balance_percentile',
-  'Swing Weight Percentile': 'swing_percentile',
-  'Pop Percentile': 'pop_percentile',
+  'Core_Thickness_mm': 'thickness',
+  'Power_Percentile': 'power_percentile',
+  'Spin_Percentile': 'spin_percentile',
+  'Twist_Weight_Percentile': 'twist_percentile',
+  'Balance_Point_Percentile': 'balance_percentile',
+  'Swing_Weight_Percentile': 'swing_percentile',
+  'Pop_Percentile': 'pop_percentile',
   'Shape': 'shape',
-  'Surface Material': 'face_material',
-  'Handle Length (in)': 'handle_length',
-  'Spin RPM': 'spin_rpm',
-  'Swing Weight': 'swing_weight',
-  'Twist Weight': 'twist_weight',
-  'Core Material': 'core_material',
-  'Surface Texture': 'surface_texture',
-  'Length (in)': 'length',
-  'Width (in)': 'width',
-  'Static Weight (oz)': 'static_weight',
-  'Balance Point (cm)': 'balance_point_cm',
-  'Serve Speed-MPH (Power)': 'serve_speed_mph',
-  'Punch Volley Speed-MPH (Pop)': 'punch_volley_speed'
+  'Surface_Material': 'face_material',
+  'Handle_Length_in': 'handle_length',
+  'Spin_RPM': 'spin_rpm',
+  'Swing_Weight': 'swing_weight',
+  'Twist_Weight': 'twist_weight',
+  'Core_Material': 'core_material',
+  'Surface_Texture': 'surface_texture',
+  'Length_in': 'length',
+  'Width_in': 'width',
+  'Static_Weight_oz': 'static_weight',
+  'Balance_Point_cm': 'balance_point_cm',
+  'Serve_Speed_MPH_Power': 'serve_speed_mph',
+  'Punch_Volley_Speed_MPH_Pop': 'punch_volley_speed'
 };
 
-export async function loadAndProcessData() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const useAirtable = urlParams.get('useAirtable');
-  const useXano = urlParams.get('useXano');
+export async function loadAndProcessDataFromXano() {
+  const apiUrl = 'https://x8ki-letl-twmt.n7.xano.io/api:MZ3FZyTL/paddles';
+  console.log(`Requesting data from API: ${apiUrl}`);
 
-  if (useAirtable) {
-    return await loadAndProcessDataFromAirtable();
-  } else if (useXano) {
-    return await loadAndProcessDataFromXano();
-  }
+  const response = await fetch(apiUrl, {
+    headers: {
+      'Authorization': 'Bearer patjACwgjxO1E1Pdg.d01120f3140b22921d9f4e3cb0d1e70f0e6fd21e551718677aeb01885a0a0906'
+    }
+  });
 
-  const data = await csv('/radarScores.csv'); // Load the CSV file from the static directory
+  console.log(`Response status: ${response.status}`);
 
-  const mappedData = data.map((row, index) => {
+  const data = await response.json();
+  console.log('Response data:', data);
+
+  const mappedData = data.map((record, index) => {
     const mappedRow = {};
     for (const [originalColumn, newColumn] of Object.entries(columnMapping)) {
-      mappedRow[newColumn] = row[originalColumn];
+      mappedRow[newColumn] = record[originalColumn];
     }
     return mappedRow;
   });
 
   console.log('Mapped data:', mappedData);
+
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
 
   const filteredData = mappedData.filter((d, index) => {
@@ -79,6 +78,8 @@ export async function loadAndProcessData() {
     return allValid;
   });
 
+  console.log('Filtered data:', filteredData);
+
   // Sort by company and then by paddle
   filteredData.sort((a, b) => {
     if (a.company < b.company) return -1;
@@ -87,12 +88,12 @@ export async function loadAndProcessData() {
     if (a.paddle > b.paddle) return 1;
     return 0;
   });
-  console.log('Filtered data:', filteredData);
 
   const excludedPaddles = mappedData
     .filter(d => !filteredData.includes(d))
     .map(d => d.paddle)
     .sort((a, b) => a.localeCompare(b));
+
   console.log('Excluded paddles:', excludedPaddles);
 
   return { filteredData, excludedPaddles };
