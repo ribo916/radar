@@ -22,12 +22,28 @@
     }
   }
 
-  // Debugging logs
-  // console.log('Radar Data:', radarData);
-  // console.log('xKey:', xKey);
-  // console.log('Series Key:', seriesKey);
-  // console.log('Thickness:', thickness);
-  // console.log('Company:', company);
+  // Special properties to highlight
+  const specialProperties = {
+    'POWER': 'serveSpeedMPH',
+    'SPIN': 'spinRPM',
+    'POP': 'punchVolleySpeed',
+    'TWIST WEIGHT': 'twistWeight',
+    'SWING WEIGHT': 'swingWeight',
+    'BALANCE POINT': 'balancePointCM'
+  };
+
+  // Separate special and regular properties
+  let specialContent = [];
+  let regularContent = [];
+
+  for (const [key, value] of Object.entries(backContent)) {
+    //console.log(`Key: ${key}, Value: ${value}`); // Log each key and value
+    if (Object.values(specialProperties).includes(key)) {
+      specialContent.push({ key, value });
+    } else {
+      regularContent.push({ key, value });
+    }
+  }
 </script>
 
 <div
@@ -62,8 +78,33 @@
     <div class="card-back">
       <div class="title-banner">{company} {seriesKey} - {thickness}</div> <!-- Title banner for the company, seriesKey, and thickness -->
       <br>
-      {#each Object.entries(backContent) as [label, value]}
-        <div class="back-content-item">{label} : <i>{value}</i></div>
+      <!-- Special properties section -->
+      <div class="special-properties-grid">
+        {#each Object.entries(specialProperties) as [label, key]}
+          {#if backContent[key] !== undefined}
+            <div class="special-property">
+              <div class="special-label">{label}</div>
+              <div class="special-value">
+                {backContent[key]}
+                {#if label === 'POWER' || label === 'POP'}
+                  MPH
+                {/if}
+                {#if label === 'SPIN'}
+                  RPM
+                {/if}
+                {#if label === 'BALANCE POINT'}
+                  cm
+                {/if}
+              </div>
+            </div>
+          {/if}
+        {/each}
+      </div>
+      <br>
+      <p>Other Properties:</p>
+      <!-- Regular properties section -->
+      {#each regularContent as { key, value }}
+        <div class="back-content-item">{key} : <i>{value}</i></div>
       {/each}
     </div>
   </div>
@@ -173,5 +214,37 @@
 
   .card:hover .flip-icon {
     color: #fff;
+  }
+
+  /* Special properties styling */
+  .special-properties-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 10px; /* Space between items */
+    width: 100%;
+  }
+
+  .special-property {
+    position: relative; /* Make the container relative for absolute positioning of the label */
+    border: 2px solid white; /* White border */
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .special-label {
+    position: absolute; /* Position the label absolutely */
+    top: -10px; /* Adjust the position to overlap the border */
+    left: 10px; /* Adjust the position to align with the padding */
+    background-color: #1e1e1e; /* Match the background color of the card */
+    padding: 0 5px; /* Add some padding to the label */
+    font-size: 0.5em;
+    color: white; /* White label text */
+    margin-bottom: 5px;
+  }
+
+  .special-value {
+    font-size: 1.0em; /* Adjusted font size to match regular properties */
+    color: #20e87a; /* Natural green value text */
   }
 </style>
