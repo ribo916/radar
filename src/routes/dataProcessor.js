@@ -66,15 +66,19 @@ export async function loadAndProcessData() {
     return allValid;
   });
 
-  filteredData.sort((a, b) => a.paddle.localeCompare(b.paddle));
+  // Sort by company and then by paddle
+  filteredData.sort((a, b) => {
+    if (a.company < b.company) return -1;
+    if (a.company > b.company) return 1;
+    if (a.paddle < b.paddle) return -1;
+    if (a.paddle > b.paddle) return 1;
+    return 0;
+  });
 
   const excludedPaddles = mappedData
     .filter(d => !filteredData.includes(d))
     .map(d => d.paddle)
     .sort((a, b) => a.localeCompare(b));
-
-  // Log the excluded paddles for debugging
-  // console.log('Excluded Paddles:', excludedPaddles);
 
   return { filteredData, excludedPaddles };
 }

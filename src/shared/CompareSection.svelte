@@ -97,7 +97,7 @@
         <div class="paddle-item">
           <label for={`paddle-${index}`}>
             <input id={`paddle-${index}`} type="checkbox" checked={isPaddleSelected({ company, paddle, thickness })} on:change={(event) => handleCheckboxChange(event, { company, paddle, thickness })} />
-            {paddle} - {thickness} ({company})
+            {company} {paddle} - {thickness}mm
           </label>
         </div>
       {/each}
