@@ -1,13 +1,12 @@
 <script>
-  import data from './_data/radarScores.csv';
   import Card from '../shared/Card.svelte';
   import SpecialCard from '../shared/SpecialCard.svelte';
   import { onMount } from 'svelte';
   import { paddlesStore, selectedPaddlesStore } from '../stores.js'; // Import the stores
+  import { loadAndProcessData } from './dataProcessor.js'; // Import the utility function
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
-  const seriespaddles = Object.keys(data[0]).filter(d => !xKey.includes(d) && d !== seriesKey);
 
   const labelMapping = {
     power_percentile: 'Power',
@@ -25,49 +24,19 @@
   let balanceFilter = 0;
   let swingFilter = 0;
 
-  //console.log('Initial Data:', data);
+  let filteredData = [];
+  let excludedPaddles = [];
+  let processedData = [];
 
-  const filteredData = data.filter((d) => {
-    let allValid = true;
-    xKey.forEach(key => {
-      const value = d[key];
-      if (value === undefined || value === '' || isNaN(+value) || +value <= 0) {
-        allValid = false;
-      }
-    });
+  onMount(async () => {
+    const { filteredData: fd, excludedPaddles: ep } = await loadAndProcessData('/radarScores.csv'); // Correct path to the CSV file
+    filteredData = fd;
+    excludedPaddles = ep;
 
-    if (allValid) {
-      xKey.forEach(key => {
-        d[key] = +d[key] * 10;
-      });
-    } else {
-      //console.log('Skipping entry due to invalid or missing data:', d);
-    }
+    //console.log('Filtered Data on Mount:', filteredData);
+    // console.log('Excluded Paddles on Mount:', excludedPaddles);
 
-    return allValid;
-  });
-
-  //console.log('Filtered Data:', filteredData);
-
-  // Sort filteredData alphabetically by paddle name
-  filteredData.sort((a, b) => a[seriesKey].localeCompare(b[seriesKey]));
-
-  const excludedPaddles = data
-    .filter(d => !filteredData.includes(d))
-    .map(d => d[seriesKey])
-    .sort((a, b) => a.localeCompare(b));
-
-  //console.log('Excluded Paddles:', excludedPaddles);
-
-  // Subscribe to the selected paddles store
-  let selectedPaddles = [];
-  selectedPaddlesStore.subscribe(value => {
-    selectedPaddles = value;
-    //console.log('Selected Paddles Store Updated:', selectedPaddles);
-  });
-
-  // Dispatch the total number of valid paddles to the layout
-  onMount(() => {
+    // Dispatch the total number of valid paddles to the layout
     window.addEventListener('getTotalValidPaddles', (event) => {
       event.detail.callback(filteredData.length);
     });
@@ -79,31 +48,34 @@
       twistFilter = event.detail.twistFilter;
       balanceFilter = event.detail.balanceFilter;
       swingFilter = event.detail.swingFilter;
-      /*console.log('Filters Set:', {
-        powerFilter,
-        spinFilter,
-        popFilter,
-        twistFilter,
-        balanceFilter,
-        swingFilter
-      });*/
+      //console.log('Filters Set:', { powerFilter, spinFilter, popFilter, twistFilter, balanceFilter, swingFilter });
     });
   });
 
-  // Create a new array of objects with the desired keys
-  const processedData = filteredData.map(record => {
-    const newRecord = {};
-    for (const key in record) {
-      if (labelMapping[key]) {
-        newRecord[labelMapping[key]] = record[key];
-      } else {
-        newRecord[key] = record[key];
-      }
-    }
-    return newRecord;
+  // Subscribe to the selected paddles store
+  let selectedPaddles = [];
+  selectedPaddlesStore.subscribe(value => {
+    selectedPaddles = value;
+    //console.log('Selected Paddles:', selectedPaddles);
   });
 
-  //console.log('Processed Data:', processedData);
+  // Create a new array of objects with the desired keys
+  $: {
+    //console.log('Filtered Data before processing:', filteredData);
+    processedData = filteredData.map(record => {
+      const newRecord = {};
+      for (const key in record) {
+        if (labelMapping[key]) {
+          newRecord[labelMapping[key]] = record[key];
+        } else {
+          newRecord[key] = record[key];
+        }
+      }
+      //console.log('Processed Record:', newRecord);
+      return newRecord;
+    });
+    //console.log('Processed Data:', processedData);
+  }
 
   // Filter processedData based on the filters and selected paddles
   $: filteredProcessedData = processedData.filter(record => 
@@ -116,7 +88,7 @@
     (selectedPaddles.length === 0 || selectedPaddles.some(p => p.paddle === record[seriesKey] && p.company === record.company && p.thickness === record.thickness))
   );
 
-  /*$: console.log('Filtered Processed Data:', filteredProcessedData);*/
+  //console.log('Filtered Processed Data:', filteredProcessedData);
 
   // Dispatch the filtered paddles count to the layout
   $: if (typeof window !== 'undefined') {
@@ -131,7 +103,6 @@
   // Update the store with the filtered processed data
   $: {
     paddlesStore.set(filteredProcessedData);
-    //console.log('Paddles Store Updated:', filteredProcessedData);
   }
 </script>
 
@@ -169,4 +140,4 @@
 {/each}
 
 <!-- Add the SpecialCard for excluded paddles -->
-<SpecialCard {excludedPaddles} excludedCount={excludedPaddles.length} />
+<SpecialCard {excludedPaddles} />

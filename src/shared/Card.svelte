@@ -21,7 +21,53 @@
       flipCard();
     }
   }
+
+  // Debugging logs
+  // console.log('Radar Data:', radarData);
+  // console.log('xKey:', xKey);
+  // console.log('Series Key:', seriesKey);
+  // console.log('Thickness:', thickness);
+  // console.log('Company:', company);
 </script>
+
+<div
+  class="card {flipped ? 'flipped' : ''}"
+  on:click={flipCard}
+  on:keydown={handleKeyDown}
+  role="button"
+  tabindex="0"
+  aria-pressed={flipped}
+>
+  <div class="card-inner">
+    <div class="card-front">
+      <div class="title-banner">{company} {seriesKey} - {thickness}</div> <!-- Title banner for the company, seriesKey, and thickness -->
+      <div class="chart-container">
+        <LayerCake
+          padding={{ top: 30, right: 30, bottom: 30, left: 30 }} 
+          x={xKey}
+          xDomain={[0, 10]}
+          xRange={({ height }) => [0, height / 2]}
+          data={[radarData]} 
+          width={300} 
+          height={300} 
+        >
+          <Svg>
+            <AxisRadial />
+            <Radar />
+          </Svg>
+        </LayerCake>
+      </div>
+      <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
+    </div>
+    <div class="card-back">
+      <div class="title-banner">{company} {seriesKey} - {thickness}</div> <!-- Title banner for the company, seriesKey, and thickness -->
+      <br>
+      {#each Object.entries(backContent) as [label, value]}
+        <div class="back-content-item">{label} : <i>{value}</i></div>
+      {/each}
+    </div>
+  </div>
+</div>
 
 <style>
   .card {
@@ -129,42 +175,3 @@
     color: #fff;
   }
 </style>
-
-<div
-  class="card {flipped ? 'flipped' : ''}"
-  on:click={flipCard}
-  on:keydown={handleKeyDown}
-  role="button"
-  tabindex="0"
-  aria-pressed={flipped}
->
-  <div class="card-inner">
-    <div class="card-front">
-      <div class="title-banner">{company} {seriesKey} - {thickness}</div> <!-- Title banner for the company, seriesKey, and thickness -->
-      <div class="chart-container">
-        <LayerCake
-          padding={{ top: 30, right: 30, bottom: 30, left: 30 }} 
-          x={xKey}
-          xDomain={[0, 10]}
-          xRange={({ height }) => [0, height / 2]}
-          data={[radarData]} 
-          width={300} 
-          height={300} 
-        >
-          <Svg>
-            <AxisRadial />
-            <Radar />
-          </Svg>
-        </LayerCake>
-      </div>
-      <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
-    </div>
-    <div class="card-back">
-      <div class="title-banner">{company} {seriesKey} - {thickness}</div> <!-- Title banner for the company, seriesKey, and thickness -->
-      <br>
-      {#each Object.entries(backContent) as [label, value]}
-        <div class="back-content-item">{label} : <i>{value}</i></div>
-      {/each}
-    </div>
-  </div>
-</div>
