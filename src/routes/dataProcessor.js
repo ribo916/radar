@@ -1,4 +1,5 @@
 import { csv } from 'd3-fetch'; // Import the csv function from d3-fetch
+import { loadAndProcessDataFromAPI } from './dataProcessorAPI'; // Import the API data processor
 
 const columnMapping = {
   'Company': 'company',
@@ -27,6 +28,13 @@ const columnMapping = {
 };
 
 export async function loadAndProcessData() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const useAPI = urlParams.get('useAPI');
+
+  if (useAPI) {
+    return await loadAndProcessDataFromAPI();
+  }
+
   const data = await csv('/radarScores.csv'); // Load the CSV file from the static directory
 
   const mappedData = data.map((row, index) => {
@@ -37,6 +45,7 @@ export async function loadAndProcessData() {
     return mappedRow;
   });
 
+  console.log('Mapped data:', mappedData);
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
 
   const filteredData = mappedData.filter((d, index) => {
@@ -74,11 +83,13 @@ export async function loadAndProcessData() {
     if (a.paddle > b.paddle) return 1;
     return 0;
   });
+  console.log('Filtered data:', filteredData);
 
   const excludedPaddles = mappedData
     .filter(d => !filteredData.includes(d))
     .map(d => d.paddle)
     .sort((a, b) => a.localeCompare(b));
+  console.log('Excluded paddles:', excludedPaddles);
 
   return { filteredData, excludedPaddles };
 }
