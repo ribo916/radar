@@ -121,9 +121,10 @@
 {#if showModal}
   <Modal on:close={closeModal}>
     <h2>Overview</h2>
-    <p>This site merely uses the JohnKew database to regenerate radar charts for quick/easy comparisons.</p>
+    <p>This site merely uses the JohnKew database to regenerate radar charts for statistical comparison.</p>
     <ul>
-      <li>Data is hardcoded from JohnKew's site on 9/3/24</li>
+      <li>Data is from JohnKew's site as of: 9/12/24</li>
+      <li>?useAirtable=true or ?useXano=true will pull data from test apis instead of the hardcoded .csv</li>
     </ul>
   </Modal>
 {/if}
