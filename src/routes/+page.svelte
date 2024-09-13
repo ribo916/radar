@@ -27,11 +27,13 @@
   let filteredData = [];
   let excludedPaddles = [];
   let processedData = [];
+  let loading = true; // Add loading state
 
   onMount(async () => {
     const { filteredData: fd, excludedPaddles: ep } = await loadAndProcessData('/radarScores.csv'); // Correct path to the CSV file
     filteredData = fd;
     excludedPaddles = ep;
+    loading = false; // Set loading to false once data is loaded
 
     //console.log('Filtered Data on Mount:', filteredData);
     // console.log('Excluded Paddles on Mount:', excludedPaddles);
@@ -106,38 +108,73 @@
   }
 </script>
 
-<!-- Loop through filteredProcessedData and create a Card for each paddle -->
-{#each filteredProcessedData as record}
-<Card 
-  backContent={{
-    power: `${Math.round(record.Power * 10)}%`,
-    spin: `${Math.round(record.Spin * 10)}%`,
-    twist: `${Math.round(record.Twist * 10)}%`,
-    balance: `${Math.round(record.Balance * 10)}%`,
-    swing: `${Math.round(record.Swing * 10)}%`,
-    pop: `${Math.round(record.Pop * 10)}%`,
-    shape: record.shape,
-    faceMaterial: record.face_material,
-    handleLength: record.handle_length,
-    spinRPM: record.spin_rpm,
-    serveSpeedMPH: record.serve_speed_mph,
-    punchVolleySpeed: record.punch_volley_speed,
-    swingWeight: record.swing_weight,
-    twistWeight: record.twist_weight,
-    coreMaterial: record.core_material,
-    surfaceTexture: record.surface_texture,
-    length: record.length,
-    width: record.width,
-    staticWeight: record.static_weight,
-    balancePointCM: record.balance_point_cm
-  }} 
-  radarData={record} 
-  seriesKey={record[seriesKey]} 
-  xKey={Object.values(labelMapping)}
-  thickness={`${record.thickness} mm`} 
-  company={record.company}
-/>
-{/each}
+<style>
+  /* Include the spinner CSS here if not already in your main stylesheet */
+  .spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
+  }
 
-<!-- Add the SpecialCard for excluded paddles -->
-<SpecialCard {excludedPaddles} />
+  .spinner {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+{#if loading}
+  <div class="spinner-wrapper">
+    <div class="spinner"></div>
+  </div>
+{:else}
+    <!-- Loop through filteredProcessedData and create a Card for each paddle -->
+    {#each filteredProcessedData as record}
+      <Card 
+        backContent={{
+          power: `${Math.round(record.Power * 10)}%`,
+          spin: `${Math.round(record.Spin * 10)}%`,
+          twist: `${Math.round(record.Twist * 10)}%`,
+          balance: `${Math.round(record.Balance * 10)}%`,
+          swing: `${Math.round(record.Swing * 10)}%`,
+          pop: `${Math.round(record.Pop * 10)}%`,
+          shape: record.shape,
+          faceMaterial: record.face_material,
+          handleLength: record.handle_length,
+          spinRPM: record.spin_rpm,
+          serveSpeedMPH: record.serve_speed_mph,
+          punchVolleySpeed: record.punch_volley_speed,
+          swingWeight: record.swing_weight,
+          twistWeight: record.twist_weight,
+          coreMaterial: record.core_material,
+          surfaceTexture: record.surface_texture,
+          length: record.length,
+          width: record.width,
+          staticWeight: record.static_weight,
+          balancePointCM: record.balance_point_cm
+        }} 
+        radarData={record} 
+        seriesKey={record[seriesKey]} 
+        xKey={Object.values(labelMapping)}
+        thickness={`${record.thickness} mm`} 
+        company={record.company}
+      />
+    {/each}
+
+    <!-- Add the SpecialCard for excluded paddles -->
+    <SpecialCard {excludedPaddles} />
+{/if}
