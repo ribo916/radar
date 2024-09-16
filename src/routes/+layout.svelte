@@ -90,6 +90,9 @@
     <button class="info-button" on:click={openModal} aria-label="More information">
       <i class="fas fa-info-circle"></i>
     </button>
+    <a class="icon-button" href="https://github.com/ribo916/radar" target="_blank" aria-label="GitHub repository">
+      <i class="fab fa-github"></i> <!-- GitHub icon -->
+    </a>
   </div>
   <div class="icon-bar">
     <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters">
@@ -163,6 +166,18 @@
     font-size: 1.5em;
     color: white;
     position: absolute;
+    right: 50px; /* Adjust spacing from the right */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Center vertically */
+  }
+
+  .icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: white;
+    position: absolute;
     right: 20px; /* Adjust spacing from the right */
     top: 50%; /* Center vertically */
     transform: translateY(-50%); /* Center vertically */
@@ -177,15 +192,6 @@
     border-bottom: 1px solid white;
     padding: 5px 0;
     border-color: #333;
-  }
-
-  .icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5em;
-    color: white;
-    margin: 0 10px;
   }
 
   .chart-grid {
