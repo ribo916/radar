@@ -123,7 +123,7 @@
     <h2>Overview</h2>
     <p>This site merely uses the JohnKew database to regenerate radar charts for statistical comparison.</p>
     <ul>
-      <li>Data was last refreshed on 9/12/24</li>
+      <li>Data was last refreshed on 9/24/24</li>
       <li>Code is <a href="https://github.com/ribo916/radar/" target="_blank">here</a></li>
     </ul>
   </Modal>

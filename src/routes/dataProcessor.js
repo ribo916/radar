@@ -39,7 +39,7 @@ export async function loadAndProcessData() {
     return await loadAndProcessDataFromXano();
   }
 
-  const data = await csv('/radarScores.csv'); // Load the CSV file from the static directory
+  const data = await csv('/radarScores_2024_09_24.csv'); // Load the CSV file from the static directory
 
   const mappedData = data.map((row, index) => {
     const mappedRow = {};
