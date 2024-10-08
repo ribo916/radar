@@ -6,8 +6,7 @@
   export let data;
   export let xKey;
 
-  // Define a consistent color palette
-  const colors = ['#ff6b6b', '#4ecdc4', '#45aaf2']; // Different colors for each paddle
+  const colors = ['#ff6b6b', '#4ecdc4', '#45aaf2'];
 
   $: console.log('ComparisonCard: Number of paddles:', data.length);
   $: console.log('ComparisonCard xKey:', xKey);
@@ -24,7 +23,14 @@
     }
   }
 
-  // Remove the logPaddleDetails function if it's no longer needed
+  const specialProperties = {
+    'POWER': 'serve_speed_mph',
+    'SPIN': 'spin_rpm',
+    'POP': 'punch_volley_speed',
+    'TWIST WEIGHT': 'twist_weight',
+    'SWING WEIGHT': 'swing_weight',
+    'BALANCE POINT': 'balance_point_cm',
+  };
 </script>
 
 <div
@@ -37,7 +43,7 @@
 >
   <div class="card-inner">
     <div class="card-front">
-      <div class="title-banner">Paddle Comparison - Under Construction</div>
+      <div class="title-banner">Paddle Comparison</div>
       <div class="chart-container">
         <LayerCake
           padding={{ top: 30, right: 30, bottom: 30, left: 30 }}
@@ -51,16 +57,13 @@
           <Svg>
             <AxisRadial />
             {#each data as paddle, i}
-              {@const paddleColor = colors[i]}
-              {@const paddleName = paddle.company + ' ' + paddle.paddle}
               <Radar 
-                fill={paddleColor} 
-                stroke={paddleColor} 
+                fill={colors[i]} 
+                stroke={colors[i]} 
                 fillOpacity={0.2} 
                 strokeWidth={2}
                 paddleData={paddle}
               />
-              {console.log(`Color assigned to ${paddleName}: ${paddleColor}`)}
             {/each}
           </Svg>
         </LayerCake>
@@ -80,27 +83,41 @@
       {#each data as paddle, i}
         <div class="paddle-details" style="color: {colors[i]};">
           <h3>{paddle.company} {paddle.paddle}</h3>
-          <p>Thickness: {paddle.thickness} mm</p>
-          <p>Power: {Math.round(paddle.Power * 10)}%</p>
-          <p>Spin: {Math.round(paddle.Spin * 10)}%</p>
-          <p>Pop: {Math.round(paddle.Pop * 10)}%</p>
-          <p>Twist: {Math.round(paddle.Twist * 10)}%</p>
-          <p>Balance: {Math.round(paddle.Balance * 10)}%</p>
-          <p>Swing: {Math.round(paddle.Swing * 10)}%</p>
-          <p>Shape: {paddle.shape}</p>
-          <p>Face Material: {paddle.face_material}</p>
-          <p>Handle Length: {paddle.handle_length}</p>
-          <p>Spin RPM: {paddle.spin_rpm}</p>
-          <p>Serve Speed: {paddle.serve_speed_mph} mph</p>
-          <p>Punch Volley Speed: {paddle.punch_volley_speed}</p>
-          <p>Swing Weight: {paddle.swing_weight}</p>
-          <p>Twist Weight: {paddle.twist_weight}</p>
-          <p>Core Material: {paddle.core_material}</p>
-          <p>Surface Texture: {paddle.surface_texture}</p>
-          <p>Length: {paddle.length}</p>
-          <p>Width: {paddle.width}</p>
-          <p>Static Weight: {paddle.static_weight}</p>
-          <p>Balance Point: {paddle.balance_point_cm} cm</p>
+          <div class="special-properties-grid">
+            {#each Object.entries(specialProperties) as [label, key]}
+              <div class="special-property">
+                <div class="special-label">{label}</div>
+                <div class="special-value">
+                  {#if ['POWER', 'POP'].includes(label)}
+                    {paddle[key]} MPH
+                  {:else if label === 'SPIN'}
+                    {paddle[key]} RPM
+                  {:else if label === 'BALANCE POINT'}
+                    {paddle[key]} cm
+                  {:else}
+                    {paddle[key]}
+                  {/if}
+                </div>
+              </div>
+            {/each}
+          </div>
+          <div class="regular-properties">
+            <p>Thickness: <i>{paddle.thickness} mm</i></p>
+            <p>Power: <i>{Math.round(paddle.Power * 10)}%</i></p>
+            <p>Spin: <i>{Math.round(paddle.Spin * 10)}%</i></p>
+            <p>Pop: <i>{Math.round(paddle.Pop * 10)}%</i></p>
+            <p>Twist: <i>{Math.round(paddle.Twist * 10)}%</i></p>
+            <p>Balance: <i>{Math.round(paddle.Balance * 10)}%</i></p>
+            <p>Swing: <i>{Math.round(paddle.Swing * 10)}%</i></p>
+            <p>Shape: <i>{paddle.shape}</i></p>
+            <p>Face Material: <i>{paddle.face_material}</i></p>
+            <p>Handle Length: <i>{paddle.handle_length}</i></p>
+            <p>Core Material: <i>{paddle.core_material}</i></p>
+            <p>Surface Texture: <i>{paddle.surface_texture}</i></p>
+            <p>Length: <i>{paddle.length}</i></p>
+            <p>Width: <i>{paddle.width}</i></p>
+            <p>Static Weight: <i>{paddle.static_weight}</i></p>
+          </div>
         </div>
       {/each}
     </div>
@@ -167,33 +184,66 @@
     text-align: left;
     overflow-y: auto;
     font-size: 0.75em;
-    padding: 0; /* Remove any padding from the card back */
+    padding: 0;
     display: flex;
     flex-direction: column;
   }
 
   .paddle-details {
     margin: 0;
-    padding: 10px 20px;
+    padding: 20px;  /* Increased padding */
     box-sizing: border-box;
     width: 100%;
-  }
-
-  .paddle-details:first-child {
-    margin-top: 0;
   }
 
   .paddle-details h3 {
-    margin: 0 0 5px 0;
+    margin: 0 0 30px 0;  /* Significantly increased bottom margin */
     font-size: 1.33em;
+    padding-bottom: 10px;  /* Added padding at the bottom */
+    border-bottom: 1px solid currentColor;  /* Added a subtle border for visual separation */
   }
 
-  .card-back .title-banner {
-    font-size: 1.33em;
+  .special-properties-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
     width: 100%;
-    padding: 10px 20px;
+    margin-bottom: 15px;
+    margin-top: 20px;  /* Added top margin to the grid */
+  }
+
+  .special-property {
+    position: relative;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 10px;
     box-sizing: border-box;
-    margin-bottom: 0;
+    background-color: rgba(32, 232, 122, 0.1); /* Light green background */
+  }
+
+  .special-label {
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: #1e1e1e;
+    padding: 0 5px;
+    font-size: 0.8em;
+    color: white;
+  }
+
+  .special-value {
+    font-size: 1.2em;
+    color: #20e87a; /* Green text color */
+    text-align: center;
+  }
+
+  .regular-properties p {
+    margin: 2px 0;
+    font-size: 0.9em;
+  }
+
+  .regular-properties i {
+    color: currentColor;
   }
 
   .title-banner {
