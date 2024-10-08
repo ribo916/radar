@@ -31,11 +31,11 @@
     .y((d, i) => d * Math.sin(angleSlice * i - Math.PI / 2));
 
   onMount(() => {
-    console.log('Radar: Mounted with color:', { fill, stroke });
+    // console.log('Radar: Mounted with color:', { fill, stroke });
   });
 
-  $: console.log('Radar: Color updated:', { fill, stroke });
-  $: console.log('Radar: Number of data points:', paddleData ? 1 : $data.length);
+  // $: console.log('Radar: Color updated:', { fill, stroke });
+  // $: console.log('Radar: Number of data points:', paddleData ? 1 : $data.length);
 </script>
 
 <g transform="translate({$width / 2}, {$height / 2})">

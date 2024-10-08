@@ -14,6 +14,36 @@
   }
 </script>
 
+<div
+  class="card {flipped ? 'flipped' : ''}"
+  on:click={flipCard}
+  on:keydown={handleKeyDown}
+  role="button"
+  tabindex="0"
+  aria-pressed={flipped}
+>
+  <div class="card-inner">
+    <div class="card-front">
+      <div class="title-banner">{excludedPaddles.length} paddles not included</div>
+      <div class="front-content">
+        <div class="front-text">Some data is missing or invalid to properly render a radar chart for certain paddles so these are all skipped.</div>
+      </div>
+      <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
+    </div>
+    <div class="card-back">
+      <div class="title-banner">Excluded Paddles</div>
+      <div class="back-content">
+        <ul class="excluded-list">
+          {#each excludedPaddles as paddle}
+            <li>{paddle}</li>
+          {/each}
+        </ul>
+      </div>
+      <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
+    </div>
+  </div>
+</div>
+
 <style>
   .card {
     perspective: 1000px;
@@ -58,32 +88,31 @@
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em; /* Adjust font size as needed */
+    align-items: stretch;
+    justify-content: flex-start;
+    font-size: 0.75em; /* Changed from 1.2em to match other cards */
     border-radius: 10px; /* Rounded corners */
-    padding: 20px;
+    padding: 0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #1e1e1e; /* Darker background color */
-    color: white; /* Ensure text color is white */
+    background-color: #2a2a2a; /* Slightly lighter background for contrast */
+    color: #a0a0a0; /* Light grey for the main text color */
     box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    overflow: hidden;
   }
 
   .card-back {
     transform: rotateY(180deg);
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding: 20px; /* Add padding to ensure the first bullet is not cut off */
   }
 
   .title-banner {
     width: 100%;
     padding: 10px;
-    background-color: #333;
-    color: white;
-    font-size: 1em; /* Adjust font size as needed */
+    background-color: #3a3a3a; /* Darker grey for the title banner */
+    color: #c0c0c0; /* Lighter grey for the title text */
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
-    border-bottom: 1px solid #444; /* Darker border */
+    border-bottom: 1px solid #4a4a4a; /* Slightly lighter border */
     box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
   }
 
@@ -92,12 +121,12 @@
     bottom: 10px;
     right: 10px;
     font-size: 1.5em;
-    color: #ccc;
+    color: #808080; /* Medium grey for the flip icon */
     transition: color 0.3s;
   }
 
   .card:hover .flip-icon {
-    color: #fff;
+    color: #a0a0a0; /* Lighter grey when hovering */
   }
 
   .excluded-list {
@@ -109,52 +138,26 @@
   }
 
   .excluded-list li {
-    font-size: 1em; /* Adjust font size as needed */
-    color: white; /* Ensure text color is white */
+    font-size: 0.9em; /* Adjust font size as needed */
+    color: #a0a0a0; /* Light grey for list items */
+    margin-bottom: 5px;
   }
 
   .front-text {
     margin-top: 10px; /* Adjust margin to ensure it is below the title */
     font-size: 0.9em;
-    color: #ccc;
+    color: #909090; /* Medium grey for the front text */
     text-align: center;
     font-style: italic; /* Make the text italicized */
   }
 
-  .front-content {
+  .front-content, .back-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start; /* Align items to the top */
-    height: 100%;
-    width: 100%;
-    padding-top: 20px; /* Add padding to the top */
+    padding: 20px;
+    overflow-y: auto;
   }
 </style>
-
-<div
-  class="card {flipped ? 'flipped' : ''}"
-  on:click={flipCard}
-  on:keydown={handleKeyDown}
-  role="button"
-  tabindex="0"
-  aria-pressed={flipped}
->
-  <div class="card-inner">
-    <div class="card-front">
-      <div class="front-content">
-        <div class="title-banner">{excludedPaddles.length} paddles not included</div>
-        <div class="front-text">Some data is missing or invalid to properly render a radar chart for certain paddles so these are all skipped.</div>
-      </div>
-      <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
-    </div>
-    <div class="card-back">
-      <ul class="excluded-list">
-        {#each excludedPaddles as paddle}
-          <li>{paddle}</li>
-        {/each}
-      </ul>
-      <i class="fas fa-sync-alt flip-icon"></i> <!-- Flip icon -->
-    </div>
-  </div>
-</div>

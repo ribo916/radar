@@ -22,46 +22,57 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
-    align-items: flex-start; /* Align items to the start of the flex container */
+    align-items: flex-start;
     justify-content: center;
-    z-index: 1000; /* Ensure the modal is on top */
-    padding-top: 10%; /* Add padding to move the modal content down */
+    z-index: 1000;
+    padding-top: 10%;
   }
   .modal-content {
     background: white;
-    color: black; /* Ensure text color is black */
+    color: black;
     padding: 20px;
     border-radius: 10px;
-    max-width: 90%; /* Default max-width for smaller screens */
+    max-width: 90%;
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative;
+    font-size: 0.75em; /* Added to match card font size */
   }
   .close-button {
     background: none;
     border: none;
-    font-size: 1.5em;
+    font-size: 1.5em; /* Increased from 1em for better visibility */
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
   }
 
+  /* Adjust heading sizes */
+  :global(.modal-content h1) { font-size: 1.5em; }
+  :global(.modal-content h2) { font-size: 1.3em; }
+  :global(.modal-content h3) { font-size: 1.2em; }
+  :global(.modal-content h4) { font-size: 1.1em; }
+  :global(.modal-content h5, .modal-content h6) { font-size: 1em; }
+
+  /* Adjust paragraph and list item sizes */
+  :global(.modal-content p, .modal-content li) { font-size: 1em; }
+
   @media (min-width: 600px) {
     .modal-content {
-      max-width: 80%; /* Adjust max-width for medium screens */
+      max-width: 80%;
     }
   }
 
   @media (min-width: 900px) {
     .modal-content {
-      max-width: 60%; /* Adjust max-width for larger screens */
+      max-width: 60%;
     }
   }
 
   @media (min-width: 1200px) {
     .modal-content {
-      max-width: 50%; /* Adjust max-width for extra-large screens */
+      max-width: 50%;
     }
   }
 </style>

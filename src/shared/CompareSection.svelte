@@ -113,7 +113,7 @@
     align-items: center;
     padding: 10px;
     color: #fff;
-    font-size: 1em;
+    font-size: 0.75em; /* Changed from 1em to match card font size */
     border-bottom: 1px solid #ccc;
     box-sizing: border-box;
     margin-bottom: 10px;
@@ -137,6 +137,7 @@
     border: 1px solid #ccc;
     cursor: pointer;
     text-align: left;
+    font-size: 1em; /* This will be relative to the new base size */
   }
 
   .dropdown-content {
@@ -160,6 +161,7 @@
     margin-bottom: 10px;
     width: 100%;
     text-align: left;
+    font-size: 0.9em; /* Slightly smaller than the button */
   }
 
   .paddle-item label {
@@ -179,6 +181,7 @@
     border-radius: 4px;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    font-size: 0.9em; /* Match the paddle item size */
   }
 
   .clear-button {
@@ -190,5 +193,6 @@
     border: 1px solid #ccc;
     cursor: pointer;
     text-align: center;
+    font-size: 1em; /* Match the dropdown button size */
   }
 </style>

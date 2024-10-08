@@ -8,8 +8,8 @@
 
   const colors = ['#ff6b6b', '#4ecdc4', '#45aaf2'];
 
-  $: console.log('ComparisonCard: Number of paddles:', data.length);
-  $: console.log('ComparisonCard xKey:', xKey);
+  // $: console.log('ComparisonCard: Number of paddles:', data.length);
+  // $: console.log('ComparisonCard xKey:', xKey);
 
   let flipped = false;
 
@@ -43,38 +43,40 @@
 >
   <div class="card-inner">
     <div class="card-front">
-      <div class="title-banner">Paddle Comparison</div>
-      <div class="chart-container">
-        <LayerCake
-          padding={{ top: 30, right: 30, bottom: 30, left: 30 }}
-          x={xKey}
-          xDomain={[0, 10]}
-          xRange={({ height }) => [0, height / 2]}
-          data={data}
-          width={300}
-          height={300}
-        >
-          <Svg>
-            <AxisRadial />
-            {#each data as paddle, i}
-              <Radar 
-                fill={colors[i]} 
-                stroke={colors[i]} 
-                fillOpacity={0.2} 
-                strokeWidth={2}
-                paddleData={paddle}
-              />
-            {/each}
-          </Svg>
-        </LayerCake>
-      </div>
-      <div class="legend">
-        {#each data as paddle, i}
-          <div class="legend-item">
-            <span class="color-box" style="background-color: {colors[i]};"></span>
-            <span>{paddle.company} {paddle.paddle}</span>
-          </div>
-        {/each}
+      <div class="title-banner">Overlays Comparisons - 2 or 3 paddles</div>
+      <div class="content-wrapper">
+        <div class="chart-container">
+          <LayerCake
+            padding={{ top: 30, right: 30, bottom: 30, left: 30 }}
+            x={xKey}
+            xDomain={[0, 10]}
+            xRange={({ height }) => [0, height / 2]}
+            data={data}
+            width={300}
+            height={300}
+          >
+            <Svg>
+              <AxisRadial />
+              {#each data as paddle, i}
+                <Radar 
+                  fill={colors[i]} 
+                  stroke={colors[i]} 
+                  fillOpacity={0.2} 
+                  strokeWidth={2}
+                  paddleData={paddle}
+                />
+              {/each}
+            </Svg>
+          </LayerCake>
+        </div>
+        <div class="legend">
+          {#each data as paddle, i}
+            <div class="legend-item">
+              <span class="color-box" style="background-color: {colors[i]};"></span>
+              <span>{paddle.company} {paddle.paddle}</span>
+            </div>
+          {/each}
+        </div>
       </div>
       <i class="fas fa-sync-alt flip-icon"></i>
     </div>
@@ -168,15 +170,16 @@
     backface-visibility: hidden;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-start;
-    font-size: 1.2em;
+    font-size: 0.75em;
     border-radius: 10px;
-    padding: 20px;
+    padding: 0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #1e1e1e;
     color: white;
     box-sizing: border-box;
+    overflow: hidden;
   }
 
   .card-back {
@@ -251,11 +254,20 @@
     padding: 10px;
     background-color: #333;
     color: white;
-    font-size: 1em;
+    font-size: 15px;  /* Set to exactly 15px to match Card.svelte */
     font-weight: bold;
     text-align: center;
-    border-bottom: 1px solid #444;
-    box-sizing: border-box;
+    border-bottom: 1px solid #444; /* Darker border */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+  }
+
+  .content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    overflow-y: auto;
   }
 
   .chart-container {
@@ -264,9 +276,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
     overflow: hidden;
-    transform: rotate(-30deg); /* Rotate the radar chart by 30 degrees counter-clockwise */
+    transform: rotate(-30deg);
   }
 
   .legend {
@@ -276,6 +287,7 @@
     width: 100%;
     padding: 5px;
     font-size: 0.5em; /* Reduce font size by 50% */
+    margin-top: 10px;
   }
 
   .legend-item {

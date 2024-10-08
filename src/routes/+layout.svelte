@@ -86,7 +86,7 @@
 
 <main>
   <div class="banner">
-    <h3>Paddle Comparisons</h3>
+    <h3>Pickleball Paddle Charts</h3>
     <button class="info-button" on:click={openModal} aria-label="More information">
       <i class="fas fa-info-circle"></i>
     </button>
@@ -121,9 +121,10 @@
 {#if showModal}
   <Modal on:close={closeModal}>
     <h2>Overview</h2>
-    <p>This site merely uses the JohnKew database to regenerate radar charts for statistical comparison.</p>
+    <p>This site uses the JohnKew spreadsheet to regenerate radar charts for statistical comparison.</p>
     <ul>
-      <li>Data was last refreshed on 9/24/24</li>
+      <li>Data last refreshed: 9/24/24</li>
+      <li>JohnKew site is <a href="https://www.johnkewpickleball.com/" target="_blank">here</a></li>
       <li>Code is <a href="https://github.com/ribo916/radar/" target="_blank">here</a></li>
     </ul>
   </Modal>
@@ -143,7 +144,7 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 0px;
     border-radius: 4px;
-    font-size: 1.2em;
+    font-size: 0.75em; /* Reduced from 1em to match card font size */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -154,13 +155,14 @@
     flex: 1;
     text-align: center;
     margin: 0;
+    font-size: 1.2em; /* Adjust this value as needed */
   }
 
   .info-button {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.5em;
+    font-size: 1em; /* Reduced from 1.2em */
     color: white;
     position: absolute;
     right: 20px;
@@ -182,7 +184,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.5em;
+    font-size: 1em; /* Reduced from 1.2em to match info-button */
     color: white;
     margin: 0 10px;
   }

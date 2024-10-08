@@ -79,7 +79,7 @@
     align-items: center;
     padding: 10px;
     color: #fff;
-    font-size: 1em;
+    font-size: 0.75em; /* Changed from 1em to match card font size */
     border-bottom: 1px solid #ccc;
     box-sizing: border-box;
     margin-bottom: 10px;
@@ -98,6 +98,7 @@
     flex: 1;
     text-align: right;
     margin-right: 10px;
+    font-size: 1em; /* This will be relative to the new base size */
   }
 
   .slider {
@@ -108,10 +109,11 @@
     flex: 1;
     text-align: left;
     margin-left: 10px;
+    font-size: 1em; /* Match the label size */
   }
 
   .total-valid-paddles {
-    font-size: 1em; /* Adjusted font size to match the filters */
+    font-size: 1em; /* This will now be relative to the new base size */
     color: #fff;
     text-align: center;
     margin-top: 20px;
