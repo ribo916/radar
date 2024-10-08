@@ -23,6 +23,8 @@
       flipCard();
     }
   }
+
+  // Remove the logPaddleDetails function if it's no longer needed
 </script>
 
 <div
@@ -56,6 +58,7 @@
                 stroke={paddleColor} 
                 fillOpacity={0.2} 
                 strokeWidth={2}
+                paddleData={paddle}
               />
               {console.log(`Color assigned to ${paddleName}: ${paddleColor}`)}
             {/each}
@@ -78,7 +81,26 @@
         <div class="paddle-details" style="color: {colors[i]};">
           <h3>{paddle.company} {paddle.paddle}</h3>
           <p>Thickness: {paddle.thickness} mm</p>
-          <!-- Add more details as needed -->
+          <p>Power: {Math.round(paddle.Power * 10)}%</p>
+          <p>Spin: {Math.round(paddle.Spin * 10)}%</p>
+          <p>Pop: {Math.round(paddle.Pop * 10)}%</p>
+          <p>Twist: {Math.round(paddle.Twist * 10)}%</p>
+          <p>Balance: {Math.round(paddle.Balance * 10)}%</p>
+          <p>Swing: {Math.round(paddle.Swing * 10)}%</p>
+          <p>Shape: {paddle.shape}</p>
+          <p>Face Material: {paddle.face_material}</p>
+          <p>Handle Length: {paddle.handle_length}</p>
+          <p>Spin RPM: {paddle.spin_rpm}</p>
+          <p>Serve Speed: {paddle.serve_speed_mph} mph</p>
+          <p>Punch Volley Speed: {paddle.punch_volley_speed}</p>
+          <p>Swing Weight: {paddle.swing_weight}</p>
+          <p>Twist Weight: {paddle.twist_weight}</p>
+          <p>Core Material: {paddle.core_material}</p>
+          <p>Surface Texture: {paddle.surface_texture}</p>
+          <p>Length: {paddle.length}</p>
+          <p>Width: {paddle.width}</p>
+          <p>Static Weight: {paddle.static_weight}</p>
+          <p>Balance Point: {paddle.balance_point_cm} cm</p>
         </div>
       {/each}
     </div>
@@ -144,6 +166,34 @@
     transform: rotateY(180deg);
     text-align: left;
     overflow-y: auto;
+    font-size: 0.75em;
+    padding: 0; /* Remove any padding from the card back */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .paddle-details {
+    margin: 0;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .paddle-details:first-child {
+    margin-top: 0;
+  }
+
+  .paddle-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.33em;
+  }
+
+  .card-back .title-banner {
+    font-size: 1.33em;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin-bottom: 0;
   }
 
   .title-banner {
@@ -174,19 +224,20 @@
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
+    font-size: 0.5em; /* Reduce font size by 50% */
   }
 
   .legend-item {
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 2.5px; /* Reduced from 5px */
   }
 
   .color-box {
-    width: 15px;
-    height: 15px;
-    margin-right: 5px;
+    width: 7.5px; /* Reduced from 15px */
+    height: 7.5px; /* Reduced from 15px */
+    margin-right: 2.5px; /* Reduced from 5px */
     border-radius: 50%;
   }
 
@@ -210,5 +261,16 @@
 
   .paddle-details h3 {
     margin-bottom: 5px;
+    font-size: 1.33em; /* Adjusted to match the original size relative to the new card-back font size */
+  }
+
+  .paddle-details p {
+    margin: 2px 0;
+    font-size: 0.9em;
+  }
+
+  /* Debugging styles */
+  .paddle-details {
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 </style>
