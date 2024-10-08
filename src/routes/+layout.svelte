@@ -138,7 +138,7 @@
   .banner {
     background: linear-gradient(90deg, #03c8ff, #0077ff);
     color: white;
-    padding: 15px 20px; /* Increase padding for better height */
+    padding: 15px 20px;
     text-align: center;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 0px;
@@ -163,9 +163,9 @@
     font-size: 1.5em;
     color: white;
     position: absolute;
-    right: 20px; /* Adjust spacing from the right */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Center vertically */
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .icon-bar {
@@ -173,10 +173,9 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 10px;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
     padding: 5px 0;
-    border-color: #333;
   }
 
   .icon-button {
@@ -190,25 +189,19 @@
 
   .chart-grid {
     display: grid;
-    gap: 16px; /* Adjust the gap between charts as needed */
-    grid-template-columns: repeat(1, 1fr); /* Default to 1 column */
+    gap: 16px;
+    grid-template-columns: repeat(1, 1fr);
   }
 
   @media (min-width: 600px) {
     .chart-grid {
-      grid-template-columns: repeat(2, 1fr); /* 2 columns for small screens */
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (min-width: 900px) {
     .chart-grid {
-      grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .chart-grid {
-      grid-template-columns: repeat(4, 1fr); /* 4 columns for large screens */
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>
