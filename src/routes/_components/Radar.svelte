@@ -3,7 +3,7 @@
   Generates an SVG radar chart.
  -->
  <script>
-  import { getContext } from 'svelte';
+  import { getContext, onMount } from 'svelte';
   import { line, curveLinearClosed } from 'd3-shape';
   // @ts-ignore
 
@@ -53,12 +53,18 @@
   //     });
   //   })
   //   .join('L') + 'z';
+
+  onMount(() => {
+    console.log('Radar: Mounted with color:', { fill, stroke });
+  });
+
+  $: console.log('Radar: Color updated:', { fill, stroke });
+  $: console.log('Radar: Number of data points:', $data.length);
 </script>
 
 <g transform="translate({$width / 2}, {$height / 2})">
   {#each $data as row}
     {@const xVals = $xGet(row)}
-    <!-- Draw a line connecting all the dots -->
     <path
       class="path-line"
       d={path(xVals)}
@@ -67,22 +73,6 @@
       {fill}
       fill-opacity={fillOpacity}
     ></path>
-
-
-    <!-- Plot each dots -->
-           <!--
-    {#each xVals as circleR, i}
-      {@const thisAngleSlice = angleSlice * i - Math.PI / 2}
-      <circle
-        cx={circleR * Math.cos(thisAngleSlice)}
-        cy={circleR * Math.sin(thisAngleSlice)}
-        {r}
-        fill={circleFill}
-        stroke={circleStroke}
-        stroke-width={circleStrokeWidth}
-      ></circle>
-    {/each}
-    -->
   {/each}
 </g>
 

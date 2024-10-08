@@ -4,6 +4,7 @@
   import { onMount } from 'svelte';
   import { paddlesStore, selectedPaddlesStore } from '../stores.js'; // Import the stores
   import { loadAndProcessData } from './dataProcessor.js'; // Import the utility function
+  import ComparisonCard from '../shared/ComparisonCard.svelte'; // New import
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -106,6 +107,11 @@
   $: {
     paddlesStore.set(filteredProcessedData);
   }
+
+  // Add this reactive statement to create comparison data
+  $: comparisonData = filteredProcessedData.length >= 2 && filteredProcessedData.length <= 3
+    ? filteredProcessedData
+    : null;
 </script>
 
 <style>
@@ -142,6 +148,14 @@
     <div class="spinner"></div>
   </div>
 {:else}
+    <!-- Add the ComparisonCard if we have 2 or 3 paddles -->
+    {#if comparisonData}
+      <ComparisonCard 
+        data={comparisonData}
+        xKey={Object.values(labelMapping)}
+      />
+    {/if}
+
     <!-- Loop through filteredProcessedData and create a Card for each paddle -->
     {#each filteredProcessedData as record}
       <Card 
