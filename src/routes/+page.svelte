@@ -31,7 +31,7 @@
   let loading = true; // Add loading state
 
   onMount(async () => {
-    const { filteredData: fd, excludedPaddles: ep } = await loadAndProcessData('/radarScores_2024_09_24.csv'); // Correct path to the CSV file
+    const { filteredData: fd, excludedPaddles: ep } = await loadAndProcessData('/radarScores_2024_10_09.csv'); // Correct path to the CSV file
     filteredData = fd;
     excludedPaddles = ep;
     loading = false; // Set loading to false once data is loaded
