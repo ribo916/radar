@@ -7,20 +7,19 @@
 
   const { width, height, xScale, extents, config } = getContext('LayerCake');
 
-  /** @type {Number} [lineLengthFactor=1.1] - How far to extend the lines from the circle's center. A value of `1` puts them at the circle's circumference. */
-  export let lineLengthFactor = 1.1;
+  /** @type {Number} [lineLengthFactor=1.05] - How far to extend the lines from the circle's center. A value of `1` puts them at the circle's circumference. */
+  export let lineLengthFactor = 1.05;
 
-  /** @type {Number} [labelPlacementFactor=1.25] - How far to place the labels from the circle's center. A value of `1` puts them at the circle's circumference. */
-  export let labelPlacementFactor = 1.25;
+  /** @type {Number} [labelPlacementFactor=1.15] - How far to place the labels from the circle's center. A value of `1` puts them at the circle's circumference. */
+  export let labelPlacementFactor = 1.15;
 
-  $: max = $xScale(Math.max(...$extents.x));
+  $: max = Math.max($xScale(Math.max(...$extents.x)), 0);
 
   $: lineLength = max * lineLengthFactor;
   $: labelPlacement = max * labelPlacementFactor;
 
   $: angleSlice = (Math.PI * 2) / $config.x.length;
 
-  // @ts-ignore
   function anchor(total, i) {
     if (i === 0 || i === total / 2) {
       return 'middle';
@@ -32,8 +31,7 @@
 </script>
 
 <g transform="translate({$width / 2}, {$height / 2})">
-  <circle cx="0" cy="0" r={max} stroke="#000" stroke-width="1" fill="#000" fill-opacity="0.1"
-  ></circle>
+  <circle cx="0" cy="0" r={max} stroke="#000" stroke-width="1" fill="#000" fill-opacity="0.1"></circle>
   <circle cx="0" cy="0" r={max / 2} stroke="#000" stroke-width="1" fill="none"></circle>
 
   {#each $config.x as label, i}
@@ -46,15 +44,12 @@
       stroke="#ccc"
       stroke-width="1"
       fill="none"
-    >
-    </line>
+    ></line>
     <text
       text-anchor={anchor($config.x.length, i)}
       dy="0.35em"
       font-size="12px"
       fill="white"
-      transform="translate({labelPlacement * Math.cos(thisAngleSlice)}, {labelPlacement *
-        Math.sin(thisAngleSlice)})">{label}</text
-    >
+      transform="translate({labelPlacement * Math.cos(thisAngleSlice)}, {labelPlacement * Math.sin(thisAngleSlice)})">{label}</text>
   {/each}
 </g>

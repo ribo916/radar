@@ -11,6 +11,9 @@
   export let company; // Accept company as a prop
 
   let flipped = false;
+  let cardElement;
+  let width;
+  let height;
 
   function flipCard() {
     flipped = !flipped;
@@ -20,6 +23,19 @@
     if (event.key === 'Enter' || event.key === ' ') {
       flipCard();
     }
+  }
+
+  function calculateSize(width, height) {
+    return Math.min(width, height) - 60; // Subtract padding
+  }
+
+  let chartSize;
+
+  $: if (cardElement) {
+    const rect = cardElement.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    chartSize = calculateSize(width, height);
   }
 
   // Special properties to highlight
@@ -45,6 +61,14 @@
     'width': 'width',
     'staticWeight': 'staticWeight'
   };
+
+  function getMaxValue(data) {
+    if (!data || !data[xKey]) return 10;
+    return Math.max(...Object.values(data[xKey]), 10); // Ensure minimum of 10
+  }
+
+  $: maxValue = radarData ? getMaxValue(radarData) : 10;
+  $: scaleFactor = Math.min(0.9, 10 / maxValue);
 </script>
 
 <div
@@ -54,26 +78,29 @@
   role="button"
   tabindex="0"
   aria-pressed={flipped}
+  bind:this={cardElement}
 >
   <div class="card-inner">
     <div class="card-front">
       <div class="title-banner">{company} {seriesKey} - {thickness}</div>
       <div class="front-content">
         <div class="chart-container">
-          <LayerCake
-            padding={{ top: 30, right: 30, bottom: 30, left: 30 }} 
-            x={xKey}
-            xDomain={[0, 10]}
-            xRange={({ height }) => [0, height / 2]}
-            data={[radarData]} 
-            width={300} 
-            height={300} 
-          >
-            <Svg>
-              <AxisRadial />
-              <Radar />
-            </Svg>
-          </LayerCake>
+          {#if chartSize && radarData}
+            <LayerCake
+              padding={{ top: 10, right: 10, bottom: 10, left: 10 }}
+              x={xKey}
+              xDomain={[0, maxValue]}
+              xRange={[0, (chartSize / 2) * scaleFactor]}
+              data={[radarData]}
+              width={chartSize}
+              height={chartSize}
+            >
+              <Svg>
+                <AxisRadial />
+                <Radar />
+              </Svg>
+            </LayerCake>
+          {/if}
         </div>
         <i class="fas fa-sync-alt flip-icon"></i>
       </div>
@@ -119,14 +146,15 @@
 <style>
   .card {
     perspective: 1000px;
-    width: 350px; /* Fixed width */
-    height: 400px; /* Fixed height */
-    margin: 10px auto; /* Center the card horizontally */
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 7/8;
+    margin: 0 auto;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    box-sizing: border-box;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 
@@ -206,14 +234,22 @@
   }
 
   .chart-container {
-    flex: 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transform: rotate(-30deg);
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .chart-container :global(svg) {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    transform: rotate(-30deg);
   }
 
   .flip-icon {

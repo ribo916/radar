@@ -8,10 +8,9 @@
 
   const colors = ['#ff6b6b', '#4ecdc4', '#45aaf2'];
 
-  // $: console.log('ComparisonCard: Number of paddles:', data.length);
-  // $: console.log('ComparisonCard xKey:', xKey);
-
   let flipped = false;
+  let cardElement;
+  let chartSize = 300; // Default size
 
   function flipCard() {
     flipped = !flipped;
@@ -31,6 +30,13 @@
     'SWING WEIGHT': 'swing_weight',
     'BALANCE POINT': 'balance_point_cm',
   };
+
+  function updateChartSize() {
+    if (cardElement) {
+      const rect = cardElement.getBoundingClientRect();
+      chartSize = Math.min(rect.width, rect.height) - 60; // Subtract padding
+    }
+  }
 </script>
 
 <div
@@ -40,6 +46,8 @@
   role="button"
   tabindex="0"
   aria-pressed={flipped}
+  bind:this={cardElement}
+  use:updateChartSize
 >
   <div class="card-inner">
     <div class="card-front">
@@ -52,8 +60,8 @@
             xDomain={[0, 10]}
             xRange={({ height }) => [0, height / 2]}
             data={data}
-            width={300}
-            height={300}
+            width={chartSize}
+            height={chartSize}
           >
             <Svg>
               <AxisRadial />
@@ -82,46 +90,48 @@
     </div>
     <div class="card-back">
       <div class="title-banner">Comparison Details</div>
-      {#each data as paddle, i}
-        <div class="paddle-details" style="color: {colors[i]};">
-          <h3>{paddle.company} {paddle.paddle}</h3>
-          <div class="special-properties-grid">
-            {#each Object.entries(specialProperties) as [label, key]}
-              <div class="special-property">
-                <div class="special-label">{label}</div>
-                <div class="special-value">
-                  {#if ['POWER', 'POP'].includes(label)}
-                    {paddle[key]} MPH
-                  {:else if label === 'SPIN'}
-                    {paddle[key]} RPM
-                  {:else if label === 'BALANCE POINT'}
-                    {paddle[key]} cm
-                  {:else}
-                    {paddle[key]}
-                  {/if}
+      <div class="back-content">
+        {#each data as paddle, i}
+          <div class="paddle-details" style="color: {colors[i]};">
+            <h3>{paddle.company} {paddle.paddle}</h3>
+            <div class="special-properties-grid">
+              {#each Object.entries(specialProperties) as [label, key]}
+                <div class="special-property">
+                  <div class="special-label">{label}</div>
+                  <div class="special-value">
+                    {#if ['POWER', 'POP'].includes(label)}
+                      {paddle[key]} MPH
+                    {:else if label === 'SPIN'}
+                      {paddle[key]} RPM
+                    {:else if label === 'BALANCE POINT'}
+                      {paddle[key]} cm
+                    {:else}
+                      {paddle[key]}
+                    {/if}
+                  </div>
                 </div>
-              </div>
-            {/each}
+              {/each}
+            </div>
+            <div class="regular-properties">
+              <p>Thickness: <i>{paddle.thickness} mm</i></p>
+              <p>Power: <i>{Math.round(paddle.Power * 10)}%</i></p>
+              <p>Spin: <i>{Math.round(paddle.Spin * 10)}%</i></p>
+              <p>Pop: <i>{Math.round(paddle.Pop * 10)}%</i></p>
+              <p>Twist: <i>{Math.round(paddle.Twist * 10)}%</i></p>
+              <p>Balance: <i>{Math.round(paddle.Balance * 10)}%</i></p>
+              <p>Swing: <i>{Math.round(paddle.Swing * 10)}%</i></p>
+              <p>Shape: <i>{paddle.shape}</i></p>
+              <p>Face Material: <i>{paddle.face_material}</i></p>
+              <p>Handle Length: <i>{paddle.handle_length}</i></p>
+              <p>Core Material: <i>{paddle.core_material}</i></p>
+              <p>Surface Texture: <i>{paddle.surface_texture}</i></p>
+              <p>Length: <i>{paddle.length}</i></p>
+              <p>Width: <i>{paddle.width}</i></p>
+              <p>Static Weight: <i>{paddle.static_weight}</i></p>
+            </div>
           </div>
-          <div class="regular-properties">
-            <p>Thickness: <i>{paddle.thickness} mm</i></p>
-            <p>Power: <i>{Math.round(paddle.Power * 10)}%</i></p>
-            <p>Spin: <i>{Math.round(paddle.Spin * 10)}%</i></p>
-            <p>Pop: <i>{Math.round(paddle.Pop * 10)}%</i></p>
-            <p>Twist: <i>{Math.round(paddle.Twist * 10)}%</i></p>
-            <p>Balance: <i>{Math.round(paddle.Balance * 10)}%</i></p>
-            <p>Swing: <i>{Math.round(paddle.Swing * 10)}%</i></p>
-            <p>Shape: <i>{paddle.shape}</i></p>
-            <p>Face Material: <i>{paddle.face_material}</i></p>
-            <p>Handle Length: <i>{paddle.handle_length}</i></p>
-            <p>Core Material: <i>{paddle.core_material}</i></p>
-            <p>Surface Texture: <i>{paddle.surface_texture}</i></p>
-            <p>Length: <i>{paddle.length}</i></p>
-            <p>Width: <i>{paddle.width}</i></p>
-            <p>Static Weight: <i>{paddle.static_weight}</i></p>
-          </div>
-        </div>
-      {/each}
+        {/each}
+      </div>
     </div>
   </div>
 </div>
@@ -129,9 +139,10 @@
 <style>
   .card {
     perspective: 1000px;
-    width: 350px;
-    height: 400px;
-    margin: 10px auto;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 7/8;
+    margin: 0 auto;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -271,13 +282,21 @@
   }
 
   .chart-container {
-    flex: 1;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     overflow: hidden;
     transform: rotate(-30deg);
+  }
+
+  .chart-container :global(svg) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .legend {
@@ -334,5 +353,24 @@
   /* Debugging styles */
   .paddle-details {
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .back-content {
+    padding: 20px;
+    overflow-y: auto;
+    height: calc(100% - 40px); /* Adjust based on your title banner height */
+  }
+
+  .paddle-details {
+    margin-bottom: 20px;
+  }
+
+  .paddle-details h3 {
+    margin-bottom: 10px;
+  }
+
+  .paddle-details p {
+    margin: 5px 0;
+    font-size: 0.9em;
   }
 </style>

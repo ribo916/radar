@@ -47,14 +47,15 @@
 <style>
   .card {
     perspective: 1000px;
-    width: 350px; /* Fixed width */
-    height: 400px; /* Fixed height */
-    margin: 10px auto; /* Center the card horizontally */
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 7/8;
+    margin: 0 auto;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+    box-sizing: border-box;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 

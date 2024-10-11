@@ -192,18 +192,27 @@
   .chart-grid {
     display: grid;
     gap: 16px;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 16px;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 640px) {
     .chart-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 1024px) {
     .chart-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .chart-grid {
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
   }
 </style>
