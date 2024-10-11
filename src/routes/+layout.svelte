@@ -96,7 +96,7 @@
       <i class="fas fa-filter"></i>
     </button>
     <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare">
-      <i class="fas fa-exchange-alt"></i> <!-- New icon for comparing paddles -->
+      <i class="fas fa-exchange-alt"></i>
     </button>
   </div>
   {#if showFilters}
@@ -113,9 +113,7 @@
   {#if showCompare}
     <CompareSection {paddles} />
   {/if}
-  <div class="chart-grid">
-    <slot />
-  </div>
+  <slot />
 </main>
 
 {#if showModal}
@@ -189,29 +187,20 @@
     margin: 0 10px;
   }
 
-  .chart-grid {
-    display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    max-width: 1800px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
-
   @media (min-width: 640px) {
-    .chart-grid {
+    .icon-bar {
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
   }
 
   @media (min-width: 1024px) {
-    .chart-grid {
+    .icon-bar {
       grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     }
   }
 
   @media (min-width: 1440px) {
-    .chart-grid {
+    .icon-bar {
       grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
   }

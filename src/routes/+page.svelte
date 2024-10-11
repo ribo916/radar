@@ -141,51 +141,92 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .page-content {
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .paddle-count-title {
+    text-align: center;
+    font-size: 0.75em; /* Reduced from 1em to 0.75em */
+    margin: 10px 0 15px; /* Adjusted margins */
+    color: #999999; /* Lighter color */
+    font-weight: normal; /* Removed boldness */
+  }
+
+  .card-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-grid {
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .card-grid {
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+  }
 </style>
 
-{#if loading}
-  <div class="spinner-wrapper">
-    <div class="spinner"></div>
+<div class="page-content">
+  <div class="paddle-count-title">
+    Displaying {filteredProcessedData.length} Paddle{filteredProcessedData.length !== 1 ? 's' : ''}
   </div>
-{:else}
-  {#if comparisonData}
-    <ComparisonCard 
-      data={comparisonData}
-      xKey={Object.values(labelMapping)}
-    />
-  {/if}
 
-  {#each filteredProcessedData as record}
-    <Card 
-      backContent={{
-        power: `${Math.round(record.Power * 10)}%`,
-        spin: `${Math.round(record.Spin * 10)}%`,
-        twist: `${Math.round(record.Twist * 10)}%`,
-        balance: `${Math.round(record.Balance * 10)}%`,
-        swing: `${Math.round(record.Swing * 10)}%`,
-        pop: `${Math.round(record.Pop * 10)}%`,
-        shape: record.shape,
-        faceMaterial: record.face_material,
-        handleLength: record.handle_length,
-        spinRPM: record.spin_rpm,
-        serveSpeedMPH: record.serve_speed_mph,
-        punchVolleySpeed: record.punch_volley_speed,
-        swingWeight: record.swing_weight,
-        twistWeight: record.twist_weight,
-        coreMaterial: record.core_material,
-        surfaceTexture: record.surface_texture,
-        length: record.length,
-        width: record.width,
-        staticWeight: record.static_weight,
-        balancePointCM: record.balance_point_cm
-      }} 
-      radarData={record} 
-      seriesKey={record[seriesKey]} 
-      xKey={Object.values(labelMapping)}
-      thickness={`${record.thickness} mm`} 
-      company={record.company}
-    />
-  {/each}
+  <div class="card-grid">
+    {#if comparisonData}
+      <ComparisonCard 
+        data={comparisonData}
+        xKey={Object.values(labelMapping)}
+      />
+    {/if}
 
-  <SpecialCard {excludedPaddles} />
-{/if}
+    {#each filteredProcessedData as record}
+      <Card 
+        backContent={{
+          power: `${Math.round(record.Power * 10)}%`,
+          spin: `${Math.round(record.Spin * 10)}%`,
+          twist: `${Math.round(record.Twist * 10)}%`,
+          balance: `${Math.round(record.Balance * 10)}%`,
+          swing: `${Math.round(record.Swing * 10)}%`,
+          pop: `${Math.round(record.Pop * 10)}%`,
+          shape: record.shape,
+          faceMaterial: record.face_material,
+          handleLength: record.handle_length,
+          spinRPM: record.spin_rpm,
+          serveSpeedMPH: record.serve_speed_mph,
+          punchVolleySpeed: record.punch_volley_speed,
+          swingWeight: record.swing_weight,
+          twistWeight: record.twist_weight,
+          coreMaterial: record.core_material,
+          surfaceTexture: record.surface_texture,
+          length: record.length,
+          width: record.width,
+          staticWeight: record.static_weight,
+          balancePointCM: record.balance_point_cm
+        }} 
+        radarData={record} 
+        seriesKey={record[seriesKey]} 
+        xKey={Object.values(labelMapping)}
+        thickness={`${record.thickness} mm`} 
+        company={record.company}
+      />
+    {/each}
+
+    <SpecialCard {excludedPaddles} />
+  </div>
+</div>
