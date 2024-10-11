@@ -4,7 +4,7 @@
   import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
-  import { paddlesStore } from '../stores.js'; // Import the store
+  import { paddlesStore, selectedReviewerStore } from '../stores.js'; // Import the store
 
   let showModal = false;
   let showFilters = false;
@@ -16,6 +16,21 @@
   let balanceFilter = 0;
   let swingFilter = 0;
   let paddles = [];
+  let selectedReviewer;
+
+  const reviewers = ['JohnKew', 'PBStudio', 'PBEffect'];
+
+  onMount(() => {
+    selectedReviewerStore.set('JohnKew');
+  });
+
+  selectedReviewerStore.subscribe(value => {
+    selectedReviewer = value;
+  });
+
+  function selectReviewer(reviewer) {
+    selectedReviewerStore.set(reviewer);
+  }
 
   function openModal() {
     showModal = true;
@@ -68,6 +83,10 @@
     paddles = value;
   });
 
+  function handleReviewerSelect(event) {
+    selectedReviewer = event.detail;
+  }
+
   // Dispatch the filter values to the child components
   $: if (typeof window !== 'undefined') {
     const event = new CustomEvent('setFilters', {
@@ -86,32 +105,44 @@
 
 <main>
   <div class="banner">
-    <h3>Pickleball Paddle Charts</h3>
+    <h3>Pickleball Paddle Reviews</h3>
     <button class="info-button" on:click={openModal} aria-label="More information">
       <i class="fas fa-info-circle"></i>
     </button>
   </div>
-  <div class="icon-bar">
-    <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters">
-      <i class="fas fa-filter"></i>
-    </button>
-    <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare">
-      <i class="fas fa-exchange-alt"></i>
-    </button>
+  <div class="reviewer-bar">
+    {#each reviewers as reviewer}
+      <button 
+        class="reviewer-button {selectedReviewer === reviewer ? 'active' : ''}" 
+        on:click={() => selectReviewer(reviewer)}
+      >
+        {reviewer}
+      </button>
+    {/each}
   </div>
-  {#if showFilters}
-    <FilterSection 
-      {powerFilter} {spinFilter} {popFilter} {twistFilter} {balanceFilter} {swingFilter}
-      setPowerFilter={setPowerFilter}
-      setSpinFilter={setSpinFilter}
-      setPopFilter={setPopFilter}
-      setTwistFilter={setTwistFilter}
-      setBalanceFilter={setBalanceFilter}
-      setSwingFilter={setSwingFilter}
-    />
-  {/if}
-  {#if showCompare}
-    <CompareSection {paddles} />
+  {#if selectedReviewer === 'JohnKew'}
+    <div class="icon-bar">
+      <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters">
+        <i class="fas fa-filter"></i>
+      </button>
+      <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare">
+        <i class="fas fa-exchange-alt"></i>
+      </button>
+    </div>
+    {#if showFilters}
+      <FilterSection 
+        {powerFilter} {spinFilter} {popFilter} {twistFilter} {balanceFilter} {swingFilter}
+        setPowerFilter={setPowerFilter}
+        setSpinFilter={setSpinFilter}
+        setPopFilter={setPopFilter}
+        setTwistFilter={setTwistFilter}
+        setBalanceFilter={setBalanceFilter}
+        setSwingFilter={setSwingFilter}
+      />
+    {/if}
+    {#if showCompare}
+      <CompareSection {paddles} />
+    {/if}
   {/if}
   <slot />
 </main>
@@ -203,5 +234,33 @@
     .icon-bar {
       grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
+  }
+
+  .reviewer-bar {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 10px 0;
+  }
+
+  .reviewer-button {
+    background: none;
+    border: none;
+    color: #fff;
+    padding: 5px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+  }
+
+  .reviewer-button.active {
+    background-color: #555;
+    border-radius: 5px;
+  }
+
+  .reviewer-button:hover {
+    background-color: #444;
+    border-radius: 5px;
   }
 </style>

@@ -2,9 +2,10 @@
   import Card from '../shared/Card.svelte';
   import SpecialCard from '../shared/SpecialCard.svelte';
   import { onMount } from 'svelte';
-  import { paddlesStore, selectedPaddlesStore } from '../stores.js'; // Import the stores
+  import { paddlesStore, selectedPaddlesStore, selectedReviewerStore } from '../stores.js'; // Import the stores
   import { loadAndProcessData } from './dataProcessor.js'; // Import the utility function
   import ComparisonCard from '../shared/ComparisonCard.svelte'; // New import
+  import LandingPage from './LandingPage.svelte';
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -30,30 +31,30 @@
   let processedData = [];
   let loading = true; // Add loading state
 
-  onMount(async () => {
+  let selectedReviewer = null;
+
+  selectedReviewerStore.subscribe(value => {
+    selectedReviewer = value;
+    if (selectedReviewer === 'JohnKew') {
+      loadData();
+    }
+  });
+
+  function handleReviewerSelect(event) {
+    selectedReviewerStore.set(event.detail);
+  }
+
+  async function loadData() {
     const { filteredData: fd, excludedPaddles: ep } = await loadAndProcessData('/radarScores_2024_10_09.csv'); // Correct path to the CSV file
     filteredData = fd;
     excludedPaddles = ep;
     loading = false; // Set loading to false once data is loaded
 
-    //console.log('Filtered Data on Mount:', filteredData);
-    // console.log('Excluded Paddles on Mount:', excludedPaddles);
-
     // Dispatch the total number of valid paddles to the layout
-    window.addEventListener('getTotalValidPaddles', (event) => {
-      event.detail.callback(filteredData.length);
-    });
-
-    window.addEventListener('setFilters', (event) => {
-      powerFilter = event.detail.powerFilter;
-      spinFilter = event.detail.spinFilter;
-      popFilter = event.detail.popFilter;
-      twistFilter = event.detail.twistFilter;
-      balanceFilter = event.detail.balanceFilter;
-      swingFilter = event.detail.swingFilter;
-      //console.log('Filters Set:', { powerFilter, spinFilter, popFilter, twistFilter, balanceFilter, swingFilter });
-    });
-  });
+    window.dispatchEvent(new CustomEvent('getTotalValidPaddles', {
+      detail: { callback: (total) => paddlesStore.set(filteredData) }
+    }));
+  }
 
   // Subscribe to the selected paddles store
   let selectedPaddles = [];
@@ -180,53 +181,79 @@
       grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
   }
+
+  .in-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    text-align: center;
+    color: #fff;
+  }
+
+  .in-progress h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+
+  .in-progress p {
+    font-size: 1.2em;
+  }
 </style>
 
-<div class="page-content">
-  <div class="paddle-count-title">
-    Displaying {filteredProcessedData.length} Paddle{filteredProcessedData.length !== 1 ? 's' : ''}
+{#if selectedReviewer === 'JohnKew'}
+  <div class="page-content">
+    <div class="paddle-count-title">
+      Displaying {filteredProcessedData.length} Paddle{filteredProcessedData.length !== 1 ? 's' : ''}
+    </div>
+
+    <div class="card-grid">
+      {#if comparisonData}
+        <ComparisonCard 
+          data={comparisonData}
+          xKey={Object.values(labelMapping)}
+        />
+      {/if}
+
+      {#each filteredProcessedData as record}
+        <Card 
+          backContent={{
+            power: `${Math.round(record.Power * 10)}%`,
+            spin: `${Math.round(record.Spin * 10)}%`,
+            twist: `${Math.round(record.Twist * 10)}%`,
+            balance: `${Math.round(record.Balance * 10)}%`,
+            swing: `${Math.round(record.Swing * 10)}%`,
+            pop: `${Math.round(record.Pop * 10)}%`,
+            shape: record.shape,
+            faceMaterial: record.face_material,
+            handleLength: record.handle_length,
+            spinRPM: record.spin_rpm,
+            serveSpeedMPH: record.serve_speed_mph,
+            punchVolleySpeed: record.punch_volley_speed,
+            swingWeight: record.swing_weight,
+            twistWeight: record.twist_weight,
+            coreMaterial: record.core_material,
+            surfaceTexture: record.surface_texture,
+            length: record.length,
+            width: record.width,
+            staticWeight: record.static_weight,
+            balancePointCM: record.balance_point_cm
+          }} 
+          radarData={record} 
+          seriesKey={record[seriesKey]} 
+          xKey={Object.values(labelMapping)}
+          thickness={`${record.thickness} mm`} 
+          company={record.company}
+        />
+      {/each}
+
+      <SpecialCard {excludedPaddles} />
+    </div>
   </div>
-
-  <div class="card-grid">
-    {#if comparisonData}
-      <ComparisonCard 
-        data={comparisonData}
-        xKey={Object.values(labelMapping)}
-      />
-    {/if}
-
-    {#each filteredProcessedData as record}
-      <Card 
-        backContent={{
-          power: `${Math.round(record.Power * 10)}%`,
-          spin: `${Math.round(record.Spin * 10)}%`,
-          twist: `${Math.round(record.Twist * 10)}%`,
-          balance: `${Math.round(record.Balance * 10)}%`,
-          swing: `${Math.round(record.Swing * 10)}%`,
-          pop: `${Math.round(record.Pop * 10)}%`,
-          shape: record.shape,
-          faceMaterial: record.face_material,
-          handleLength: record.handle_length,
-          spinRPM: record.spin_rpm,
-          serveSpeedMPH: record.serve_speed_mph,
-          punchVolleySpeed: record.punch_volley_speed,
-          swingWeight: record.swing_weight,
-          twistWeight: record.twist_weight,
-          coreMaterial: record.core_material,
-          surfaceTexture: record.surface_texture,
-          length: record.length,
-          width: record.width,
-          staticWeight: record.static_weight,
-          balancePointCM: record.balance_point_cm
-        }} 
-        radarData={record} 
-        seriesKey={record[seriesKey]} 
-        xKey={Object.values(labelMapping)}
-        thickness={`${record.thickness} mm`} 
-        company={record.company}
-      />
-    {/each}
-
-    <SpecialCard {excludedPaddles} />
+{:else}
+  <div class="in-progress">
+    <h2>In Progress</h2>
+    <p>Data for {selectedReviewer} is not yet available. Check back soon!</p>
   </div>
-</div>
+{/if}
