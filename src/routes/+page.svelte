@@ -80,10 +80,24 @@
         (selectedPaddles.length === 0 || selectedPaddles.some(p => p.paddle === record[seriesKey] && p.company === record.company && p.thickness === record.thickness))
       )
     : selectedReviewer === 'PBEffect'
-      ? processedData.filter(paddle => 
-          $pbEffectFilterValues.powerFilter === 0 || 
-          (paddle.power_percentile != null && parseFloat(paddle.power_percentile) > $pbEffectFilterValues.powerFilter)
-        )
+      ? processedData.filter(paddle => {
+          const spinFilterIndex = Math.floor($pbEffectFilterValues.spinFilter / 25);
+          const spinFilterLevel = spinLevels[spinFilterIndex];
+          const paddleSpinRating = paddle.spin_rating ? paddle.spin_rating.trim().toLowerCase() : '';
+          const spinFilterPasses = spinFilterIndex === 0 || paddleSpinRating === spinFilterLevel;
+
+          return (
+            ($pbEffectFilterValues.powerFilter === 0 || 
+             (paddle.power_percentile != null && parseFloat(paddle.power_percentile) > $pbEffectFilterValues.powerFilter)) &&
+            ($pbEffectFilterValues.popFilter === 0 || 
+             (paddle.pop_percentile != null && parseFloat(paddle.pop_percentile) > $pbEffectFilterValues.popFilter)) &&
+            ($pbEffectFilterValues.twistFilter === 0 || 
+             (paddle.twist_percentile != null && parseFloat(paddle.twist_percentile) > $pbEffectFilterValues.twistFilter)) &&
+            ($pbEffectFilterValues.swingFilter === 0 || 
+             (paddle.swing_percentile != null && parseFloat(paddle.swing_percentile) > $pbEffectFilterValues.swingFilter)) &&
+            spinFilterPasses
+          );
+        })
       : processedData;
 
   $: if (typeof window !== 'undefined') {
@@ -110,8 +124,6 @@
   function handleReviewerSelect(event) {
     selectedReviewerStore.set(event.detail);
   }
-
-  let firstPBEffectPaddle = null;
 
   async function loadJohnKewData() {
     loading = true;
@@ -142,9 +154,6 @@
       filteredData = fd;
       excludedPaddles = ep;
       totalValidPaddleCount = fd.length;
-      firstPBEffectPaddle = fd[0];
-      console.log('PBEffect data loaded:', fd);
-      console.log('First PBEffect paddle:', firstPBEffectPaddle);
       loading = false;
     } catch (error) {
       console.error('Error loading PBEffect data:', error);
@@ -168,6 +177,8 @@
       loading = false;
     }
   }
+
+  const spinLevels = ['', 'low', 'medium', 'high', 'very high'];
 </script>
 
 <style>
@@ -255,7 +266,9 @@
   }
 </style>
 
-{#if loading}
+{#if !selectedReviewer}
+  <LandingPage on:select={handleReviewerSelect} />
+{:else if loading}
   <div class="loading">Loading {selectedReviewer} data...</div>
 {:else if dataError}
   <div class="error">Error loading data for {selectedReviewer}. Please try again later.</div>

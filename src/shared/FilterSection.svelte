@@ -35,7 +35,11 @@
       });
     } else if (selectedReviewer === 'PBEffect') {
       pbEffectFilterValues.set({
-        powerFilter: 0
+        powerFilter: 0,
+        popFilter: 0,
+        twistFilter: 0,
+        swingFilter: 0,
+        spinFilter: 0
       });
     }
   }
@@ -55,6 +59,17 @@
       pbEffectFilterValues.update(filters => ({ ...filters, [key]: value }));
     }
   }
+
+  const spinLevels = ['All', 'Low', 'Medium', 'High', 'Very High'];
+
+  function getSpinLabel(value) {
+    const index = Math.floor(value / 25);
+    if (index === 0) {
+      return spinLevels[index];
+    } else {
+      return `${spinLevels[index]} (only)`;
+    }
+  }
 </script>
 
 <div class="filter-area">
@@ -67,11 +82,24 @@
       </div>
     {/each}
   {:else if selectedReviewer === 'PBEffect'}
-    <div class="slider-container">
-      <label class="filter-label" for="powerFilter">Power:</label>
-      <input id="powerFilter" type="range" min="0" max="100" bind:value={$pbEffectFilterValues.powerFilter} on:input={() => updateFilter('powerFilter', $pbEffectFilterValues.powerFilter)} class="slider" />
-      <div class="filter-value">{$pbEffectFilterValues.powerFilter}</div>
-    </div>
+    {#each ['power', 'pop', 'twist', 'swing', 'spin'] as attribute}
+      <div class="slider-container">
+        <label class="filter-label" for="{attribute}Filter">{attribute.charAt(0).toUpperCase() + attribute.slice(1)}:</label>
+        <input 
+          id="{attribute}Filter" 
+          type="range" 
+          min="0" 
+          max="100" 
+          step={attribute === 'spin' ? "25" : "1"}
+          bind:value={$pbEffectFilterValues[`${attribute}Filter`]} 
+          on:input={() => updateFilter(`${attribute}Filter`, $pbEffectFilterValues[`${attribute}Filter`])} 
+          class="slider" 
+        />
+        <div class="filter-value">
+          {attribute === 'spin' ? getSpinLabel($pbEffectFilterValues[`${attribute}Filter`]) : $pbEffectFilterValues[`${attribute}Filter`]}
+        </div>
+      </div>
+    {/each}
   {/if}
 </div>
 

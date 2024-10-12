@@ -46,8 +46,8 @@ export async function processData(searchParams) {
     .map(row => row['Paddle'] || 'Unknown')
     .sort((a, b) => a.localeCompare(b));
 
-  console.log('Filtered data:', mappedData);
-  console.log('Excluded paddles:', excludedPaddles);
+  console.log('Filtered PBStudio data:', mappedData);
+  console.log('Excluded PBStudio paddles:', excludedPaddles);
 
   return { filteredData: mappedData, excludedPaddles };
 }

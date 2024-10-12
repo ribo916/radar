@@ -38,7 +38,7 @@ export async function processData(searchParams) {
     mappedRow.twistweight = row['Twistweight'];
     mappedRow.surface_texture = row['Grit Type'];
     mappedRow.static_weight = row['Weight (oz)'];
-    mappedRow.spin_rating = row['Spin Rating'];
+    mappedRow.spin_rating = row['Spin Rating'] ? row['Spin Rating'].trim().toLowerCase() : null;
 
     return mappedRow;
   });
@@ -48,8 +48,7 @@ export async function processData(searchParams) {
     .map(row => row['Paddle Name'] || 'Unknown')
     .sort((a, b) => a.localeCompare(b));
 
-  console.log('Filtered data:', mappedData);
-  console.log('Excluded paddles:', excludedPaddles);
-
+  console.log('Filtered PBEffect data:', mappedData);
+  
   return { filteredData: mappedData, excludedPaddles };
 }

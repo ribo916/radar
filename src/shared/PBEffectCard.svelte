@@ -37,14 +37,7 @@
   ];
 </script>
 
-<div 
-  class="card {isFlipped ? 'flipped' : ''}"
-  on:click={flipCard}
-  on:keydown={handleKeyDown}
-  role="button"
-  tabindex="0"
-  aria-pressed={isFlipped}
->
+<div class="card {isFlipped ? 'flipped' : ''}" on:click={flipCard} on:keydown={handleKeyDown} role="button" tabindex="0" aria-pressed={isFlipped}>
   <div class="card-inner">
     <div class="card-front">
       <div class="title-banner">{backContent.paddle || 'Unknown Paddle'} - {backContent.thickness || 'N/A'}mm</div>
@@ -77,10 +70,10 @@
     <div class="card-back">
       <div class="title-banner">{backContent.paddle || 'Unknown Paddle'} - {backContent.thickness || 'N/A'}mm</div>
       <div class="back-content">
-        <div class="back-content-item">Brand: <i>{backContent.company || 'N/A'}</i></div>
+        <div class="back-content-item">Brand: <span class="value">{backContent.company || 'N/A'}</span></div>
         {#each Object.entries(backContent) as [key, value]}
           {#if !key.includes('percentile') && key !== 'company' && key !== 'paddle' && key !== 'thickness' && key !== 'spin_rating'}
-            <div class="back-content-item">{key.replace('_', ' ')}: <i>{value || 'N/A'}</i></div>
+            <div class="back-content-item">{key.replace('_', ' ')}: <span class="value">{value || 'N/A'}</span></div>
           {/if}
         {/each}
       </div>
@@ -198,5 +191,9 @@
   .back-content-item {
     margin-bottom: 10px;
     font-size: 0.9em;
+  }
+
+  .back-content-item .value {
+    color: #2196F3; /* This is the blue color used for the Pop percentile bar */
   }
 </style>

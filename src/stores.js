@@ -14,5 +14,9 @@ export const filterValues = writable({
 
 // New store for PBEffect filters
 export const pbEffectFilterValues = writable({
-  powerFilter: 0
+  powerFilter: 0,
+  popFilter: 0,
+  twistFilter: 0,
+  swingFilter: 0,
+  spinFilter: 0
 });

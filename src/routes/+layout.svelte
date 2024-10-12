@@ -21,7 +21,7 @@
   const reviewers = ['JohnKew', 'PBStudio', 'PBEffect'];
 
   onMount(() => {
-    selectedReviewerStore.set('JohnKew');
+    selectedReviewerStore.set(null);
   });
 
   selectedReviewerStore.subscribe(value => {
@@ -102,6 +102,10 @@
       });
     }
   }
+
+  function goHome() {
+    selectedReviewerStore.set(null);
+  }
 </script>
 
 <main>
@@ -121,8 +125,8 @@
       </button>
     {/each}
   </div>
-  <div class="icon-bar">
-    {#if selectedReviewer === 'JohnKew' || selectedReviewer === 'PBEffect'}
+  {#if selectedReviewer && (selectedReviewer === 'JohnKew' || selectedReviewer === 'PBEffect')}
+    <div class="icon-bar">
       <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters" title="Filter">
         <i class="fas fa-filter"></i>
       </button>
@@ -134,8 +138,8 @@
       <button class="icon-button" on:click={clearAll} aria-label="Clear all filters and comparisons" title="Clear">
         <i class="fas fa-undo"></i>
       </button>
-    {/if}
-  </div>
+    </div>
+  {/if}
   {#if showFilters}
     <FilterSection />
   {/if}
@@ -262,5 +266,9 @@
   .reviewer-button:hover {
     background-color: #444;
     border-radius: 5px;
+  }
+
+  .home-button {
+    margin-right: auto; /* This pushes the Home button to the left */
   }
 </style>

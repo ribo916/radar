@@ -52,7 +52,7 @@ function processCSVData(data) {
     return mappedRow;
   });
 
-  console.log('Mapped data:', mappedData);
+  console.log('Mapped JohnKewdata:', mappedData);
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
 
   const filteredData = mappedData.filter((d, index) => {
@@ -81,13 +81,13 @@ function processCSVData(data) {
     if (a.paddle > b.paddle) return 1;
     return 0;
   });
-  console.log('Filtered data:', filteredData);
+  console.log('Filtered JohnKewdata:', filteredData);
 
   const excludedPaddles = mappedData
     .filter(d => !filteredData.includes(d))
     .map(d => d.paddle)
     .sort((a, b) => a.localeCompare(b));
-  console.log('Excluded paddles:', excludedPaddles);
+  console.log('Excluded JohnKewpaddles:', excludedPaddles);
 
   return { filteredData, excludedPaddles };
 }
