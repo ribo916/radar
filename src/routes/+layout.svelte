@@ -268,7 +268,4 @@
     border-radius: 5px;
   }
 
-  .home-button {
-    margin-right: auto; /* This pushes the Home button to the left */
-  }
 </style>
