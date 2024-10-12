@@ -6,8 +6,8 @@
   export let balanceFilter;
   export let swingFilter;
 
-  import { onMount } from 'svelte';
-  import { paddlesStore } from '../stores.js'; // Import the store
+  import { onMount, onDestroy } from 'svelte';
+  import { paddlesStore, filterValues } from '../stores.js'; // Import the stores
 
   let totalValidPaddles = "All"; // Default value
 
@@ -25,6 +25,23 @@
     window.addEventListener('updateFilteredPaddlesCount', (event) => {
       totalValidPaddles = event.detail.count;
     });
+  });
+
+  function resetFilters() {
+    powerFilter = 0;
+    spinFilter = 0;
+    popFilter = 0;
+    twistFilter = 0;
+    balanceFilter = 0;
+    swingFilter = 0;
+  }
+
+  onMount(() => {
+    window.addEventListener('resetFilters', resetFilters);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('resetFilters', resetFilters);
   });
 </script>
 
@@ -59,8 +76,6 @@
     <input id="swingFilter" type="range" min="0" max="100" bind:value={swingFilter} class="slider" />
     <div class="filter-value">{swingFilter}</div>
   </div>
-  <!-- Total Valid Paddles Count -->
-  <div class="total-valid-paddles">Total Valid Paddles: {totalValidPaddles}</div>
   <br>
 </div>
 
@@ -105,10 +120,4 @@
     font-size: 1em; /* Match the label size */
   }
 
-  .total-valid-paddles {
-    font-size: 1em; /* This will now be relative to the new base size */
-    color: #fff;
-    text-align: center;
-    margin-top: 20px;
-  }
 </style>

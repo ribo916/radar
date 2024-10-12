@@ -4,7 +4,7 @@
   import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
-  import { paddlesStore, selectedReviewerStore, filterValues } from '../stores.js'; // Import the store
+  import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore } from '../stores.js'; // Import the store
 
   let showModal = false;
   let showFilters = false;
@@ -87,6 +87,25 @@
     selectedReviewer = event.detail;
   }
 
+  function clearAll() {
+    // Reset compared paddles
+    selectedPaddlesStore.set([]);
+
+    // Reset filters
+    filterValues.set({
+      powerFilter: 0,
+      spinFilter: 0,
+      popFilter: 0,
+      twistFilter: 0,
+      balanceFilter: 0,
+      swingFilter: 0
+    });
+
+    // Dispatch custom events to notify FilterSection and CompareSection
+    window.dispatchEvent(new CustomEvent('resetFilters'));
+    window.dispatchEvent(new CustomEvent('resetCompare'));
+  }
+
   $: {
     filterValues.set({
       powerFilter,
@@ -118,11 +137,14 @@
   </div>
   {#if selectedReviewer === 'JohnKew'}
     <div class="icon-bar">
-      <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters">
+      <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters" title="Filter">
         <i class="fas fa-filter"></i>
       </button>
-      <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare">
+      <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare" title="Compare">
         <i class="fas fa-exchange-alt"></i>
+      </button>
+      <button class="icon-button" on:click={clearAll} aria-label="Clear all filters and comparisons" title="Clear">
+        <i class="fas fa-undo"></i>
       </button>
     </div>
     {#if showFilters}
@@ -145,9 +167,8 @@
 {#if showModal}
   <Modal on:close={closeModal}>
     <h2>Overview</h2>
-    <p>This site uses the JohnKew spreadsheet to regenerate radar charts for statistical comparison.</p>
+    <p>This site displays the public spreadsheet data found on pickleball review sites for easier consumption on multiple devices.</p>
     <ul>
-      <li>Data last refreshed: 9/24/24</li>
       <li>JohnKew site is <a href="https://www.johnkewpickleball.com/" target="_blank">here</a></li>
       <li>Code is <a href="https://github.com/ribo916/radar/" target="_blank">here</a></li>
     </ul>
@@ -211,6 +232,7 @@
     font-size: 1em; /* Reduced from 1.2em to match info-button */
     color: white;
     margin: 0 10px;
+    padding: 5px;
   }
 
   @media (min-width: 640px) {

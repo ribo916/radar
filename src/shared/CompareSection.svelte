@@ -1,7 +1,7 @@
 <script>
   import { selectedPaddlesStore } from '../stores.js'; // Import the store
   import { writable } from 'svelte/store';
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
 
   export let paddles = []; // Use the paddles prop passed from +layout.svelte
 
@@ -63,28 +63,19 @@
     //console.log('filteredPaddlesStore after set:', $filteredPaddlesStore);
   }
 
-  function clearSelection() {
+  function resetCompare() {
     selectedPaddlesStore.set([]);
-    filterText = '';
-    filteredPaddlesStore.set(FULL_PADDLES_LIST);
-    // Manually uncheck all checkboxes
-    document.querySelectorAll('.paddle-item input[type="checkbox"]').forEach(checkbox => {
-      checkbox.checked = false;
-    });
-    // Simulate pressing the "Clear" button a second time
-    setTimeout(() => {
-      selectedPaddlesStore.set([]);
-      filterText = '';
-      filteredPaddlesStore.set(FULL_PADDLES_LIST);
-      document.querySelectorAll('.paddle-item input[type="checkbox"]').forEach(checkbox => {
-        checkbox.checked = false;
-      });
-    }, 0);
+    filterPaddles(); // Reapply filter to update the list
   }
 
   // Initialize filtered paddles on mount
   onMount(() => {
     filteredPaddlesStore.set(FULL_PADDLES_LIST); // Initialize the filtered paddles store
+    window.addEventListener('resetCompare', resetCompare);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('resetCompare', resetCompare);
   });
 </script>
 
@@ -103,7 +94,6 @@
       {/each}
     </div>
   </div>
-  <button class="clear-button" on:click={clearSelection}>Clear</button>
 </div>
 
 <style>
@@ -182,17 +172,5 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
     font-size: 0.9em; /* Match the paddle item size */
-  }
-
-  .clear-button {
-    margin-left: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    text-align: center;
-    font-size: 1em; /* Match the dropdown button size */
   }
 </style>

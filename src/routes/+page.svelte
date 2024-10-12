@@ -37,7 +37,7 @@
   selectedReviewerStore.subscribe(value => {
     selectedReviewer = value;
     if (selectedReviewer === 'JohnKew') {
-      loadData();
+      loadJohnKewData();
     }
   });
 
@@ -45,11 +45,14 @@
     selectedReviewerStore.set(event.detail);
   }
 
-  async function loadData() {
+  let totalValidPaddleCount = 0;
+
+  async function loadJohnKewData() {
     const { filteredData: fd, excludedPaddles: ep } = await processData('JohnKew', $page.url.searchParams);
     filteredData = fd;
     excludedPaddles = ep;
-    loading = false; // Set loading to false once data is loaded
+    totalValidPaddleCount = fd.length;
+    loading = false;
 
     // Dispatch the total number of valid paddles to the layout
     window.dispatchEvent(new CustomEvent('getTotalValidPaddles', {
@@ -134,10 +137,10 @@
 
   .paddle-count-title {
     text-align: center;
-    font-size: 0.75em; /* Reduced from 1em to 0.75em */
-    margin: 10px 0 15px; /* Adjusted margins */
-    color: #999999; /* Lighter color */
-    font-weight: normal; /* Removed boldness */
+    font-size: 0.75em;
+    margin: 10px 0 15px;
+    color: #999999;
+    font-weight: normal;
   }
 
   .card-grid {
@@ -187,7 +190,7 @@
 {#if selectedReviewer === 'JohnKew'}
   <div class="page-content">
     <div class="paddle-count-title">
-      Displaying {filteredProcessedData.length} Paddle{filteredProcessedData.length !== 1 ? 's' : ''}
+      Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: 10/09/2024)
     </div>
 
     <div class="card-grid">

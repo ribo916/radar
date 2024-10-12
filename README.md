@@ -40,7 +40,7 @@ https://paddles.vercel.app/?useAirtable=true - read paddle data from Airtable AP
 https://paddles.vercel.app/?useXano=true - read paddle data from Xano API
 
 
-## How data is loaded
+## How data is loaded (JohnKew)
 
 - Go to https://www.johnkewpickleball.com/paddle-database and view source
 - Find link to raw data, found in <iframe src=""> tag
@@ -48,3 +48,6 @@ https://paddles.vercel.app/?useXano=true - read paddle data from Xano API
 - Updata filename (e.e radarScores_2024_09_24.csv) in page.svelte and dataProcessor.js
 - Update +layout.svelte info details to indicate last refreshed date
 - Note: The API calls require updating Xano or Airtable and will most likely be older versions as they are just playgrounds
+
+## How data is loaded (PBEffect)
+ - Go to https://pickleballeffect.com/pickleball-paddle-database/ and download the .csv from the Airtable
