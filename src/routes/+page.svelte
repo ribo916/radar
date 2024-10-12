@@ -3,9 +3,10 @@
   import SpecialCard from '../shared/SpecialCard.svelte';
   import { onMount } from 'svelte';
   import { paddlesStore, selectedPaddlesStore, selectedReviewerStore, filterValues } from '../stores.js'; // Import the stores
-  import { loadAndProcessData } from './dataProcessor.js'; // Import the utility function
+  import { processData } from '$lib/dataProcessors'; // New import
   import ComparisonCard from '../shared/ComparisonCard.svelte'; // New import
   import LandingPage from './LandingPage.svelte';
+  import { page } from '$app/stores';
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -45,7 +46,7 @@
   }
 
   async function loadData() {
-    const { filteredData: fd, excludedPaddles: ep } = await loadAndProcessData('/radarScores_2024_10_09.csv'); // Correct path to the CSV file
+    const { filteredData: fd, excludedPaddles: ep } = await processData('JohnKew', $page.url.searchParams);
     filteredData = fd;
     excludedPaddles = ep;
     loading = false; // Set loading to false once data is loaded

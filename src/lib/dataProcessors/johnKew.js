@@ -1,6 +1,6 @@
 import { csv } from 'd3-fetch'; // Import the csv function from d3-fetch
-import { loadAndProcessDataFromAirtable } from './dataProcessorAirtable'; // Import the API data processor
-import { loadAndProcessDataFromXano } from './dataProcessorXano'; // Import the API data processor
+import { loadAndProcessDataFromAirtable } from './johnKew.airtable.js'; // Import the API data processor
+import { loadAndProcessDataFromXano } from './johnKew.xano.js'; // Import the API data processor
 
 const columnMapping = {
   'Company': 'company',
@@ -28,20 +28,23 @@ const columnMapping = {
   'Punch Volley Speed-MPH (Pop)': 'punch_volley_speed'
 };
 
-export async function loadAndProcessData() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const useAirtable = urlParams.get('useAirtable');
-  const useXano = urlParams.get('useXano');
-
-  if (useAirtable) {
+export async function loadAndProcessData(queryParams) {
+  if (queryParams.get('useAirtable') === 'true') {
     return await loadAndProcessDataFromAirtable();
-  } else if (useXano) {
+  } else if (queryParams.get('useXano') === 'true') {
     return await loadAndProcessDataFromXano();
+  } else {
+    return await loadAndProcessDataFromCSV();
   }
+}
 
-  const data = await csv('/radarScores_2024_10_09.csv'); // Load the CSV file from the static directory
+async function loadAndProcessDataFromCSV() {
+  const data = await csv('/JohnKew_2024_10_09.csv');
+  return processData(data);
+}
 
-  const mappedData = data.map((row, index) => {
+function processData(data) {
+  const mappedData = data.map((row) => {
     const mappedRow = {};
     for (const [originalColumn, newColumn] of Object.entries(columnMapping)) {
       mappedRow[newColumn] = row[originalColumn];
