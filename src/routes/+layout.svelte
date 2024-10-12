@@ -170,6 +170,8 @@
     <p>This site displays the public spreadsheet data found on pickleball review sites for easier consumption on multiple devices.</p>
     <ul>
       <li>JohnKew site is <a href="https://www.johnkewpickleball.com/" target="_blank">here</a></li>
+      <li>PBEffect site is <a href="https://pickleballeffect.com/" target="_blank">here</a></li>
+      <li>PBStudio site is <a href="https://pickleballstudio.com/" target="_blank">here</a></li>
       <li>Code is <a href="https://github.com/ribo916/radar/" target="_blank">here</a></li>
     </ul>
   </Modal>

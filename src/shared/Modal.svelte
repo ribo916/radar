@@ -20,7 +20,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -28,24 +28,26 @@
     padding-top: 10%;
   }
   .modal-content {
-    background: white;
-    color: black;
+    background: #1a1a1a;
+    color: #fff;
     padding: 20px;
     border-radius: 10px;
     max-width: 90%;
     width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
     position: relative;
-    font-size: 0.75em; /* Added to match card font size */
+    font-size: 0.75em;
+    border: 1px solid #333;
   }
   .close-button {
     background: none;
     border: none;
-    font-size: 1.5em; /* Increased from 1em for better visibility */
+    font-size: 1.5em;
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
+    color: #fff;
   }
 
   /* Adjust heading sizes */
@@ -57,6 +59,16 @@
 
   /* Adjust paragraph and list item sizes */
   :global(.modal-content p, .modal-content li) { font-size: 1em; }
+
+  /* Style for links inside the modal */
+  :global(.modal-content a) {
+    color: #03c8ff;
+    text-decoration: none;
+  }
+
+  :global(.modal-content a:hover) {
+    text-decoration: underline;
+  }
 
   @media (min-width: 600px) {
     .modal-content {

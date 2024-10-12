@@ -30,65 +30,42 @@
   let filteredData = [];
   let excludedPaddles = [];
   let processedData = [];
-  let loading = true; // Add loading state
-
+  let loading = true;
   let selectedReviewer = null;
+  let totalValidPaddleCount = 0;
+  let selectedPaddles = [];
+  let dataError = false;
 
   selectedReviewerStore.subscribe(value => {
     selectedReviewer = value;
     if (selectedReviewer === 'JohnKew') {
       loadJohnKewData();
+    } else if (selectedReviewer === 'PBEffect') {
+      loadPBEffectData();
+    } else if (selectedReviewer === 'PBStudio') {
+      loadPBStudioData();
     }
   });
 
-  function handleReviewerSelect(event) {
-    selectedReviewerStore.set(event.detail);
-  }
-
-  let totalValidPaddleCount = 0;
-
-  async function loadJohnKewData() {
-    const { filteredData: fd, excludedPaddles: ep } = await processData('JohnKew', $page.url.searchParams);
-    filteredData = fd;
-    excludedPaddles = ep;
-    totalValidPaddleCount = fd.length;
-    loading = false;
-
-    // Dispatch the total number of valid paddles to the layout
-    window.dispatchEvent(new CustomEvent('getTotalValidPaddles', {
-      detail: { callback: (total) => paddlesStore.set(filteredData) }
-    }));
-  }
-
-  // Subscribe to the selected paddles store
-  let selectedPaddles = [];
   selectedPaddlesStore.subscribe(value => {
     selectedPaddles = value;
-    //console.log('Selected Paddles:', selectedPaddles);
   });
 
-  // Add these lines to get the filter values from the store
+  // Move all reactive statements to the top level
   $: ({ powerFilter, spinFilter, popFilter, twistFilter, balanceFilter, swingFilter } = $filterValues);
 
-  // Create a new array of objects with the desired keys
-  $: {
-    //console.log('Filtered Data before processing:', filteredData);
-    processedData = filteredData.map(record => {
-      const newRecord = {};
-      for (const key in record) {
-        if (labelMapping[key]) {
-          newRecord[labelMapping[key]] = record[key];
-        } else {
-          newRecord[key] = record[key];
-        }
+  $: processedData = filteredData.map(record => {
+    const newRecord = {};
+    for (const key in record) {
+      if (labelMapping[key]) {
+        newRecord[labelMapping[key]] = record[key];
+      } else {
+        newRecord[key] = record[key];
       }
-      //console.log('Processed Record:', newRecord);
-      return newRecord;
-    });
-    //console.log('Processed Data:', processedData);
-  }
+    }
+    return newRecord;
+  });
 
-  // Update the filtered data reactive statement
   $: filteredProcessedData = processedData.filter(record => 
     record.Power * 10 > $filterValues.powerFilter &&
     record.Spin * 10 > $filterValues.spinFilter &&
@@ -99,9 +76,6 @@
     (selectedPaddles.length === 0 || selectedPaddles.some(p => p.paddle === record[seriesKey] && p.company === record.company && p.thickness === record.thickness))
   );
 
-  //console.log('Filtered Processed Data:', filteredProcessedData);
-
-  // Dispatch the filtered paddles count to the layout
   $: if (typeof window !== 'undefined') {
     const event = new CustomEvent('updateFilteredPaddlesCount', {
       detail: {
@@ -111,15 +85,74 @@
     window.dispatchEvent(event);
   }
 
-  // Update the store with the filtered processed data
-  $: {
-    paddlesStore.set(filteredProcessedData);
-  }
+  $: paddlesStore.set(filteredProcessedData);
 
-  // Add this reactive statement to create comparison data
   $: comparisonData = filteredProcessedData.length >= 2 && filteredProcessedData.length <= 3
     ? filteredProcessedData
     : null;
+
+  let dataDate = {
+    JohnKew: '10/09/2024',
+    PBEffect: '10/11/2024',
+    PBStudio: '10/11/2024'
+  };
+
+  function handleReviewerSelect(event) {
+    selectedReviewerStore.set(event.detail);
+  }
+
+  async function loadJohnKewData() {
+    loading = true;
+    dataError = false;
+    try {
+      const { filteredData: fd, excludedPaddles: ep } = await processData('JohnKew', $page.url.searchParams);
+      filteredData = fd;
+      excludedPaddles = ep;
+      totalValidPaddleCount = fd.length;
+      loading = false;
+
+      // Dispatch the total number of valid paddles to the layout
+      window.dispatchEvent(new CustomEvent('getTotalValidPaddles', {
+        detail: { callback: (total) => paddlesStore.set(filteredData) }
+      }));
+    } catch (error) {
+      console.error('Error loading JohnKew data:', error);
+      dataError = true;
+      loading = false;
+    }
+  }
+
+  async function loadPBEffectData() {
+    loading = true;
+    dataError = false;
+    try {
+      const { filteredData: fd, excludedPaddles: ep } = await processData('PBEffect', $page.url.searchParams);
+      filteredData = fd;
+      excludedPaddles = ep;
+      totalValidPaddleCount = fd.length;
+      loading = false;
+    } catch (error) {
+      console.error('Error loading PBEffect data:', error);
+      dataError = true;
+      loading = false;
+    }
+  }
+
+  async function loadPBStudioData() {
+    loading = true;
+    dataError = false;
+    try {
+      const { filteredData: fd, excludedPaddles: ep } = await processData('PBStudio', $page.url.searchParams);
+      filteredData = fd;
+      excludedPaddles = ep;
+      totalValidPaddleCount = fd.length;
+      loading = false;
+    } catch (error) {
+      console.error('Error loading PBStudio data:', error);
+      dataError = true;
+      loading = false;
+    }
+  }
 </script>
 
 <style>
@@ -174,7 +207,10 @@
     justify-content: center;
     height: 50vh;
     text-align: center;
-    color: #fff;
+    color: #ff3e00;
+    font-size: 1.2em;
+    margin: 5px 0;
+    padding: 0;
   }
 
   .in-progress h2 {
@@ -185,12 +221,33 @@
   .in-progress p {
     font-size: 1.2em;
   }
+
+  .loading {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 20px;
+  }
+
+  .error {
+    color: red;
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 10px;
+  }
+
+  .centered {
+    text-align: center;
+  }
 </style>
 
-{#if selectedReviewer === 'JohnKew'}
+{#if loading}
+  <div class="loading">Loading {selectedReviewer} data...</div>
+{:else if dataError}
+  <div class="error">Error loading data for {selectedReviewer}. Please try again later.</div>
+{:else if selectedReviewer === 'JohnKew'}
   <div class="page-content">
     <div class="paddle-count-title">
-      Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: 10/09/2024)
+      Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer]})
     </div>
 
     <div class="card-grid">
@@ -235,6 +292,12 @@
 
       <SpecialCard {excludedPaddles} />
     </div>
+  </div>
+{:else if selectedReviewer === 'PBEffect' || selectedReviewer === 'PBStudio'}
+  <div class="page-content centered">
+    <p>In Progress</p>
+    <p>Total paddles in {selectedReviewer} dataset: {totalValidPaddleCount}</p>
+    <p>Data as of: {dataDate[selectedReviewer]}</p>
   </div>
 {:else}
   <div class="in-progress">

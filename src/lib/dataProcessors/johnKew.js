@@ -28,7 +28,7 @@ const columnMapping = {
   'Punch Volley Speed-MPH (Pop)': 'punch_volley_speed'
 };
 
-export async function loadAndProcessData(queryParams) {
+export async function processData(queryParams) {
   if (queryParams.get('useAirtable') === 'true') {
     return await loadAndProcessDataFromAirtable();
   } else if (queryParams.get('useXano') === 'true') {
@@ -40,10 +40,10 @@ export async function loadAndProcessData(queryParams) {
 
 async function loadAndProcessDataFromCSV() {
   const data = await csv('/JohnKew_2024_10_09.csv');
-  return processData(data);
+  return processCSVData(data);
 }
 
-function processData(data) {
+function processCSVData(data) {
   const mappedData = data.map((row) => {
     const mappedRow = {};
     for (const [originalColumn, newColumn] of Object.entries(columnMapping)) {

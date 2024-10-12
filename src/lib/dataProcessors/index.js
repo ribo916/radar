@@ -1,17 +1,17 @@
-import { loadAndProcessData as processJohnKewData } from './johnKew.js';
-// import { processPBStudioData } from './pbStudio.js';
-// import { processPBEffectData } from './pbEffect.js';
+import { processData as processJohnKewData } from './johnKew.js';
+import { processData as processPBEffectData } from './pbEffect.js';
+import { processData as processPBStudioData } from './pbStudio.js';
 
-export async function processData(reviewer, queryParams) {
+export function processData(reviewer, searchParams) {
   switch (reviewer) {
     case 'JohnKew':
-      return await processJohnKewData(queryParams);
-    // case 'PBStudio':
-    //   return await processPBStudioData(dataSource);
-    // case 'PBEffect':
-    //   return await processPBEffectData(dataSource);
-    // Add cases for other reviewers as needed
+      return processJohnKewData(searchParams);
+    case 'PBEffect':
+      return processPBEffectData(searchParams);
+    case 'PBStudio':
+      return processPBStudioData(searchParams);
     default:
-      throw new Error(`Unsupported reviewer: ${reviewer}`);
+      console.log(`Data processing not implemented for reviewer: ${reviewer}`);
+      return Promise.resolve({ filteredData: [], excludedPaddles: [] });
   }
 }
