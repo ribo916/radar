@@ -72,6 +72,11 @@
       })
     : filteredData; // For PBEffect and other reviewers, use filteredData as is
 
+  let pbEffectSelectedPaddles = [];
+  pbEffectSelectedPaddlesStore.subscribe(value => {
+    pbEffectSelectedPaddles = value;
+  });
+
   $: filteredProcessedData = selectedReviewer === 'JohnKew'
     ? processedData.filter(record => 
         record.Power * 10 > $filterValues.powerFilter &&
@@ -89,7 +94,8 @@
           const paddleSpinRating = paddle.spin_rating ? paddle.spin_rating.trim().toLowerCase() : '';
           const spinFilterPasses = spinFilterIndex === 0 || paddleSpinRating === spinFilterLevel;
 
-          return (
+          // Apply existing PBEffect filters
+          const existingFiltersPassed = (
             ($pbEffectFilterValues.powerFilter === 0 || 
              (paddle.power_percentile != null && parseFloat(paddle.power_percentile) > $pbEffectFilterValues.powerFilter)) &&
             ($pbEffectFilterValues.popFilter === 0 || 
@@ -100,6 +106,16 @@
              (paddle.swing_percentile != null && parseFloat(paddle.swing_percentile) > $pbEffectFilterValues.swingFilter)) &&
             spinFilterPasses
           );
+
+          // Apply compare filter
+          const compareFilterPassed = pbEffectSelectedPaddles.length === 0 || 
+            pbEffectSelectedPaddles.some(p => 
+              p.company === paddle.company && 
+              p.paddle === paddle.paddle && 
+              p.thickness === paddle.thickness
+            );
+
+          return existingFiltersPassed && compareFilterPassed;
         })
       : processedData;
 
@@ -182,11 +198,6 @@
   }
 
   const spinLevels = ['', 'low', 'medium', 'high', 'very high'];
-
-  let pbEffectSelectedPaddles = [];
-  pbEffectSelectedPaddlesStore.subscribe(value => {
-    pbEffectSelectedPaddles = value;
-  });
 </script>
 
 <style>
@@ -334,7 +345,7 @@
 {:else if selectedReviewer === 'PBEffect'}
   <div class="page-content">
     {#if $showPBEffectCompareStore}
-      <PBEffectCompareSection paddles={filteredProcessedData} />
+      <PBEffectCompareSection paddles={processedData} />
     {/if}
     <div class="paddle-count-title">
       Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer] || 'Unknown Date'})

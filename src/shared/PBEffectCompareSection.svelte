@@ -2,6 +2,7 @@
 <script>
   import { pbEffectSelectedPaddlesStore } from '../stores.js';
   import { writable } from 'svelte/store';
+  import { onMount, onDestroy } from 'svelte';
 
   export let paddles = [];
 
@@ -42,6 +43,20 @@
 
     filteredPaddlesStore.set(mergedPaddles);
   }
+
+  function resetCompare() {
+    pbEffectSelectedPaddlesStore.set([]);
+    filterText = '';
+    filterPaddles();
+  }
+
+  onMount(() => {
+    window.addEventListener('resetCompare', resetCompare);
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('resetCompare', resetCompare);
+  });
 </script>
 
 <div class="compare-area">

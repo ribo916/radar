@@ -4,7 +4,7 @@
   import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
-  import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore, pbEffectFilterValues, showPBEffectCompareStore } from '../stores.js'; // Import the store
+  import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore, pbEffectFilterValues, showPBEffectCompareStore, pbEffectSelectedPaddlesStore } from '../stores.js'; // Import the store
 
   let showModal = false;
   let showFilters = false;
@@ -79,8 +79,9 @@
   }
 
   function clearAll() {
-    // Reset compared paddles
+    // Reset compared paddles for both JohnKew and PBEffect
     selectedPaddlesStore.set([]);
+    pbEffectSelectedPaddlesStore.set([]);
 
     // Reset filters
     if (selectedReviewer === 'JohnKew') {
