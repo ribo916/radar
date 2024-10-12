@@ -81,13 +81,13 @@ function processCSVData(data) {
     if (a.paddle > b.paddle) return 1;
     return 0;
   });
-  console.log('Filtered JohnKewdata:', filteredData);
+  // console.log('Filtered JohnKewdata:', filteredData);
 
   const excludedPaddles = mappedData
     .filter(d => !filteredData.includes(d))
     .map(d => d.paddle)
     .sort((a, b) => a.localeCompare(b));
-  console.log('Excluded JohnKewpaddles:', excludedPaddles);
+  // console.log('Excluded JohnKewpaddles:', excludedPaddles);
 
   return { filteredData, excludedPaddles };
 }
