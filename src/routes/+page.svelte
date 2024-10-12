@@ -2,7 +2,7 @@
   import Card from '../shared/Card.svelte';
   import SpecialCard from '../shared/SpecialCard.svelte';
   import { onMount } from 'svelte';
-  import { paddlesStore, selectedPaddlesStore, selectedReviewerStore, filterValues } from '../stores.js'; // Import the stores
+  import { paddlesStore, selectedPaddlesStore, selectedReviewerStore, filterValues, pbEffectFilterValues } from '../stores.js'; // Import the stores
   import { processData } from '$lib/dataProcessors'; // New import
   import ComparisonCard from '../shared/ComparisonCard.svelte'; // New import
   import LandingPage from './LandingPage.svelte';
@@ -55,27 +55,36 @@
   // Move all reactive statements to the top level
   $: ({ powerFilter, spinFilter, popFilter, twistFilter, balanceFilter, swingFilter } = $filterValues);
 
-  $: processedData = filteredData.map(record => {
-    const newRecord = {};
-    for (const key in record) {
-      if (labelMapping[key]) {
-        newRecord[labelMapping[key]] = record[key];
-      } else {
-        newRecord[key] = record[key];
-      }
-    }
-    return newRecord;
-  });
+  $: processedData = selectedReviewer === 'JohnKew'
+    ? filteredData.map(record => {
+        const newRecord = {};
+        for (const key in record) {
+          if (labelMapping[key]) {
+            newRecord[labelMapping[key]] = record[key];
+          } else {
+            newRecord[key] = record[key];
+          }
+        }
+        return newRecord;
+      })
+    : filteredData; // For PBEffect and other reviewers, use filteredData as is
 
-  $: filteredProcessedData = processedData.filter(record => 
-    record.Power * 10 > $filterValues.powerFilter &&
-    record.Spin * 10 > $filterValues.spinFilter &&
-    record.Pop * 10 > $filterValues.popFilter &&
-    record.Twist * 10 > $filterValues.twistFilter &&
-    record.Balance * 10 > $filterValues.balanceFilter &&
-    record.Swing * 10 > $filterValues.swingFilter &&
-    (selectedPaddles.length === 0 || selectedPaddles.some(p => p.paddle === record[seriesKey] && p.company === record.company && p.thickness === record.thickness))
-  );
+  $: filteredProcessedData = selectedReviewer === 'JohnKew'
+    ? processedData.filter(record => 
+        record.Power * 10 > $filterValues.powerFilter &&
+        record.Spin * 10 > $filterValues.spinFilter &&
+        record.Pop * 10 > $filterValues.popFilter &&
+        record.Twist * 10 > $filterValues.twistFilter &&
+        record.Balance * 10 > $filterValues.balanceFilter &&
+        record.Swing * 10 > $filterValues.swingFilter &&
+        (selectedPaddles.length === 0 || selectedPaddles.some(p => p.paddle === record[seriesKey] && p.company === record.company && p.thickness === record.thickness))
+      )
+    : selectedReviewer === 'PBEffect'
+      ? processedData.filter(paddle => 
+          $pbEffectFilterValues.powerFilter === 0 || 
+          (paddle.power_percentile != null && parseFloat(paddle.power_percentile) > $pbEffectFilterValues.powerFilter)
+        )
+      : processedData;
 
   $: if (typeof window !== 'undefined') {
     const event = new CustomEvent('updateFilteredPaddlesCount', {
@@ -302,10 +311,10 @@
 {:else if selectedReviewer === 'PBEffect'}
   <div class="page-content">
     <div class="paddle-count-title">
-      Displaying {filteredData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer] || 'Unknown Date'})
+      Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer] || 'Unknown Date'})
     </div>
     <div class="card-grid">
-      {#each filteredData as paddle}
+      {#each filteredProcessedData as paddle}
         <PBEffectCard backContent={paddle} />
       {/each}
     </div>

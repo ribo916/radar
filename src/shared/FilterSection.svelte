@@ -1,22 +1,18 @@
 <script>
-  export let powerFilter;
-  export let spinFilter;
-  export let popFilter;
-  export let twistFilter;
-  export let balanceFilter;
-  export let swingFilter;
-
   import { onMount, onDestroy } from 'svelte';
-  import { paddlesStore, filterValues } from '../stores.js'; // Import the stores
+  import { paddlesStore, filterValues, pbEffectFilterValues, selectedReviewerStore } from '../stores.js';
 
-  let totalValidPaddles = "All"; // Default value
+  let totalValidPaddles = "All";
+  let selectedReviewer;
 
-  // Subscribe to the paddles store to get the total number of valid paddles
+  selectedReviewerStore.subscribe(value => {
+    selectedReviewer = value;
+  });
+
   paddlesStore.subscribe(value => {
     totalValidPaddles = value.length;
   });
 
-  // Fetch the total number of valid paddles from the parent component
   onMount(() => {
     window.addEventListener('getTotalValidPaddles', (event) => {
       event.detail.callback(totalValidPaddles);
@@ -28,12 +24,20 @@
   });
 
   function resetFilters() {
-    powerFilter = 0;
-    spinFilter = 0;
-    popFilter = 0;
-    twistFilter = 0;
-    balanceFilter = 0;
-    swingFilter = 0;
+    if (selectedReviewer === 'JohnKew') {
+      filterValues.set({
+        powerFilter: 0,
+        spinFilter: 0,
+        popFilter: 0,
+        twistFilter: 0,
+        balanceFilter: 0,
+        swingFilter: 0
+      });
+    } else if (selectedReviewer === 'PBEffect') {
+      pbEffectFilterValues.set({
+        powerFilter: 0
+      });
+    }
   }
 
   onMount(() => {
@@ -43,40 +47,32 @@
   onDestroy(() => {
     window.removeEventListener('resetFilters', resetFilters);
   });
+
+  function updateFilter(key, value) {
+    if (selectedReviewer === 'JohnKew') {
+      filterValues.update(filters => ({ ...filters, [key]: value }));
+    } else if (selectedReviewer === 'PBEffect') {
+      pbEffectFilterValues.update(filters => ({ ...filters, [key]: value }));
+    }
+  }
 </script>
 
 <div class="filter-area">
-  <div class="slider-container">
-    <label class="filter-label" for="powerFilter">Power:</label>
-    <input id="powerFilter" type="range" min="0" max="100" bind:value={powerFilter} class="slider" />
-    <div class="filter-value">{powerFilter}</div>
-  </div>
-  <div class="slider-container">
-    <label class="filter-label" for="spinFilter">Spin:</label>
-    <input id="spinFilter" type="range" min="0" max="100" bind:value={spinFilter} class="slider" />
-    <div class="filter-value">{spinFilter}</div>
-  </div>
-  <div class="slider-container">
-    <label class="filter-label" for="popFilter">Pop:</label>
-    <input id="popFilter" type="range" min="0" max="100" bind:value={popFilter} class="slider" />
-    <div class="filter-value">{popFilter}</div>
-  </div>
-  <div class="slider-container">
-    <label class="filter-label" for="twistFilter">Twist:</label>
-    <input id="twistFilter" type="range" min="0" max="100" bind:value={twistFilter} class="slider" />
-    <div class="filter-value">{twistFilter}</div>
-  </div>
-  <div class="slider-container">
-    <label class="filter-label" for="balanceFilter">Balance:</label>
-    <input id="balanceFilter" type="range" min="0" max="100" bind:value={balanceFilter} class="slider" />
-    <div class="filter-value">{balanceFilter}</div>
-  </div>
-  <div class="slider-container">
-    <label class="filter-label" for="swingFilter">Swing:</label>
-    <input id="swingFilter" type="range" min="0" max="100" bind:value={swingFilter} class="slider" />
-    <div class="filter-value">{swingFilter}</div>
-  </div>
-  <br>
+  {#if selectedReviewer === 'JohnKew'}
+    {#each Object.entries($filterValues) as [key, value]}
+      <div class="slider-container">
+        <label class="filter-label" for={key}>{key.replace('Filter', '')}:</label>
+        <input id={key} type="range" min="0" max="100" bind:value={$filterValues[key]} on:input={() => updateFilter(key, $filterValues[key])} class="slider" />
+        <div class="filter-value">{value}</div>
+      </div>
+    {/each}
+  {:else if selectedReviewer === 'PBEffect'}
+    <div class="slider-container">
+      <label class="filter-label" for="powerFilter">Power:</label>
+      <input id="powerFilter" type="range" min="0" max="100" bind:value={$pbEffectFilterValues.powerFilter} on:input={() => updateFilter('powerFilter', $pbEffectFilterValues.powerFilter)} class="slider" />
+      <div class="filter-value">{$pbEffectFilterValues.powerFilter}</div>
+    </div>
+  {/if}
 </div>
 
 <style>

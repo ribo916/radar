@@ -4,7 +4,7 @@
   import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
-  import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore } from '../stores.js'; // Import the store
+  import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore, pbEffectFilterValues } from '../stores.js'; // Import the store
 
   let showModal = false;
   let showFilters = false;
@@ -41,9 +41,11 @@
   }
 
   function toggleFilters() {
-    showFilters = !showFilters;
-    if (showFilters) {
-      showCompare = false;
+    if (selectedReviewer !== 'PBStudio') {
+      showFilters = !showFilters;
+      if (showFilters) {
+        showCompare = false;
+      }
     }
   }
 
@@ -52,30 +54,6 @@
     if (showCompare) {
       showFilters = false;
     }
-  }
-
-  function setPowerFilter(event) {
-    powerFilter = event.target.value;
-  }
-
-  function setSpinFilter(event) {
-    spinFilter = event.target.value;
-  }
-
-  function setPopFilter(event) {
-    popFilter = event.target.value;
-  }
-
-  function setTwistFilter(event) {
-    twistFilter = event.target.value;
-  }
-
-  function setBalanceFilter(event) {
-    balanceFilter = event.target.value;
-  }
-
-  function setSwingFilter(event) {
-    swingFilter = event.target.value;
   }
 
   // Subscribe to the paddles store
@@ -92,14 +70,20 @@
     selectedPaddlesStore.set([]);
 
     // Reset filters
-    filterValues.set({
-      powerFilter: 0,
-      spinFilter: 0,
-      popFilter: 0,
-      twistFilter: 0,
-      balanceFilter: 0,
-      swingFilter: 0
-    });
+    if (selectedReviewer === 'JohnKew') {
+      filterValues.set({
+        powerFilter: 0,
+        spinFilter: 0,
+        popFilter: 0,
+        twistFilter: 0,
+        balanceFilter: 0,
+        swingFilter: 0
+      });
+    } else if (selectedReviewer === 'PBEffect') {
+      pbEffectFilterValues.set({
+        powerFilter: 0
+      });
+    }
 
     // Dispatch custom events to notify FilterSection and CompareSection
     window.dispatchEvent(new CustomEvent('resetFilters'));
@@ -107,14 +91,16 @@
   }
 
   $: {
-    filterValues.set({
-      powerFilter,
-      spinFilter,
-      popFilter,
-      twistFilter,
-      balanceFilter,
-      swingFilter
-    });
+    if (selectedReviewer === 'JohnKew') {
+      filterValues.set({
+        powerFilter,
+        spinFilter,
+        popFilter,
+        twistFilter,
+        balanceFilter,
+        swingFilter
+      });
+    }
   }
 </script>
 
@@ -135,31 +121,26 @@
       </button>
     {/each}
   </div>
-  {#if selectedReviewer === 'JohnKew'}
-    <div class="icon-bar">
+  <div class="icon-bar">
+    {#if selectedReviewer === 'JohnKew' || selectedReviewer === 'PBEffect'}
       <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters" title="Filter">
         <i class="fas fa-filter"></i>
       </button>
-      <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare" title="Compare">
-        <i class="fas fa-exchange-alt"></i>
-      </button>
+      {#if selectedReviewer === 'JohnKew'}
+        <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare" title="Compare">
+          <i class="fas fa-exchange-alt"></i>
+        </button>
+      {/if}
       <button class="icon-button" on:click={clearAll} aria-label="Clear all filters and comparisons" title="Clear">
         <i class="fas fa-undo"></i>
       </button>
-    </div>
-    {#if showFilters}
-      <FilterSection 
-        bind:powerFilter
-        bind:spinFilter
-        bind:popFilter
-        bind:twistFilter
-        bind:balanceFilter
-        bind:swingFilter
-      />
     {/if}
-    {#if showCompare}
-      <CompareSection {paddles} />
-    {/if}
+  </div>
+  {#if showFilters}
+    <FilterSection />
+  {/if}
+  {#if showCompare && selectedReviewer === 'JohnKew'}
+    <CompareSection {paddles} />
   {/if}
   <slot />
 </main>
