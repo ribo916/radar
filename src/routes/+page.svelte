@@ -8,6 +8,9 @@
   import LandingPage from './LandingPage.svelte';
   import { page } from '$app/stores';
   import PBEffectCard from '../shared/PBEffectCard.svelte';
+  import { showPBEffectCompareStore } from '../stores.js';
+  import PBEffectCompareSection from '../shared/PBEffectCompareSection.svelte';
+  import { pbEffectSelectedPaddlesStore } from '../stores.js';
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -179,6 +182,11 @@
   }
 
   const spinLevels = ['', 'low', 'medium', 'high', 'very high'];
+
+  let pbEffectSelectedPaddles = [];
+  pbEffectSelectedPaddlesStore.subscribe(value => {
+    pbEffectSelectedPaddles = value;
+  });
 </script>
 
 <style>
@@ -192,6 +200,7 @@
     max-width: 1800px;
     margin: 0 auto;
     padding: 0 16px;
+    position: relative; /* Add this line */
   }
 
   .paddle-count-title {
@@ -264,6 +273,7 @@
   .centered {
     text-align: center;
   }
+
 </style>
 
 {#if !selectedReviewer}
@@ -323,6 +333,9 @@
   </div>
 {:else if selectedReviewer === 'PBEffect'}
   <div class="page-content">
+    {#if $showPBEffectCompareStore}
+      <PBEffectCompareSection paddles={filteredProcessedData} />
+    {/if}
     <div class="paddle-count-title">
       Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer] || 'Unknown Date'})
     </div>

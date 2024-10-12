@@ -4,11 +4,12 @@
   import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
-  import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore, pbEffectFilterValues } from '../stores.js'; // Import the store
+  import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore, pbEffectFilterValues, showPBEffectCompareStore } from '../stores.js'; // Import the store
 
   let showModal = false;
   let showFilters = false;
   let showCompare = false;
+  let showPBEffectFilters = false;  // Add this line to initialize the variable
   let powerFilter = 0;
   let spinFilter = 0;
   let popFilter = 0;
@@ -41,18 +42,30 @@
   }
 
   function toggleFilters() {
-    if (selectedReviewer !== 'PBStudio') {
+    if (selectedReviewer === 'JohnKew') {
       showFilters = !showFilters;
       if (showFilters) {
         showCompare = false;
+      }
+    } else if (selectedReviewer === 'PBEffect') {
+      showPBEffectFilters = !showPBEffectFilters;
+      if (showPBEffectFilters) {
+        showPBEffectCompareStore.set(false);
       }
     }
   }
 
   function toggleCompare() {
-    showCompare = !showCompare;
-    if (showCompare) {
-      showFilters = false;
+    if (selectedReviewer === 'JohnKew') {
+      showCompare = !showCompare;
+      if (showCompare) {
+        showFilters = false;
+      }
+    } else if (selectedReviewer === 'PBEffect') {
+      showPBEffectCompareStore.update(value => !value);
+      if ($showPBEffectCompareStore) {
+        showPBEffectFilters = false;
+      }
     }
   }
 
@@ -81,9 +94,19 @@
       });
     } else if (selectedReviewer === 'PBEffect') {
       pbEffectFilterValues.set({
-        powerFilter: 0
+        powerFilter: 0,
+        spinFilter: 0,
+        popFilter: 0,
+        twistFilter: 0,
+        swingFilter: 0
       });
     }
+
+    // Close filter and compare sections
+    showFilters = false;
+    showCompare = false;
+    showPBEffectFilters = false;
+    showPBEffectCompareStore.set(false);
 
     // Dispatch custom events to notify FilterSection and CompareSection
     window.dispatchEvent(new CustomEvent('resetFilters'));
@@ -130,17 +153,18 @@
       <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters" title="Filter">
         <i class="fas fa-filter"></i>
       </button>
-      {#if selectedReviewer === 'JohnKew'}
-        <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare" title="Compare">
-          <i class="fas fa-exchange-alt"></i>
-        </button>
-      {/if}
+      <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare" title="Compare">
+        <i class="fas fa-exchange-alt"></i>
+      </button>
       <button class="icon-button" on:click={clearAll} aria-label="Clear all filters and comparisons" title="Clear">
         <i class="fas fa-undo"></i>
       </button>
     </div>
   {/if}
-  {#if showFilters}
+  {#if showFilters && selectedReviewer === 'JohnKew'}
+    <FilterSection />
+  {/if}
+  {#if showPBEffectFilters && selectedReviewer === 'PBEffect'}
     <FilterSection />
   {/if}
   {#if showCompare && selectedReviewer === 'JohnKew'}
