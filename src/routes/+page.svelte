@@ -7,6 +7,7 @@
   import ComparisonCard from '../shared/ComparisonCard.svelte'; // New import
   import LandingPage from './LandingPage.svelte';
   import { page } from '$app/stores';
+  import PBEffectCard from '../shared/PBEffectCard.svelte';
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -101,6 +102,8 @@
     selectedReviewerStore.set(event.detail);
   }
 
+  let firstPBEffectPaddle = null;
+
   async function loadJohnKewData() {
     loading = true;
     dataError = false;
@@ -130,6 +133,9 @@
       filteredData = fd;
       excludedPaddles = ep;
       totalValidPaddleCount = fd.length;
+      firstPBEffectPaddle = fd[0];
+      console.log('PBEffect data loaded:', fd);
+      console.log('First PBEffect paddle:', firstPBEffectPaddle);
       loading = false;
     } catch (error) {
       console.error('Error loading PBEffect data:', error);
@@ -293,7 +299,18 @@
       <SpecialCard {excludedPaddles} />
     </div>
   </div>
-{:else if selectedReviewer === 'PBEffect' || selectedReviewer === 'PBStudio'}
+{:else if selectedReviewer === 'PBEffect'}
+  <div class="page-content">
+    <div class="paddle-count-title">
+      Displaying {filteredData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer] || 'Unknown Date'})
+    </div>
+    <div class="card-grid">
+      {#each filteredData as paddle}
+        <PBEffectCard backContent={paddle} />
+      {/each}
+    </div>
+  </div>
+{:else if selectedReviewer === 'PBStudio'}
   <div class="page-content centered">
     <p>In Progress</p>
     <p>Total paddles in {selectedReviewer} dataset: {totalValidPaddleCount}</p>
