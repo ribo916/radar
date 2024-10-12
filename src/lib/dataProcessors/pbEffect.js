@@ -7,6 +7,7 @@ const columnMapping = {
   'Twistweight Percentile': 'twist_percentile',
   'Balance Point (mm)': 'balance_point',
   'Swingweight Percentile': 'swing_percentile',
+  'Spin Rating': 'spin_rating',
 };
 
 export async function processData(searchParams) {
@@ -37,6 +38,7 @@ export async function processData(searchParams) {
     mappedRow.twistweight = row['Twistweight'];
     mappedRow.surface_texture = row['Grit Type'];
     mappedRow.static_weight = row['Weight (oz)'];
+    mappedRow.spin_rating = row['Spin Rating'];
 
     return mappedRow;
   });

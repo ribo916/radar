@@ -18,11 +18,22 @@
     return value ? `${parseFloat(value).toFixed(1)}%` : 'N/A';
   }
 
+  function getSpinRatingWidth(rating) {
+    switch (rating?.toLowerCase()) {
+      case 'very high': return '100%';
+      case 'high': return '75%';
+      case 'medium': return '50%';
+      case 'low': return '25%';
+      default: return '0%';
+    }
+  }
+
   const percentileFields = [
     { key: 'power_percentile', color: '#4CAF50', label: 'Power' },
     { key: 'pop_percentile', color: '#2196F3', label: 'Pop' },
     { key: 'twist_percentile', color: '#FFC107', label: 'Twist' },
-    { key: 'swing_percentile', color: '#9C27B0', label: 'Swing' }
+    { key: 'swing_percentile', color: '#9C27B0', label: 'Swing' },
+    { key: 'spin_rating', color: '#FF5722', label: 'Spin' }
   ];
 </script>
 
@@ -42,7 +53,15 @@
           <div class="percentile-bar">
             <span class="percentile-label">{label}:</span>
             <div class="bar-container">
-              {#if backContent[key] && parseFloat(backContent[key]) > 0}
+              {#if key === 'spin_rating'}
+                {#if backContent[key]}
+                  <div class="bar" style="width: {getSpinRatingWidth(backContent[key])}; background-color: {color};">
+                    {backContent[key]}
+                  </div>
+                {:else}
+                  <div class="bar na">N/A</div>
+                {/if}
+              {:else if backContent[key] && parseFloat(backContent[key]) > 0}
                 <div class="bar" style="width: {backContent[key]}%; background-color: {color};">
                   {formatValue(backContent[key])}
                 </div>
@@ -60,7 +79,7 @@
       <div class="back-content">
         <div class="back-content-item">Brand: <i>{backContent.company || 'N/A'}</i></div>
         {#each Object.entries(backContent) as [key, value]}
-          {#if !key.includes('percentile') && key !== 'company' && key !== 'paddle' && key !== 'thickness'}
+          {#if !key.includes('percentile') && key !== 'company' && key !== 'paddle' && key !== 'thickness' && key !== 'spin_rating'}
             <div class="back-content-item">{key.replace('_', ' ')}: <i>{value || 'N/A'}</i></div>
           {/if}
         {/each}
@@ -157,11 +176,15 @@
     font-size: 0.8em;
     color: #fff;
     transition: width 0.3s ease-in-out;
+    text-transform: capitalize;
   }
 
   .bar.na {
-    background-color: #666;
+    background-color: rgba(102, 102, 102, 0.3); /* Reduced opacity */
     justify-content: center;
+    color: rgba(255, 255, 255, 0.5); /* Dimmed text color */
+    font-style: italic;
+    width: 100%; /* Ensure full width */
   }
 
   .flip-icon {
