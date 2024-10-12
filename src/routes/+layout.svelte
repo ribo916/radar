@@ -4,7 +4,7 @@
   import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
-  import { paddlesStore, selectedReviewerStore } from '../stores.js'; // Import the store
+  import { paddlesStore, selectedReviewerStore, filterValues } from '../stores.js'; // Import the store
 
   let showModal = false;
   let showFilters = false;
@@ -87,19 +87,15 @@
     selectedReviewer = event.detail;
   }
 
-  // Dispatch the filter values to the child components
-  $: if (typeof window !== 'undefined') {
-    const event = new CustomEvent('setFilters', {
-      detail: {
-        powerFilter,
-        spinFilter,
-        popFilter,
-        twistFilter,
-        balanceFilter,
-        swingFilter
-      }
+  $: {
+    filterValues.set({
+      powerFilter,
+      spinFilter,
+      popFilter,
+      twistFilter,
+      balanceFilter,
+      swingFilter
     });
-    window.dispatchEvent(event);
   }
 </script>
 
@@ -131,13 +127,12 @@
     </div>
     {#if showFilters}
       <FilterSection 
-        {powerFilter} {spinFilter} {popFilter} {twistFilter} {balanceFilter} {swingFilter}
-        setPowerFilter={setPowerFilter}
-        setSpinFilter={setSpinFilter}
-        setPopFilter={setPopFilter}
-        setTwistFilter={setTwistFilter}
-        setBalanceFilter={setBalanceFilter}
-        setSwingFilter={setSwingFilter}
+        bind:powerFilter
+        bind:spinFilter
+        bind:popFilter
+        bind:twistFilter
+        bind:balanceFilter
+        bind:swingFilter
       />
     {/if}
     {#if showCompare}

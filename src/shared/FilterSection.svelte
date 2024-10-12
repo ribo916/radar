@@ -6,13 +6,6 @@
   export let balanceFilter;
   export let swingFilter;
 
-  export let setPowerFilter;
-  export let setSpinFilter;
-  export let setPopFilter;
-  export let setTwistFilter;
-  export let setBalanceFilter;
-  export let setSwingFilter;
-
   import { onMount } from 'svelte';
   import { paddlesStore } from '../stores.js'; // Import the store
 
@@ -38,32 +31,32 @@
 <div class="filter-area">
   <div class="slider-container">
     <label class="filter-label" for="powerFilter">Power:</label>
-    <input id="powerFilter" type="range" min="0" max="100" bind:value={powerFilter} class="slider" on:input={setPowerFilter} />
+    <input id="powerFilter" type="range" min="0" max="100" bind:value={powerFilter} class="slider" />
     <div class="filter-value">{powerFilter}</div>
   </div>
   <div class="slider-container">
     <label class="filter-label" for="spinFilter">Spin:</label>
-    <input id="spinFilter" type="range" min="0" max="100" bind:value={spinFilter} class="slider" on:input={setSpinFilter} />
+    <input id="spinFilter" type="range" min="0" max="100" bind:value={spinFilter} class="slider" />
     <div class="filter-value">{spinFilter}</div>
   </div>
   <div class="slider-container">
     <label class="filter-label" for="popFilter">Pop:</label>
-    <input id="popFilter" type="range" min="0" max="100" bind:value={popFilter} class="slider" on:input={setPopFilter} />
+    <input id="popFilter" type="range" min="0" max="100" bind:value={popFilter} class="slider" />
     <div class="filter-value">{popFilter}</div>
   </div>
   <div class="slider-container">
     <label class="filter-label" for="twistFilter">Twist:</label>
-    <input id="twistFilter" type="range" min="0" max="100" bind:value={twistFilter} class="slider" on:input={setTwistFilter} />
+    <input id="twistFilter" type="range" min="0" max="100" bind:value={twistFilter} class="slider" />
     <div class="filter-value">{twistFilter}</div>
   </div>
   <div class="slider-container">
     <label class="filter-label" for="balanceFilter">Balance:</label>
-    <input id="balanceFilter" type="range" min="0" max="100" bind:value={balanceFilter} class="slider" on:input={setBalanceFilter} />
+    <input id="balanceFilter" type="range" min="0" max="100" bind:value={balanceFilter} class="slider" />
     <div class="filter-value">{balanceFilter}</div>
   </div>
   <div class="slider-container">
     <label class="filter-label" for="swingFilter">Swing:</label>
-    <input id="swingFilter" type="range" min="0" max="100" bind:value={swingFilter} class="slider" on:input={setSwingFilter} />
+    <input id="swingFilter" type="range" min="0" max="100" bind:value={swingFilter} class="slider" />
     <div class="filter-value">{swingFilter}</div>
   </div>
   <!-- Total Valid Paddles Count -->

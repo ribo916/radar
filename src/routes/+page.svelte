@@ -2,7 +2,7 @@
   import Card from '../shared/Card.svelte';
   import SpecialCard from '../shared/SpecialCard.svelte';
   import { onMount } from 'svelte';
-  import { paddlesStore, selectedPaddlesStore, selectedReviewerStore } from '../stores.js'; // Import the stores
+  import { paddlesStore, selectedPaddlesStore, selectedReviewerStore, filterValues } from '../stores.js'; // Import the stores
   import { loadAndProcessData } from './dataProcessor.js'; // Import the utility function
   import ComparisonCard from '../shared/ComparisonCard.svelte'; // New import
   import LandingPage from './LandingPage.svelte';
@@ -63,6 +63,9 @@
     //console.log('Selected Paddles:', selectedPaddles);
   });
 
+  // Add these lines to get the filter values from the store
+  $: ({ powerFilter, spinFilter, popFilter, twistFilter, balanceFilter, swingFilter } = $filterValues);
+
   // Create a new array of objects with the desired keys
   $: {
     //console.log('Filtered Data before processing:', filteredData);
@@ -81,14 +84,14 @@
     //console.log('Processed Data:', processedData);
   }
 
-  // Filter processedData based on the filters and selected paddles
+  // Update the filtered data reactive statement
   $: filteredProcessedData = processedData.filter(record => 
-    record.Power * 10 > powerFilter &&
-    record.Spin * 10 > spinFilter &&
-    record.Pop * 10 > popFilter &&
-    record.Twist * 10 > twistFilter &&
-    record.Balance * 10 > balanceFilter &&
-    record.Swing * 10 > swingFilter &&
+    record.Power * 10 > $filterValues.powerFilter &&
+    record.Spin * 10 > $filterValues.spinFilter &&
+    record.Pop * 10 > $filterValues.popFilter &&
+    record.Twist * 10 > $filterValues.twistFilter &&
+    record.Balance * 10 > $filterValues.balanceFilter &&
+    record.Swing * 10 > $filterValues.swingFilter &&
     (selectedPaddles.length === 0 || selectedPaddles.some(p => p.paddle === record[seriesKey] && p.company === record.company && p.thickness === record.thickness))
   );
 
