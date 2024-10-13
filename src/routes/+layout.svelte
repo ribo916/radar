@@ -4,7 +4,7 @@
   import FilterSection from '../shared/FilterSection.svelte'; // Import the FilterSection component
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
-  import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore, pbEffectFilterValues, showPBEffectCompareStore, pbEffectSelectedPaddlesStore } from '../stores.js'; // Import the store
+  import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore, pbEffectFilterValues, showPBEffectCompareStore, pbEffectSelectedPaddlesStore, showPBStudioCompareStore, pbStudioSelectedPaddlesStore } from '../stores.js'; // Import the store
 
   let showModal = false;
   let showFilters = false;
@@ -66,6 +66,8 @@
       if ($showPBEffectCompareStore) {
         showPBEffectFilters = false;
       }
+    } else if (selectedReviewer === 'PBStudio') {
+      showPBStudioCompareStore.update(value => !value);
     }
   }
 
@@ -79,9 +81,10 @@
   }
 
   function clearAll() {
-    // Reset compared paddles for both JohnKew and PBEffect
+    // Reset compared paddles for JohnKew, PBEffect, and PBStudio
     selectedPaddlesStore.set([]);
     pbEffectSelectedPaddlesStore.set([]);
+    pbStudioSelectedPaddlesStore.set([]);
 
     // Reset filters
     if (selectedReviewer === 'JohnKew') {
@@ -108,6 +111,7 @@
     showCompare = false;
     showPBEffectFilters = false;
     showPBEffectCompareStore.set(false);
+    showPBStudioCompareStore.set(false);
 
     // Dispatch custom events to notify FilterSection and CompareSection
     window.dispatchEvent(new CustomEvent('resetFilters'));
@@ -149,11 +153,13 @@
       </button>
     {/each}
   </div>
-  {#if selectedReviewer && (selectedReviewer === 'JohnKew' || selectedReviewer === 'PBEffect')}
+  {#if selectedReviewer && (selectedReviewer === 'JohnKew' || selectedReviewer === 'PBEffect' || selectedReviewer === 'PBStudio')}
     <div class="icon-bar">
-      <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters" title="Filter">
-        <i class="fas fa-filter"></i>
-      </button>
+      {#if selectedReviewer !== 'PBStudio'}
+        <button class="icon-button" on:click={toggleFilters} aria-label="Toggle filters" title="Filter">
+          <i class="fas fa-filter"></i>
+        </button>
+      {/if}
       <button class="icon-button" on:click={toggleCompare} aria-label="Toggle compare" title="Compare">
         <i class="fas fa-exchange-alt"></i>
       </button>

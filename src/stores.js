@@ -25,3 +25,6 @@ export const showCompareStore = writable(false);
 
 export const pbEffectSelectedPaddlesStore = writable([]);
 export const showPBEffectCompareStore = writable(false);
+
+export const pbStudioSelectedPaddlesStore = writable([]);
+export const showPBStudioCompareStore = writable(false);

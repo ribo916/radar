@@ -11,6 +11,8 @@
   import PBEffectCompareSection from '../shared/PBEffectCompareSection.svelte';
   import { pbEffectSelectedPaddlesStore } from '../stores.js';
   import PBStudioCard from '../shared/PBStudioCard.svelte';
+  import PBStudioCompareSection from '../shared/PBStudioCompareSection.svelte';
+  import { showPBStudioCompareStore, pbStudioSelectedPaddlesStore } from '../stores.js';
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -77,6 +79,11 @@
     pbEffectSelectedPaddles = value;
   });
 
+  let pbStudioSelectedPaddles = [];
+  pbStudioSelectedPaddlesStore.subscribe(value => {
+    pbStudioSelectedPaddles = value;
+  });
+
   let filteredProcessedData = [];
 
   $: {
@@ -121,6 +128,17 @@
           );
 
         return existingFiltersPassed && compareFilterPassed;
+      });
+    } else if (selectedReviewer === 'PBStudio') {
+      filteredProcessedData = processedData.filter(paddle => {
+        const compareFilterPassed = pbStudioSelectedPaddles.length === 0 || 
+          pbStudioSelectedPaddles.some(p => 
+            p.company === paddle.company && 
+            p.paddle === paddle.paddle && 
+            p.thickness === paddle.thickness
+          );
+
+        return compareFilterPassed;
       });
     } else {
       filteredProcessedData = processedData;
@@ -368,11 +386,14 @@
   </div>
 {:else if selectedReviewer === 'PBStudio'}
   <div class="page-content">
+    {#if $showPBStudioCompareStore}
+      <PBStudioCompareSection paddles={processedData} />
+    {/if}
     <div class="paddle-count-title">
-      Displaying {processedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer] || 'Unknown Date'})
+      Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer] || 'Unknown Date'})
     </div>
     <div class="card-grid">
-      {#each processedData as paddle}
+      {#each filteredProcessedData as paddle}
         <PBStudioCard paddleData={paddle} />
       {/each}
     </div>
