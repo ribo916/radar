@@ -8,6 +8,13 @@ const columnMapping = {
   'Balance Point (mm)': 'balance_point',
   'Swingweight Percentile': 'swing_percentile',
   'Spin Rating': 'spin_rating',
+  // Add new columns here
+  'Price': 'price',
+  'Year Released': 'year_released',
+  'Generation/Build': 'generation_build',
+  'Paddle Type': 'paddle_type',
+  'Link to Paddle': 'link_to_paddle',
+  'Discount Code': 'discount_code'
 };
 
 export async function processData(searchParams) {

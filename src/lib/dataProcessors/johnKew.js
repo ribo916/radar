@@ -19,13 +19,26 @@ const columnMapping = {
   'Swing Weight': 'swing_weight',
   'Twist Weight': 'twist_weight',
   'Core Material': 'core_material',
-  'Surface Texture': 'surface_texture',
-  'Length (in)': 'length',
   'Width (in)': 'width',
   'Static Weight (oz)': 'static_weight',
   'Balance Point (cm)': 'balance_point_cm',
   'Serve Speed-MPH (Power)': 'serve_speed_mph',
-  'Punch Volley Speed-MPH (Pop)': 'punch_volley_speed'
+  'Punch Volley Speed-MPH (Pop)': 'punch_volley_speed',
+  // Add new columns here
+  'Price': 'price',
+  'Year Released': 'year_released',
+  'Generation/Build': 'generation_build',
+  'Paddle Type': 'paddle_type',
+  'Link to Paddle': 'link_to_paddle',
+  'Discount Code': 'discount_code',
+  'Length (in)': 'length',
+  'Condition': 'condition',
+  // Add the new mappings here
+  'Discount': 'discount',
+  'Discounted Price': 'discounted_price',
+  'Manufacturing Process': 'manufacturing_process',
+  'Surface Texture': 'surface_texture',
+  'Overall Percentile': 'overall_percentile'
 };
 
 export async function processData(queryParams) {
@@ -52,7 +65,7 @@ function processCSVData(data) {
     return mappedRow;
   });
 
-  console.log('Mapped JohnKewdata:', mappedData);
+  // console.log('Processed JohnKew data (first item):', mappedData[0]);
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
 
   const filteredData = mappedData.filter((d, index) => {
@@ -81,13 +94,11 @@ function processCSVData(data) {
     if (a.paddle > b.paddle) return 1;
     return 0;
   });
-  // console.log('Filtered JohnKewdata:', filteredData);
 
   const excludedPaddles = mappedData
     .filter(d => !filteredData.includes(d))
     .map(d => d.paddle)
     .sort((a, b) => a.localeCompare(b));
-  // console.log('Excluded JohnKewpaddles:', excludedPaddles);
 
   return { filteredData, excludedPaddles };
 }

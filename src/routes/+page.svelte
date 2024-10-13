@@ -302,7 +302,7 @@
     <div class="card-grid">
       {#if comparisonData}
         <ComparisonCard 
-          data={comparisonData}
+          data={comparisonData.map(record => ({...record}))}
           xKey={Object.values(labelMapping)}
         />
       {/if}
@@ -329,7 +329,12 @@
             length: record.length,
             width: record.width,
             staticWeight: record.static_weight,
-            balancePointCM: record.balance_point_cm
+            balancePointCM: record.balance_point_cm,
+            ...Object.fromEntries(
+              Object.entries(record).filter(([key]) => 
+                !['Power', 'Spin', 'Twist', 'Balance', 'Swing', 'Pop', 'shape', 'face_material', 'handle_length', 'spin_rpm', 'serve_speed_mph', 'punch_volley_speed', 'swing_weight', 'twist_weight', 'core_material', 'surface_texture', 'length', 'width', 'static_weight', 'balance_point_cm'].includes(key)
+              )
+            )
           }} 
           radarData={record} 
           seriesKey={record[seriesKey]} 

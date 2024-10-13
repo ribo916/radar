@@ -69,6 +69,29 @@
 
   $: maxValue = radarData ? getMaxValue(radarData) : 10;
   $: scaleFactor = Math.min(0.9, 10 / maxValue);
+
+  // Add this function to log all properties
+  function logAllProperties() {
+    // console.log('All properties for this card:', backContent);
+  }
+
+  // Call this function when the component mounts
+  import { onMount } from 'svelte';
+  onMount(() => {
+    logAllProperties();
+  });
+
+  // Add this function to format the property names
+  function formatPropertyName(name) {
+    return name
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  $: {
+    console.log('Data received in Card:', backContent);
+  }
 </script>
 
 <div
@@ -133,9 +156,18 @@
         </div>
         <br>
         <!-- Regular properties section -->
-        {#each Object.entries(specialProperties) as [label, key]}
-          {#if !['serveSpeedMPH', 'spinRPM', 'punchVolleySpeed', 'twistWeight', 'swingWeight', 'balancePointCM'].includes(key) && backContent[key] !== undefined}
-            <div class="back-content-item">{label} : <i>{backContent[key]}</i></div>
+        {#each Object.entries(backContent) as [key, value]}
+          {#if !['serveSpeedMPH', 'spinRPM', 'punchVolleySpeed', 'twistWeight', 'swingWeight', 'balancePointCM'].includes(key)}
+            <div class="back-content-item">
+              <span class="property-name">{formatPropertyName(key)}:</span> 
+              {#if key === 'link_to_paddle' && value && value.startsWith('http')}
+                <a href={value} target="_blank" rel="noopener noreferrer">Link</a>
+              {:else if value !== undefined && value !== ''}
+                <span class="property-value">{value}</span>
+              {:else}
+                <span class="property-value">N/A</span>
+              {/if}
+            </div>
           {/if}
         {/each}
       </div>
@@ -205,10 +237,6 @@
     text-align: left; /* Left-align the text */
     overflow-y: auto; /* Add vertical scrollbar */
     font-size: 0.75em; /* Explicitly set to match ComparisonCard */
-  }
-
-  .card-back i {
-    color: rgb(234, 99, 207); 
   }
 
   .title-banner {
@@ -300,8 +328,26 @@
   }
 
   .back-content-item {
-    margin-bottom: 2px; /* Changed from 5px to match ComparisonCard's regular properties */
-    font-size: 0.9em; /* Added to match ComparisonCard's regular properties */
-    text-align: left; /* Ensure text is left-aligned */
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    text-align: left;
+  }
+
+  .property-name {
+    font-weight: bold;
+    color: #20e87a; /* Adjust color as needed */
+  }
+
+  .property-value {
+    color: #ffffff; /* Adjust color as needed */
+  }
+
+  .back-content-item a {
+    color: #4CAF50;
+    text-decoration: none;
+  }
+
+  .back-content-item a:hover {
+    text-decoration: underline;
   }
 </style>

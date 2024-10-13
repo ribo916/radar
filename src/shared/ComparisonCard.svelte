@@ -6,6 +6,8 @@
   export let data;
   export let xKey;
 
+  //console.log('Data received in ComparisonCard:', data);
+
   const colors = ['#ff6b6b', '#4ecdc4', '#45aaf2'];
 
   let flipped = false;

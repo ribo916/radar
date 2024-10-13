@@ -35,6 +35,9 @@
     { key: 'swing_percentile', color: '#9C27B0', label: 'Swing' },
     { key: 'spin_rating', color: '#FF5722', label: 'Spin' }
   ];
+
+  // Console log all properties of backContent
+  // console.log('PBEffectCard backContent:', JSON.parse(JSON.stringify(backContent)));
 </script>
 
 <div class="card {isFlipped ? 'flipped' : ''}" on:click={flipCard} on:keydown={handleKeyDown} role="button" tabindex="0" aria-pressed={isFlipped}>
@@ -73,7 +76,16 @@
         <div class="back-content-item">Brand: <span class="value">{backContent.company || 'N/A'}</span></div>
         {#each Object.entries(backContent) as [key, value]}
           {#if !key.includes('percentile') && key !== 'company' && key !== 'paddle' && key !== 'thickness' && key !== 'spin_rating'}
-            <div class="back-content-item">{key.replace('_', ' ')}: <span class="value">{value || 'N/A'}</span></div>
+            <div class="back-content-item">
+              {key.replace('_', ' ')}:
+              <span class="value">
+                {#if key === 'link_to_paddle'}
+                  <a href={value} target="_blank" rel="noopener noreferrer">Link</a>
+                {:else}
+                  {value || 'N/A'}
+                {/if}
+              </span>
+            </div>
           {/if}
         {/each}
       </div>
@@ -119,6 +131,8 @@
   .card-back {
     transform: rotateY(180deg);
     text-align: left;
+    display: flex;
+    flex-direction: column;
   }
 
   .title-banner {
@@ -193,7 +207,22 @@
     font-size: 0.9em;
   }
 
+  .back-content-item {
+    color: #20e87a; /* Changed to green */
+    font-weight: bold;
+  }
+
   .back-content-item .value {
-    color: #2196F3; /* This is the blue color used for the Pop percentile bar */
+    color: #ffffff; /* Plain white for the values */
+    font-weight: normal;
+  }
+
+  .back-content-item a {
+    color: #2196F3; /* Changed to blue */
+    text-decoration: none;
+  }
+
+  .back-content-item a:hover {
+    text-decoration: underline;
   }
 </style>
