@@ -1,53 +1,86 @@
-# Intro
+# Paddle Data Visualization App
 
-This app was started with a sample project for [Layer Cake](https://layercake.graphics). 
+This application visualizes pickleball paddle data using [Layer Cake](https://layercake.graphics). It provides multiple data sources and deployment options for flexibility.
 
+## Features
 
-## Key Notes
-- Data comes from a csv that is just a cut/paste directly from the JohnKew side. Original code was written using a custom version, so I implemented a dataprocessor.js file to read the real raw data and translate after I migrated to that. 
-- As another example, the .csv was also loaded into Airtable, as well as Xano, which both support APIs to get data.  
-    - Default - just load data from the .csv in the codebase
-    - Airtable - This api can only return 100 records, so we loop through using pagintion to ensure we get all data
-    - Xano returns all records we require, but mapping is slightly different
+- Visualizes pickleball paddle data from various sources
+- Supports multiple data loading methods (CSV, Airtable API, Xano API)
+- Deployed on Vercel with automatic updates
 
-## Get started
+## Data Sources
 
-Install the dependencies...
+1. **CSV (Default)**: Data loaded directly from a CSV file in the codebase
+2. **Airtable API**: Fetches data with pagination (limited to 100 records per request) - only with JohnKew
+3. **Xano API**: Retrieves all required records with slightly different mapping - only with JohnKew
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (version X.X.X or higher)
+- npm (version X.X.X or higher)
+
+### Installation
 
 ```bash
 npm install
+```
+
+### Running the App
+
+For production:
+
+```bash
 npm run build && npm run preview
 ```
 
-Your app will be running at [localhost:4173](http://localhost:4173).
+The app will be available at [http://localhost:4173](http://localhost:4173).
 
-## Developing
+For development:
 
-```sh
-# if you didn't already install, run the install command
-npm install
+```bash
 npm run dev
 ```
 
-Your app will be running at [localhost:5173](http://localhost:5173).
+The app will be available at [http://localhost:5173](http://localhost:5173).
 
-## How was this deployed
+## Deployment
 
-The app was deployed using a free Vercel account. It reads the github repo and auto deploys ever time the master branch is updated. 
+The app is deployed using Vercel, which automatically deploys updates when changes are pushed to the `master` branch.
 
-https://paddles.vercel.app/ - reads from the .csv
-https://paddles.vercel.app/?useAirtable=true - read paddle data from Airtable API
-https://paddles.vercel.app/?useXano=true - read paddle data from Xano API
+### Live Demos
+
+- [https://paddles.vercel.app/](https://paddles.vercel.app/) (CSV data)
+- [https://paddles.vercel.app/?useAirtable=true](https://paddles.vercel.app/?useAirtable=true) (Airtable API - outdated)
+- [https://paddles.vercel.app/?useXano=true](https://paddles.vercel.app/?useXano=true) (Xano API - outdated)
+
+## Data Update Process
+
+### JohnKew Data
+
+1. Visit [https://www.johnkewpickleball.com/paddle-database](https://www.johnkewpickleball.com/paddle-database)
+2. View the page source and locate the `<iframe src="">` tag containing the raw data link
+3. Save the data in Google Sheets and download as CSV
+4. Update the CSV file in the codebase
+5. Update the filename in `page.svelte` and `dataProcessor.js` (e.g., `radarScores_2024_09_24.csv`)
+6. Update the "last refreshed" date in `+layout.svelte`
+
+### PBEffect Data
+
+1. Visit [https://pickleballeffect.com/pickleball-paddle-database/](https://pickleballeffect.com/pickleball-paddle-database/)
+2. Download the CSV file from the Airtable
+
+### PBStudio Data
+
+1. Visit PBStudio site and just cut/paste all data from Notion (no option to download a CSV)
+2. Paste into Google Sheets, add header data manually, then download as CSV
 
 
-## How data is loaded (JohnKew)
+## Contributing
 
-- Go to https://www.johnkewpickleball.com/paddle-database and view source
-- Find link to raw data, found in <iframe src=""> tag
-- Save version in Google sheets, then download as csv and put in codebase
-- Updata filename (e.e radarScores_2024_09_24.csv) in page.svelte and dataProcessor.js
-- Update +layout.svelte info details to indicate last refreshed date
-- Note: The API calls require updating Xano or Airtable and will most likely be older versions as they are just playgrounds
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-## How data is loaded (PBEffect)
- - Go to https://pickleballeffect.com/pickleball-paddle-database/ and download the .csv from the Airtable
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

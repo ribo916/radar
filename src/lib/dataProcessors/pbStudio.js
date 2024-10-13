@@ -1,12 +1,24 @@
 import { csv } from 'd3-fetch';
 
 const columnMapping = {
-  'Power': 'power_percentile',
-  'Spin': 'spin_percentile',
-  'Control': 'pop_percentile',
-  'Maneuverability': 'twist_percentile',
-  'Touch': 'balance_percentile',
-  'Stability': 'swing_percentile',
+  'Company': 'company',
+  'Paddle': 'paddle',
+  'Price': 'price',
+  'Swing Weight': 'swing_weight',
+  'Twist Weight': 'twist_weight',
+  'Balance': 'balance_point',
+  'My paddle weight': 'static_weight',
+  'Core thickness in mm': 'thickness',
+  'Grip length': 'handle_length',
+  'Grip thickness': 'grip_thickness',
+  'RPM': 'spin_rpm',
+  'Shape': 'shape',
+  'Face Material': 'face_material',
+  'Core Material': 'core_material',
+  'YouTube Review': 'youtube_review',
+  'Link to purchase': 'link_to_paddle',
+  'Discount code': 'discount_code',
+  'Grams': 'weight_grams'
 };
 
 export async function processData(searchParams) {
@@ -15,27 +27,23 @@ export async function processData(searchParams) {
   const filteredData = data.filter(row => row['Company'] && row['Paddle']);
   
   const mappedData = filteredData.map((row) => {
-    const mappedRow = {
-      paddle: row['Paddle'],
-      company: row['Company'],
-      thickness: row['Core thickness in mm'],
-      shape: row['Shape'],
-      face_material: row['Face Material'],
-      handle_length: row['Grip length'],
-      core_material: row['Core Material'],
-      surface_texture: '', // Not available in this dataset
-      length: '', // Not available in this dataset
-      width: '', // Not available in this dataset
-      static_weight: row['My paddle weight'],
-      balance_point_cm: row['Balance'],
-      swing_weight: row['Swing Weight'],
-      twist_weight: row['Twist Weight'],
-      spin_rpm: row['RPM'],
-    };
+    const mappedRow = {};
+    for (const [originalColumn, newColumn] of Object.entries(columnMapping)) {
+      if (originalColumn === 'Swing Weight' || originalColumn === 'Twist Weight' || originalColumn === 'Balance' || originalColumn === 'My paddle weight') {
+        mappedRow[newColumn] = row[originalColumn] ? parseFloat(row[originalColumn]) : null;
+      } else {
+        mappedRow[newColumn] = row[originalColumn];
+      }
+    }
+    
+    // Convert grip length from inches to mm
+    if (mappedRow.handle_length) {
+      mappedRow.handle_length = (parseFloat(mappedRow.handle_length) * 25.4).toFixed(2);
+    }
 
-    // Map the percentile values
-    for (const [key, value] of Object.entries(columnMapping)) {
-      mappedRow[value] = parseFloat(row[key] || 0) / 100; // Assuming these values are already percentages
+    // Convert static weight from oz to grams if weight_grams is not available
+    if (mappedRow.static_weight && !mappedRow.weight_grams) {
+      mappedRow.weight_grams = (parseFloat(mappedRow.static_weight) * 28.3495).toFixed(2);
     }
 
     return mappedRow;
@@ -47,7 +55,6 @@ export async function processData(searchParams) {
     .sort((a, b) => a.localeCompare(b));
 
   console.log('Filtered PBStudio data:', mappedData);
-  console.log('Excluded PBStudio paddles:', excludedPaddles);
-
+  
   return { filteredData: mappedData, excludedPaddles };
 }

@@ -10,6 +10,7 @@
   import { showPBEffectCompareStore } from '../stores.js';
   import PBEffectCompareSection from '../shared/PBEffectCompareSection.svelte';
   import { pbEffectSelectedPaddlesStore } from '../stores.js';
+  import PBStudioCard from '../shared/PBStudioCard.svelte';
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -195,6 +196,7 @@
       filteredData = fd;
       excludedPaddles = ep;
       totalValidPaddleCount = fd.length;
+      processedData = fd; // Add this line to set processedData for PBStudio
       loading = false;
     } catch (error) {
       console.error('Error loading PBStudio data:', error);
@@ -287,10 +289,6 @@
     margin-top: 10px;
   }
 
-  .centered {
-    text-align: center;
-  }
-
 </style>
 
 {#if !selectedReviewer}
@@ -369,10 +367,15 @@
     </div>
   </div>
 {:else if selectedReviewer === 'PBStudio'}
-  <div class="page-content centered">
-    <p>In Progress</p>
-    <p>Total paddles in {selectedReviewer} dataset: {totalValidPaddleCount}</p>
-    <p>Data as of: {dataDate[selectedReviewer]}</p>
+  <div class="page-content">
+    <div class="paddle-count-title">
+      Displaying {processedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer] || 'Unknown Date'})
+    </div>
+    <div class="card-grid">
+      {#each processedData as paddle}
+        <PBStudioCard paddleData={paddle} />
+      {/each}
+    </div>
   </div>
 {:else}
   <div class="in-progress">
