@@ -23,10 +23,10 @@
   }
 
   const frontParameters = [
-    { key: 'swing_weight', label: 'Swing Weight', color: '#FF6B6B' },
-    { key: 'twist_weight', label: 'Twist Weight', color: '#4ECDC4' },
-    { key: 'balance_point', label: 'Balance', color: '#45B7D1' },
-    { key: 'spin_rpm', label: 'Spin RPM', color: '#FFA07A' }
+    { key: 'swing_weight', label: 'Swing Weight', color: '#9C27B0' },
+    { key: 'twist_weight', label: 'Twist Weight', color: '#009688' },
+    { key: 'balance_point', label: 'Balance', color: '#2196F3' },
+    { key: 'spin_rpm', label: 'Spin RPM', color: '#D32F2F' }
   ];
 
   function formatKey(key) {
@@ -115,33 +115,31 @@
     color: white;
     display: flex;
     flex-direction: column;
+    font-size: 0.75em; /* Match PBEffect card font size */
   }
 
   .card-back {
     transform: rotateY(180deg);
+    text-align: left; /* Align text to the left like PBEffect */
   }
 
   .title-banner {
     background-color: #333;
     padding: 10px;
-    font-size: 1em;
+    font-size: 15px; /* Match PBEffect title font size */
     font-weight: bold;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    text-align: center; /* Center the text like PBEffect */
+    border-bottom: 1px solid #444; /* Add a bottom border like PBEffect */
+    box-sizing: border-box;
   }
 
   .front-content, .back-content {
     padding: 20px;
     flex-grow: 1;
     overflow-y: auto;
-  }
-
-  .front-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: calc(100% - 40px); /* Subtract the height of the title banner */
-    position: relative;
   }
 
   .parameters-layout {

@@ -31,9 +31,9 @@
   const percentileFields = [
     { key: 'power_percentile', color: '#4CAF50', label: 'Power' },
     { key: 'pop_percentile', color: '#2196F3', label: 'Pop' },
-    { key: 'twist_percentile', color: '#FFC107', label: 'Twist' },
+    { key: 'twist_percentile', color: '#009688', label: 'Twist' },
     { key: 'swing_percentile', color: '#9C27B0', label: 'Swing' },
-    { key: 'spin_rating', color: '#FF5722', label: 'Spin' }
+    { key: 'spin_rating', color: '#D32F2F', label: 'Spin' }
   ];
 
   // Console log all properties of backContent

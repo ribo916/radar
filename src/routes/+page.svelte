@@ -13,6 +13,7 @@
   import PBStudioCard from '../shared/PBStudioCard.svelte';
   import PBStudioCompareSection from '../shared/PBStudioCompareSection.svelte';
   import { showPBStudioCompareStore, pbStudioSelectedPaddlesStore } from '../stores.js';
+  import CombinedPage from './CombinedPage.svelte';
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -50,6 +51,8 @@
       loadPBEffectData();
     } else if (selectedReviewer === 'PBStudio') {
       loadPBStudioData();
+    } else if (selectedReviewer === 'Combined') {
+      loadCombinedData();
     }
   });
 
@@ -223,6 +226,14 @@
     }
   }
 
+  async function loadCombinedData() {
+    loading = true;
+    // Implement your combined data loading logic here
+    // For now, let's just simulate a delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    loading = false;
+  }
+
   const spinLevels = ['', 'low', 'medium', 'high', 'very high'];
 </script>
 
@@ -233,7 +244,6 @@
   }
 
   .page-content {
-    width: 100%;
     max-width: 1800px;
     margin: 0 auto;
     padding: 0 16px;
@@ -398,6 +408,8 @@
       {/each}
     </div>
   </div>
+{:else if selectedReviewer === 'Combined'}
+  <CombinedPage />
 {:else}
   <div class="in-progress">
     <h2>In Progress</h2>

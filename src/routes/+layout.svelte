@@ -5,6 +5,7 @@
   import CompareSection from '../shared/CompareSection.svelte'; // Import the CompareSection component
   import { onMount } from 'svelte';
   import { paddlesStore, selectedReviewerStore, filterValues, selectedPaddlesStore, pbEffectFilterValues, showPBEffectCompareStore, pbEffectSelectedPaddlesStore, showPBStudioCompareStore, pbStudioSelectedPaddlesStore } from '../stores.js'; // Import the store
+  import CombinedPage from './CombinedPage.svelte';  // Add this import
 
   let showModal = false;
   let showFilters = false;
@@ -19,7 +20,7 @@
   let paddles = [];
   let selectedReviewer;
 
-  const reviewers = ['JohnKew', 'PBStudio', 'PBEffect'];
+  const reviewers = ['JohnKew', 'PBStudio', 'PBEffect', 'Combined'];  // Add 'Combined' to the reviewers array
 
   onMount(() => {
     selectedReviewerStore.set(null);
@@ -276,6 +277,7 @@
     justify-content: center;
     background-color: #333;
     padding: 10px 0;
+    flex-wrap: wrap;  /* Add this to allow wrapping on smaller screens */
   }
 
   .reviewer-button {
@@ -283,7 +285,7 @@
     border: none;
     color: #fff;
     padding: 5px 15px;
-    margin: 0 5px;
+    margin: 5px;  /* Changed from 0 5px to 5px for better spacing when wrapped */
     cursor: pointer;
     font-size: 0.9em;
     transition: background-color 0.3s;
