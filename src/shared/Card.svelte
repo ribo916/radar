@@ -89,8 +89,18 @@
       .join(' ');
   }
 
-  $: {
-    console.log('Data received in Card:', backContent);
+  function logRadarData(data) {
+    // console.log('Radar data passed to LayerCake:', data);
+    return data;
+  }
+
+  function checkRadarData(data) {
+    return !(data.Power === 0 || data.Power === null ||
+             data.Spin === 0 || data.Spin === null ||
+             data.Pop === 0 || data.Pop === null ||
+             data.Twist === 0 || data.Twist === null ||
+             data.Balance === 0 || data.Balance === null ||
+             data.Swing === 0 || data.Swing === null);
   }
 </script>
 
@@ -109,20 +119,26 @@
       <div class="front-content">
         <div class="chart-container">
           {#if chartSize && radarData}
-            <LayerCake
-              padding={{ top: 10, right: 10, bottom: 10, left: 10 }}
-              x={xKey}
-              xDomain={[0, maxValue]}
-              xRange={[0, (chartSize / 2) * scaleFactor]}
-              data={[radarData]}
-              width={chartSize}
-              height={chartSize}
-            >
-              <Svg>
-                <AxisRadial />
-                <Radar />
-              </Svg>
-            </LayerCake>
+            {#if checkRadarData(radarData)}
+              <LayerCake
+                padding={{ top: 10, right: 10, bottom: 10, left: 10 }}
+                x={xKey}
+                xDomain={[0, maxValue]}
+                xRange={[0, (chartSize / 2) * scaleFactor]}
+                data={[radarData]}
+                width={chartSize}
+                height={chartSize}
+              >
+                <Svg>
+                  <AxisRadial />
+                  <Radar />
+                </Svg>
+              </LayerCake>
+            {:else}
+              <div class="insufficient-data">
+                Insufficient Data
+              </div>
+            {/if}
           {/if}
         </div>
         <i class="fas fa-sync-alt flip-icon"></i>
@@ -349,5 +365,15 @@
 
   .back-content-item a:hover {
     text-decoration: underline;
+  }
+
+  .insufficient-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 1.2em;
+    color: #888;
   }
 </style>

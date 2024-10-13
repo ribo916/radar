@@ -66,11 +66,10 @@ export async function loadAndProcessDataFromAirtable() {
 
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
 
-  const filteredData = mappedData.filter((d, index) => {
-    let allValid = true;
+  mappedData.forEach((d) => {
     xKey.forEach(key => {
       let value = d[key];
-      if (value !== undefined && value !== '' && !isNaN(parseFloat(value)) && parseFloat(value) > 0) {
+      if (value !== undefined && value !== '' && !isNaN(parseFloat(value))) {
         // Strip the '%' symbol and convert to decimal
         value = parseFloat(value.replace('%', '')) / 100;
         // Multiply by 100 and round the value to the nearest whole number, then divide by 10
@@ -78,16 +77,13 @@ export async function loadAndProcessDataFromAirtable() {
         // Assign the rounded value back to the object
         d[key] = value;
       } else {
-        allValid = false;
+        d[key] = 0; // Set to 0 if invalid or missing
       }
     });
-    return allValid;
   });
 
-  console.log('Filtered data:', filteredData);
-
   // Sort by company and then by paddle
-  filteredData.sort((a, b) => {
+  mappedData.sort((a, b) => {
     if (a.company < b.company) return -1;
     if (a.company > b.company) return 1;
     if (a.paddle < b.paddle) return -1;
@@ -95,12 +91,5 @@ export async function loadAndProcessDataFromAirtable() {
     return 0;
   });
 
-  const excludedPaddles = mappedData
-    .filter(d => !filteredData.includes(d))
-    .map(d => d.paddle)
-    .sort((a, b) => a.localeCompare(b));
-
-  console.log('Excluded paddles:', excludedPaddles);
-
-  return { filteredData, excludedPaddles };
+  return { filteredData: mappedData };
 }

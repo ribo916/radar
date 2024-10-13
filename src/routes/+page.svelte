@@ -1,6 +1,5 @@
 <script>
   import Card from '../shared/Card.svelte';
-  import SpecialCard from '../shared/SpecialCard.svelte';
   import { onMount } from 'svelte';
   import { paddlesStore, selectedPaddlesStore, selectedReviewerStore, filterValues, pbEffectFilterValues } from '../stores.js'; // Import the stores
   import { processData } from '$lib/dataProcessors'; // New import
@@ -70,54 +69,62 @@
         }
         return newRecord;
       })
-    : filteredData; // For PBEffect and other reviewers, use filteredData as is
+    : filteredData;
 
   let pbEffectSelectedPaddles = [];
   pbEffectSelectedPaddlesStore.subscribe(value => {
     pbEffectSelectedPaddles = value;
   });
 
-  $: filteredProcessedData = selectedReviewer === 'JohnKew'
-    ? processedData.filter(record => 
-        record.Power * 10 > $filterValues.powerFilter &&
-        record.Spin * 10 > $filterValues.spinFilter &&
-        record.Pop * 10 > $filterValues.popFilter &&
-        record.Twist * 10 > $filterValues.twistFilter &&
-        record.Balance * 10 > $filterValues.balanceFilter &&
-        record.Swing * 10 > $filterValues.swingFilter &&
-        (selectedPaddles.length === 0 || selectedPaddles.some(p => p.paddle === record[seriesKey] && p.company === record.company && p.thickness === record.thickness))
-      )
-    : selectedReviewer === 'PBEffect'
-      ? processedData.filter(paddle => {
-          const spinFilterIndex = Math.floor($pbEffectFilterValues.spinFilter / 25);
-          const spinFilterLevel = spinLevels[spinFilterIndex];
-          const paddleSpinRating = paddle.spin_rating ? paddle.spin_rating.trim().toLowerCase() : '';
-          const spinFilterPasses = spinFilterIndex === 0 || paddleSpinRating === spinFilterLevel;
+  let filteredProcessedData = [];
 
-          // Apply existing PBEffect filters
-          const existingFiltersPassed = (
-            ($pbEffectFilterValues.powerFilter === 0 || 
-             (paddle.power_percentile != null && parseFloat(paddle.power_percentile) > $pbEffectFilterValues.powerFilter)) &&
-            ($pbEffectFilterValues.popFilter === 0 || 
-             (paddle.pop_percentile != null && parseFloat(paddle.pop_percentile) > $pbEffectFilterValues.popFilter)) &&
-            ($pbEffectFilterValues.twistFilter === 0 || 
-             (paddle.twist_percentile != null && parseFloat(paddle.twist_percentile) > $pbEffectFilterValues.twistFilter)) &&
-            ($pbEffectFilterValues.swingFilter === 0 || 
-             (paddle.swing_percentile != null && parseFloat(paddle.swing_percentile) > $pbEffectFilterValues.swingFilter)) &&
-            spinFilterPasses
+  $: {
+    if (selectedReviewer === 'JohnKew') {
+      filteredProcessedData = processedData.filter(record => 
+        (record.Power * 10 >= $filterValues.powerFilter) &&
+        (record.Spin * 10 >= $filterValues.spinFilter) &&
+        (record.Pop * 10 >= $filterValues.popFilter) &&
+        (record.Twist * 10 >= $filterValues.twistFilter) &&
+        (record.Balance * 10 >= $filterValues.balanceFilter) &&
+        (record.Swing * 10 >= $filterValues.swingFilter) &&
+        (selectedPaddles.length === 0 || selectedPaddles.some(p => 
+          p.paddle === record[seriesKey] && 
+          p.company === record.company && 
+          p.thickness === record.thickness
+        ))
+      );
+    } else if (selectedReviewer === 'PBEffect') {
+      filteredProcessedData = processedData.filter(paddle => {
+        const spinFilterIndex = Math.floor($pbEffectFilterValues.spinFilter / 25);
+        const spinFilterLevel = spinLevels[spinFilterIndex];
+        const paddleSpinRating = paddle.spin_rating ? paddle.spin_rating.trim().toLowerCase() : '';
+        const spinFilterPasses = spinFilterIndex === 0 || paddleSpinRating === spinFilterLevel;
+
+        const existingFiltersPassed = (
+          ($pbEffectFilterValues.powerFilter === 0 || 
+           (paddle.power_percentile != null && parseFloat(paddle.power_percentile) > $pbEffectFilterValues.powerFilter)) &&
+          ($pbEffectFilterValues.popFilter === 0 || 
+           (paddle.pop_percentile != null && parseFloat(paddle.pop_percentile) > $pbEffectFilterValues.popFilter)) &&
+          ($pbEffectFilterValues.twistFilter === 0 || 
+           (paddle.twist_percentile != null && parseFloat(paddle.twist_percentile) > $pbEffectFilterValues.twistFilter)) &&
+          ($pbEffectFilterValues.swingFilter === 0 || 
+           (paddle.swing_percentile != null && parseFloat(paddle.swing_percentile) > $pbEffectFilterValues.swingFilter)) &&
+          spinFilterPasses
+        );
+
+        const compareFilterPassed = pbEffectSelectedPaddles.length === 0 || 
+          pbEffectSelectedPaddles.some(p => 
+            p.company === paddle.company && 
+            p.paddle === paddle.paddle && 
+            p.thickness === paddle.thickness
           );
 
-          // Apply compare filter
-          const compareFilterPassed = pbEffectSelectedPaddles.length === 0 || 
-            pbEffectSelectedPaddles.some(p => 
-              p.company === paddle.company && 
-              p.paddle === paddle.paddle && 
-              p.thickness === paddle.thickness
-            );
-
-          return existingFiltersPassed && compareFilterPassed;
-        })
-      : processedData;
+        return existingFiltersPassed && compareFilterPassed;
+      });
+    } else {
+      filteredProcessedData = processedData;
+    }
+  }
 
   $: if (typeof window !== 'undefined') {
     const event = new CustomEvent('updateFilteredPaddlesCount', {
@@ -148,10 +155,9 @@
     loading = true;
     dataError = false;
     try {
-      const { filteredData: fd, excludedPaddles: ep } = await processData('JohnKew', $page.url.searchParams);
+      const { filteredData: fd } = await processData('JohnKew', $page.url.searchParams);
       filteredData = fd;
-      excludedPaddles = ep;
-      totalValidPaddleCount = fd.length;
+      totalValidPaddleCount = filteredData.length;
       loading = false;
 
       // Dispatch the total number of valid paddles to the layout
@@ -344,7 +350,8 @@
         />
       {/each}
 
-      <SpecialCard {excludedPaddles} />
+      <!-- Remove this line: -->
+      <!-- <SpecialCard {excludedPaddles} /> -->
     </div>
   </div>
 {:else if selectedReviewer === 'PBEffect'}

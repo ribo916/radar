@@ -39,6 +39,19 @@
       chartSize = Math.min(rect.width, rect.height) - 60; // Subtract padding
     }
   }
+
+  function normalizeRadarData(paddle) {
+    const radarFields = ['Power', 'Spin', 'Pop', 'Twist', 'Balance', 'Swing'];
+    const hasInvalidField = radarFields.some(field => paddle[field] === 0 || paddle[field] === null);
+
+    if (hasInvalidField) {
+      radarFields.forEach(field => paddle[field] = 0);
+    }
+
+    return paddle;
+  }
+
+  $: normalizedData = data.map(normalizeRadarData);
 </script>
 
 <div
@@ -61,13 +74,13 @@
             x={xKey}
             xDomain={[0, 10]}
             xRange={({ height }) => [0, height / 2]}
-            data={data}
+            data={normalizedData}
             width={chartSize}
             height={chartSize}
           >
             <Svg>
               <AxisRadial />
-              {#each data as paddle, i}
+              {#each normalizedData as paddle, i}
                 <Radar 
                   fill={colors[i]} 
                   stroke={colors[i]} 
@@ -80,7 +93,7 @@
           </LayerCake>
         </div>
         <div class="legend">
-          {#each data as paddle, i}
+          {#each normalizedData as paddle, i}
             <div class="legend-item">
               <span class="color-box" style="background-color: {colors[i]};"></span>
               <span>{paddle.company} {paddle.paddle}</span>
@@ -93,7 +106,7 @@
     <div class="card-back">
       <div class="title-banner">Comparison Details</div>
       <div class="back-content">
-        {#each data as paddle, i}
+        {#each normalizedData as paddle, i}
           <div class="paddle-details" style="color: {colors[i]};">
             <h3>{paddle.company} {paddle.paddle}</h3>
             <div class="special-properties-grid">
@@ -130,6 +143,9 @@
               <p>Length: <i>{paddle.length}</i></p>
               <p>Width: <i>{paddle.width}</i></p>
               <p>Static Weight: <i>{paddle.static_weight}</i></p>
+              {#if paddle.Power === 0 && paddle.Spin === 0 && paddle.Pop === 0 && paddle.Twist === 0 && paddle.Balance === 0 && paddle.Swing === 0}
+                <p><strong>Note: Insufficient data for radar chart comparison</strong></p>
+              {/if}
             </div>
           </div>
         {/each}
