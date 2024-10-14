@@ -266,6 +266,19 @@
   }
 
   const spinLevels = ['', 'low', 'medium', 'high', 'very high'];
+
+  onMount(() => {
+    window.addEventListener('showJohnKewLoading', () => {
+      isTransitioning = true;
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 2000); // Adjust this value based on how long it typically takes to render
+    });
+
+    return () => {
+      window.removeEventListener('showJohnKewLoading', () => {});
+    };
+  });
 </script>
 
 <style>

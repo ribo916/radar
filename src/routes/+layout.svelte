@@ -83,22 +83,32 @@
 
   function clearAll() {
     if (selectedReviewer === 'JohnKew') {
-      // Reset compared paddles for JohnKew
-      selectedPaddlesStore.set([]);
+      // Dispatch a custom event to notify +page.svelte to show loading
+      window.dispatchEvent(new CustomEvent('showJohnKewLoading'));
 
-      // Reset filters for JohnKew
-      filterValues.set({
-        powerFilter: 0,
-        spinFilter: 0,
-        popFilter: 0,
-        twistFilter: 0,
-        balanceFilter: 0,
-        swingFilter: 0
-      });
+      // Use setTimeout to allow the UI to update before processing
+      setTimeout(() => {
+        // Reset compared paddles for JohnKew
+        selectedPaddlesStore.set([]);
 
-      // Close filter and compare sections for JohnKew
-      showFilters = false;
-      showCompare = false;
+        // Reset filters for JohnKew
+        filterValues.set({
+          powerFilter: 0,
+          spinFilter: 0,
+          popFilter: 0,
+          twistFilter: 0,
+          balanceFilter: 0,
+          swingFilter: 0
+        });
+
+        // Close filter and compare sections for JohnKew
+        showFilters = false;
+        showCompare = false;
+
+        // Dispatch custom events to notify FilterSection and CompareSection
+        window.dispatchEvent(new CustomEvent('resetFilters'));
+        window.dispatchEvent(new CustomEvent('resetCompare'));
+      }, 0);
     } else if (selectedReviewer === 'PBEffect') {
       // Reset compared paddles for PBEffect
       pbEffectSelectedPaddlesStore.set([]);
