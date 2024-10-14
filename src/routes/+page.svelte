@@ -177,7 +177,7 @@
     loading = true;
     dataError = false;
     try {
-      const { filteredData: fd } = await processData('JohnKew', $page.url.searchParams);
+      const { filteredData: fd } = await processData('JohnKew');
       filteredData = fd;
       totalValidPaddleCount = filteredData.length;
       loading = false;

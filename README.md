@@ -4,15 +4,13 @@ This application visualizes pickleball paddle data using [Layer Cake](https://la
 
 ## Features
 
-- Visualizes pickleball paddle data from various sources
-- Supports multiple data loading methods (CSV, Airtable API, Xano API)
+- Visualizes pickleball paddle data from various reviewers
 - Deployed on Vercel with automatic updates
 
 ## Data Sources
 
-1. **CSV (Default)**: Data loaded directly from a CSV file in the codebase
-2. **Airtable API**: Fetches data with pagination (limited to 100 records per request) - only with JohnKew
-3. **Xano API**: Retrieves all required records with slightly different mapping - only with JohnKew
+1. **CSV (Default)**: Data loaded directly from CSV files. API implementations were removed as I didn't want to maintain them separately
+
 
 ## Getting Started
 
@@ -51,9 +49,7 @@ The app is deployed using Vercel, which automatically deploys updates when chang
 
 ### Live Demos
 
-- [https://paddles.vercel.app/](https://paddles.vercel.app/) (CSV data)
-- [https://paddles.vercel.app/?useAirtable=true](https://paddles.vercel.app/?useAirtable=true) (Airtable API - outdated)
-- [https://paddles.vercel.app/?useXano=true](https://paddles.vercel.app/?useXano=true) (Xano API - outdated)
+- [https://paddles.vercel.app/](https://paddles.vercel.app/) 
 
 ## Data Update Process
 

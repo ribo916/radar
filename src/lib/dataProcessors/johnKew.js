@@ -1,6 +1,4 @@
 import { csv } from 'd3-fetch'; // Import the csv function from d3-fetch
-import { loadAndProcessDataFromAirtable } from './johnKew.airtable.js'; // Import the API data processor
-import { loadAndProcessDataFromXano } from './johnKew.xano.js'; // Import the API data processor
 
 const columnMapping = {
   'Company': 'company',
@@ -24,7 +22,6 @@ const columnMapping = {
   'Balance Point (cm)': 'balance_point_cm',
   'Serve Speed-MPH (Power)': 'serve_speed_mph',
   'Punch Volley Speed-MPH (Pop)': 'punch_volley_speed',
-  // Add new columns here
   'Price': 'price',
   'Year Released': 'year_released',
   'Generation/Build': 'generation_build',
@@ -33,7 +30,6 @@ const columnMapping = {
   'Discount Code': 'discount_code',
   'Length (in)': 'length',
   'Condition': 'condition',
-  // Add the new mappings here
   'Discount': 'discount',
   'Discounted Price': 'discounted_price',
   'Manufacturing Process': 'manufacturing_process',
@@ -41,14 +37,8 @@ const columnMapping = {
   'Overall Percentile': 'overall_percentile'
 };
 
-export async function processData(queryParams) {
-  if (queryParams.get('useAirtable') === 'true') {
-    return await loadAndProcessDataFromAirtable();
-  } else if (queryParams.get('useXano') === 'true') {
-    return await loadAndProcessDataFromXano();
-  } else {
-    return await loadAndProcessDataFromCSV();
-  }
+export async function processData() {
+  return await loadAndProcessDataFromCSV();
 }
 
 async function loadAndProcessDataFromCSV() {

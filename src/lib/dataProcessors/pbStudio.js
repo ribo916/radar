@@ -21,7 +21,7 @@ const columnMapping = {
   'Grams': 'weight_grams'
 };
 
-export async function processData(searchParams) {
+export async function processData() {
   const data = await csv('/PBStudio_2024_10_11.csv');
   
   const filteredData = data.filter(row => row['Company'] && row['Paddle']);
