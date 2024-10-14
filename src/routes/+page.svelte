@@ -43,6 +43,8 @@
   let selectedPaddles = [];
   let dataError = false;
 
+  const dataCache = {};
+
   selectedReviewerStore.subscribe(value => {
     selectedReviewer = value;
     if (selectedReviewer === 'JohnKew') {
@@ -177,9 +179,15 @@
     loading = true;
     dataError = false;
     try {
-      const { filteredData: fd } = await processData('JohnKew');
-      filteredData = fd;
-      totalValidPaddleCount = filteredData.length;
+      if (dataCache.JohnKew) {
+        filteredData = dataCache.JohnKew.filteredData;
+        totalValidPaddleCount = dataCache.JohnKew.totalValidPaddleCount;
+      } else {
+        const { filteredData: fd } = await processData('JohnKew');
+        filteredData = fd;
+        totalValidPaddleCount = filteredData.length;
+        dataCache.JohnKew = { filteredData: fd, totalValidPaddleCount };
+      }
       loading = false;
 
       // Dispatch the total number of valid paddles to the layout
@@ -197,10 +205,17 @@
     loading = true;
     dataError = false;
     try {
-      const { filteredData: fd, excludedPaddles: ep } = await processData('PBEffect', $page.url.searchParams);
-      filteredData = fd;
-      excludedPaddles = ep;
-      totalValidPaddleCount = fd.length;
+      if (dataCache.PBEffect) {
+        filteredData = dataCache.PBEffect.filteredData;
+        excludedPaddles = dataCache.PBEffect.excludedPaddles;
+        totalValidPaddleCount = dataCache.PBEffect.totalValidPaddleCount;
+      } else {
+        const { filteredData: fd, excludedPaddles: ep } = await processData('PBEffect', $page.url.searchParams);
+        filteredData = fd;
+        excludedPaddles = ep;
+        totalValidPaddleCount = fd.length;
+        dataCache.PBEffect = { filteredData: fd, excludedPaddles: ep, totalValidPaddleCount };
+      }
       loading = false;
     } catch (error) {
       console.error('Error loading PBEffect data:', error);
@@ -213,11 +228,19 @@
     loading = true;
     dataError = false;
     try {
-      const { filteredData: fd, excludedPaddles: ep } = await processData('PBStudio', $page.url.searchParams);
-      filteredData = fd;
-      excludedPaddles = ep;
-      totalValidPaddleCount = fd.length;
-      processedData = fd; // Add this line to set processedData for PBStudio
+      if (dataCache.PBStudio) {
+        filteredData = dataCache.PBStudio.filteredData;
+        excludedPaddles = dataCache.PBStudio.excludedPaddles;
+        totalValidPaddleCount = dataCache.PBStudio.totalValidPaddleCount;
+        processedData = dataCache.PBStudio.processedData;
+      } else {
+        const { filteredData: fd, excludedPaddles: ep } = await processData('PBStudio', $page.url.searchParams);
+        filteredData = fd;
+        excludedPaddles = ep;
+        totalValidPaddleCount = fd.length;
+        processedData = fd;
+        dataCache.PBStudio = { filteredData: fd, excludedPaddles: ep, totalValidPaddleCount, processedData: fd };
+      }
       loading = false;
     } catch (error) {
       console.error('Error loading PBStudio data:', error);

@@ -82,13 +82,11 @@
   }
 
   function clearAll() {
-    // Reset compared paddles for JohnKew, PBEffect, and PBStudio
-    selectedPaddlesStore.set([]);
-    pbEffectSelectedPaddlesStore.set([]);
-    pbStudioSelectedPaddlesStore.set([]);
-
-    // Reset filters
     if (selectedReviewer === 'JohnKew') {
+      // Reset compared paddles for JohnKew
+      selectedPaddlesStore.set([]);
+
+      // Reset filters for JohnKew
       filterValues.set({
         powerFilter: 0,
         spinFilter: 0,
@@ -97,7 +95,15 @@
         balanceFilter: 0,
         swingFilter: 0
       });
+
+      // Close filter and compare sections for JohnKew
+      showFilters = false;
+      showCompare = false;
     } else if (selectedReviewer === 'PBEffect') {
+      // Reset compared paddles for PBEffect
+      pbEffectSelectedPaddlesStore.set([]);
+
+      // Reset filters for PBEffect
       pbEffectFilterValues.set({
         powerFilter: 0,
         spinFilter: 0,
@@ -105,14 +111,17 @@
         twistFilter: 0,
         swingFilter: 0
       });
-    }
 
-    // Close filter and compare sections
-    showFilters = false;
-    showCompare = false;
-    showPBEffectFilters = false;
-    showPBEffectCompareStore.set(false);
-    showPBStudioCompareStore.set(false);
+      // Close filter and compare sections for PBEffect
+      showPBEffectFilters = false;
+      showPBEffectCompareStore.set(false);
+    } else if (selectedReviewer === 'PBStudio') {
+      // Reset compared paddles for PBStudio
+      pbStudioSelectedPaddlesStore.set([]);
+
+      // Close compare section for PBStudio
+      showPBStudioCompareStore.set(false);
+    }
 
     // Dispatch custom events to notify FilterSection and CompareSection
     window.dispatchEvent(new CustomEvent('resetFilters'));
