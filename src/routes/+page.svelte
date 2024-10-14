@@ -45,7 +45,15 @@
 
   const dataCache = {};
 
+  let isTransitioning = false;
+
   selectedReviewerStore.subscribe(value => {
+    if (value === 'JohnKew' && selectedReviewer !== 'JohnKew') {
+      isTransitioning = true;
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 100);
+    }
     selectedReviewer = value;
     if (selectedReviewer === 'JohnKew') {
       loadJohnKewData();
@@ -327,10 +335,28 @@
     font-size: 1.2em;
   }
 
-  .loading {
-    text-align: center;
-    font-size: 1.2em;
-    margin-top: 20px;
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: relative;
+    top: 100%; /* This moves the spinner 100% down from its original position */
   }
 
   .error {
@@ -339,70 +365,77 @@
     font-size: 1.2em;
     margin-top: 10px;
   }
-
 </style>
 
 {#if !selectedReviewer}
   <LandingPage on:select={handleReviewerSelect} />
 {:else if loading}
-  <div class="loading">Loading {selectedReviewer} data...</div>
+  <div class="loading-overlay">
+    <div class="loading-spinner"></div>
+  </div>
 {:else if dataError}
   <div class="error">Error loading data for {selectedReviewer}. Please try again later.</div>
 {:else if selectedReviewer === 'JohnKew'}
-  <div class="page-content">
-    <div class="paddle-count-title">
-      Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer]})
+  {#if isTransitioning}
+    <div class="loading-overlay">
+      <div class="loading-spinner"></div>
     </div>
+  {:else}
+    <div class="page-content">
+      <div class="paddle-count-title">
+        Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer]})
+      </div>
 
-    <div class="card-grid">
-      {#if comparisonData}
-        <ComparisonCard 
-          data={comparisonData.map(record => ({...record}))}
-          xKey={Object.values(labelMapping)}
-        />
-      {/if}
+      <div class="card-grid">
+        {#if comparisonData}
+          <ComparisonCard 
+            data={comparisonData.map(record => ({...record}))}
+            xKey={Object.values(labelMapping)}
+          />
+        {/if}
 
-      {#each filteredProcessedData as record}
-        <Card 
-          backContent={{
-            power: `${Math.round(record.Power * 10)}%`,
-            spin: `${Math.round(record.Spin * 10)}%`,
-            twist: `${Math.round(record.Twist * 10)}%`,
-            balance: `${Math.round(record.Balance * 10)}%`,
-            swing: `${Math.round(record.Swing * 10)}%`,
-            pop: `${Math.round(record.Pop * 10)}%`,
-            shape: record.shape,
-            faceMaterial: record.face_material,
-            handleLength: record.handle_length,
-            spinRPM: record.spin_rpm,
-            serveSpeedMPH: record.serve_speed_mph,
-            punchVolleySpeed: record.punch_volley_speed,
-            swingWeight: record.swing_weight,
-            twistWeight: record.twist_weight,
-            coreMaterial: record.core_material,
-            surfaceTexture: record.surface_texture,
-            length: record.length,
-            width: record.width,
-            staticWeight: record.static_weight,
-            balancePointCM: record.balance_point_cm,
-            ...Object.fromEntries(
-              Object.entries(record).filter(([key]) => 
-                !['Power', 'Spin', 'Twist', 'Balance', 'Swing', 'Pop', 'shape', 'face_material', 'handle_length', 'spin_rpm', 'serve_speed_mph', 'punch_volley_speed', 'swing_weight', 'twist_weight', 'core_material', 'surface_texture', 'length', 'width', 'static_weight', 'balance_point_cm'].includes(key)
+        {#each filteredProcessedData as record}
+          <Card 
+            backContent={{
+              power: `${Math.round(record.Power * 10)}%`,
+              spin: `${Math.round(record.Spin * 10)}%`,
+              twist: `${Math.round(record.Twist * 10)}%`,
+              balance: `${Math.round(record.Balance * 10)}%`,
+              swing: `${Math.round(record.Swing * 10)}%`,
+              pop: `${Math.round(record.Pop * 10)}%`,
+              shape: record.shape,
+              faceMaterial: record.face_material,
+              handleLength: record.handle_length,
+              spinRPM: record.spin_rpm,
+              serveSpeedMPH: record.serve_speed_mph,
+              punchVolleySpeed: record.punch_volley_speed,
+              swingWeight: record.swing_weight,
+              twistWeight: record.twist_weight,
+              coreMaterial: record.core_material,
+              surfaceTexture: record.surface_texture,
+              length: record.length,
+              width: record.width,
+              staticWeight: record.static_weight,
+              balancePointCM: record.balance_point_cm,
+              ...Object.fromEntries(
+                Object.entries(record).filter(([key]) => 
+                  !['Power', 'Spin', 'Twist', 'Balance', 'Swing', 'Pop', 'shape', 'face_material', 'handle_length', 'spin_rpm', 'serve_speed_mph', 'punch_volley_speed', 'swing_weight', 'twist_weight', 'core_material', 'surface_texture', 'length', 'width', 'static_weight', 'balance_point_cm'].includes(key)
+                )
               )
-            )
-          }} 
-          radarData={record} 
-          seriesKey={record[seriesKey]} 
-          xKey={Object.values(labelMapping)}
-          thickness={`${record.thickness} mm`} 
-          company={record.company}
-        />
-      {/each}
+            }} 
+            radarData={record} 
+            seriesKey={record[seriesKey]} 
+            xKey={Object.values(labelMapping)}
+            thickness={`${record.thickness} mm`} 
+            company={record.company}
+          />
+        {/each}
 
-      <!-- Remove this line: -->
-      <!-- <SpecialCard {excludedPaddles} /> -->
+        <!-- Remove this line: -->
+        <!-- <SpecialCard {excludedPaddles} /> -->
+      </div>
     </div>
-  </div>
+  {/if}
 {:else if selectedReviewer === 'PBEffect'}
   <div class="page-content">
     {#if $showPBEffectCompareStore}
