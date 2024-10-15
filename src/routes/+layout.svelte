@@ -158,7 +158,7 @@
 
 <main>
   <div class="banner">
-    <h3>Pickleball Paddle Reviews</h3>
+    <h3>Pickleball Paddle Stats</h3>
     <button class="info-button" on:click={openModal} aria-label="More information">
       <i class="fas fa-info-circle"></i>
     </button>
@@ -202,8 +202,7 @@
 
 {#if showModal}
   <Modal on:close={closeModal}>
-    <h2>Overview</h2>
-    <p>This site displays the public spreadsheet data found on pickleball review sites for easier consumption on multiple devices.</p>
+    <h2>Useful links</h2>
     <ul>
       <li>JohnKew site is <a href="https://www.johnkewpickleball.com/" target="_blank">here</a></li>
       <li>PBEffect site is <a href="https://pickleballeffect.com/" target="_blank">here</a></li>

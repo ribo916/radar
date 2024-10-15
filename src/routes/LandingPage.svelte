@@ -9,7 +9,7 @@
   </script>
   
   <div class="landing-page">
-    <h1>Welcome to Pickleball Paddle Reviews</h1>
+    <h1>Welcome to Pickleball Paddle Stats</h1>
     <p>Select a reviewer from the options above to view paddle data.</p>
     <div class="disclaimer">
       <p><em>Disclaimer: This site aggregates public data shared by each reviewer and presents it for easier consumption. All credit for the data goes to the original reviewers.</em></p>
