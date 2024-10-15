@@ -28,3 +28,12 @@ export const showPBEffectCompareStore = writable(false);
 
 export const pbStudioSelectedPaddlesStore = writable([]);
 export const showPBStudioCompareStore = writable(false);
+
+export const lastKnownJohnKewFilters = writable({
+  powerFilter: 0,
+  spinFilter: 0,
+  popFilter: 0,
+  twistFilter: 0,
+  balanceFilter: 0,
+  swingFilter: 0
+});

@@ -82,7 +82,7 @@ function processCSVData(data) {
     return 0;
   });
 
-  console.log('Processed data:', { filteredData: mappedData });
+  console.log('Filtered JohnKew data:', mappedData);
 
   return { filteredData: mappedData };
 }

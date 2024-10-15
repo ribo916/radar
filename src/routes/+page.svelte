@@ -1,6 +1,6 @@
 <script>
   import Card from '../shared/Card.svelte';
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy, afterUpdate } from 'svelte';
   import { paddlesStore, selectedPaddlesStore, selectedReviewerStore, filterValues, pbEffectFilterValues } from '../stores.js'; // Import the stores
   import { processData } from '$lib/dataProcessors'; // New import
   import ComparisonCard from '../shared/ComparisonCard.svelte'; // New import
@@ -14,6 +14,8 @@
   import PBStudioCompareSection from '../shared/PBStudioCompareSection.svelte';
   import { showPBStudioCompareStore, pbStudioSelectedPaddlesStore } from '../stores.js';
   import CombinedPage from './CombinedPage.svelte';
+  import FilterSection from '../shared/FilterSection.svelte';
+  import { lastKnownJohnKewFilters } from '../stores.js';
 
   const seriesKey = 'paddle';
   const xKey = ['power_percentile', 'spin_percentile', 'twist_percentile', 'balance_percentile', 'swing_percentile', 'pop_percentile'];
@@ -46,6 +48,7 @@
   const dataCache = {};
 
   let isTransitioning = false;
+  let isJohnKewMounted = false;
 
   selectedReviewerStore.subscribe(value => {
     if (value === 'JohnKew' && selectedReviewer !== 'JohnKew') {
@@ -53,6 +56,9 @@
       setTimeout(() => {
         isTransitioning = false;
       }, 100);
+      isJohnKewMounted = false;
+    } else if (selectedReviewer === 'JohnKew' && value !== 'JohnKew') {
+      lastKnownJohnKewFilters.set($filterValues);
     }
     selectedReviewer = value;
     if (selectedReviewer === 'JohnKew') {
@@ -197,11 +203,6 @@
         dataCache.JohnKew = { filteredData: fd, totalValidPaddleCount };
       }
       loading = false;
-
-      // Dispatch the total number of valid paddles to the layout
-      window.dispatchEvent(new CustomEvent('getTotalValidPaddles', {
-        detail: { callback: (total) => paddlesStore.set(filteredData) }
-      }));
     } catch (error) {
       console.error('Error loading JohnKew data:', error);
       dataError = true;
@@ -278,6 +279,15 @@
     return () => {
       window.removeEventListener('showJohnKewLoading', () => {});
     };
+  });
+
+  afterUpdate(() => {
+    if (selectedReviewer === 'JohnKew' && !isJohnKewMounted) {
+      isJohnKewMounted = true;
+      lastKnownJohnKewFilters.subscribe(lastFilters => {
+        filterValues.set(lastFilters);
+      })();
+    }
   });
 </script>
 
@@ -398,7 +408,6 @@
       <div class="paddle-count-title">
         Displaying {filteredProcessedData.length}/{totalValidPaddleCount} paddles (Data as of: {dataDate[selectedReviewer]})
       </div>
-
       <div class="card-grid">
         {#if comparisonData}
           <ComparisonCard 

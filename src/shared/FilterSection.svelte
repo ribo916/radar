@@ -1,6 +1,6 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import { paddlesStore, filterValues, pbEffectFilterValues, selectedReviewerStore } from '../stores.js';
+  import { onMount, onDestroy, afterUpdate } from 'svelte';
+  import { paddlesStore, filterValues, pbEffectFilterValues, selectedReviewerStore, lastKnownJohnKewFilters } from '../stores.js';
 
   let totalValidPaddles = "All";
   let selectedReviewer;
@@ -21,6 +21,10 @@
     window.addEventListener('updateFilteredPaddlesCount', (event) => {
       totalValidPaddles = event.detail.count;
     });
+  });
+
+  afterUpdate(() => {
+    $filterValues;
   });
 
   function resetFilters() {
@@ -54,7 +58,11 @@
 
   function updateFilter(key, value) {
     if (selectedReviewer === 'JohnKew') {
-      filterValues.update(filters => ({ ...filters, [key]: value }));
+      filterValues.update(filters => {
+        const updatedFilters = { ...filters, [key]: value };
+        lastKnownJohnKewFilters.set(updatedFilters);
+        return updatedFilters;
+      });
     } else if (selectedReviewer === 'PBEffect') {
       pbEffectFilterValues.update(filters => ({ ...filters, [key]: value }));
     }
