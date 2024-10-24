@@ -5,6 +5,7 @@
   let focusedBubble = null;
 
   function flipCard() {
+    clearFocus(); // Clear focus when flipping the card
     isFlipped = !isFlipped;
   }
 
