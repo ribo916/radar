@@ -18,7 +18,7 @@ const columnMapping = {
 };
 
 export async function processData() {
-  const data = await csv('/PBEffect_2024_10_11.csv');
+  const data = await csv('/PBEffect_2024_10_25.csv');
   
   const filteredData = data.filter(row => row['Paddle Name'] && row['Brand']);
   
