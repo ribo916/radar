@@ -58,19 +58,19 @@ The app is deployed using Vercel, which automatically deploys updates when chang
 1. Visit [https://www.johnkewpickleball.com/paddle-database](https://www.johnkewpickleball.com/paddle-database)
 2. View the page source and locate the `<iframe src="">` tag containing the raw data link
 3. Save the data in Google Sheets and download as CSV
-4. Update the data processor file
+4. Update the data processor file and then dates in page.svelte
 
 ### PBEffect Data
 
 1. Visit [https://pickleballeffect.com/pickleball-paddle-database/](https://pickleballeffect.com/pickleball-paddle-database/)
 2. Download the CSV file from the Airtable
-3. Update the data processor file
+3. Update the data processor file and then dates in page.svelte
 
 ### PBStudio Data
 
 1. Visit PBStudio site and just cut/paste all data from Notion (no option to download a CSV)
 2. Paste into Google Sheets, add header data manually, then download as CSV
-3. Update the data processor file
+3. Update the data processor file and then dates in page.svelte
 
 ## Contributing
 

@@ -180,9 +180,9 @@
     : null;
 
   let dataDate = {
-    JohnKew: '10/09/2024',
-    PBEffect: '10/11/2024',
-    PBStudio: '10/11/2024'
+    JohnKew: '10/25/2024',
+    PBEffect: '10/25/2024',
+    PBStudio: '10/25/2024'
   };
 
   function handleReviewerSelect(event) {
