@@ -17,7 +17,7 @@ This application visualizes pickleball paddle data using [Layer Cake](https://la
 ### Prerequisites
 
 - Node.js (version X.X.X or higher)
-- npm (version X.X.X or higher)
+- npm (version X.X.X or higher) 
 
 ### Installation
 
