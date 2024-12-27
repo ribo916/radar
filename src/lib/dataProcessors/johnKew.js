@@ -42,7 +42,7 @@ export async function processData() {
 }
 
 async function loadAndProcessDataFromCSV() {
-  const data = await csv('/JohnKew_2024_10_25.csv');
+  const data = await csv('/JohnKew_2024_12_27.csv');
   return processCSVData(data);
 }
 
